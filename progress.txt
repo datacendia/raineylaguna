@@ -1,0 +1,278 @@
+Rainey Laguna — audit + Studios work log
+==========================================
+
+SPRINT 2 · STARTED (May 2, 2026 · evening)
+------------------------------------------
+Canonical reference docs shipped (pin these for every future session):
+  + BITACORA.md                       — "La Bitácora" · raineylaguna.com logbook (this repo)
+  + ../raineylagunastudios/COLOFON.md — "El Colofón" · Rainey Laguna Studios colophon
+
+Live Audit · v0 UI + mocked pipeline shipped on raineylaguna.com homepage:
+  + section #audit (between Services and Live Brief)
+  + scripts/live-audit.js         — client-side 6-step progressive audit
+                                    + 6-week roadmap + WhatsApp CTA
+  + bilingual i18n keys (nav-audit, audit-*, sector labels)
+  + CSS for .live-audit/.audit-* reusing site palette
+  + nav-link 01 / Auditoría (previously unused idx)
+
+Vigía endpoint stub reserved:
+  + c:\Users\Stu\vigia\src\app\api\audit\route.ts (returns 501 for now)
+
+Still pending for Sprint 2 completion (2026 target ≤ May 19):
+  [ ] Real /api/audit pipeline (Lighthouse + Places + SerpAPI + IG + Claude)
+  [ ] Server-side rate limit (1/IP/24h) + 6h cache
+  [ ] Signed PDF export of the audit (S/ 250 paid-call upgrade path)
+  [ ] Swap live-audit.js to streaming consumer once endpoint is live
+  [ ] Garúa AI generator + admin UI (against mock adapter; swap to Meta on approval)
+
+Blocked on Stuart:
+  [ ] Google PageSpeed API key
+  [ ] Google Places API key
+  [ ] SerpAPI key (or DataForSEO alternative)
+  [ ] Anthropic API key in Vigía's env
+  [ ] Meta Business Suite + WhatsApp Business Platform + IG Graph
+      (submission drafts live at ../raineylagunastudios/docs/meta-whatsapp-instagram-submission.md)
+
+POSITIONING (locked May 2, 2026)
+--------------------------------
+**Tagline:** "Estudio web e inteligencia para negocios locales independientes en Lima."
+**Audience:** Independent local businesses in Lima that live by their reputation.
+**5 sectors served:**
+  1. Hospitality (anchor) — restaurants, cafés, boutique hotels, bars
+  2. Boutique fitness & wellness — yoga, pilates, crossfit, spinning, climbing, MMA, spas
+  3. Independent education — bilingual schools, academies, language centres, music/art
+  4. Health & aesthetics — dental, dermatology, aesthetic, vets, physio
+  5. Boutique retail — bookshops, concept stores, specialty, ateliers
+
+Garúa stays hospitality-only with a 2026 Q3 fitness pilot footnote.
+The other 5 services (Websites, Marca, Care, Vigía, Espejo) apply cross-sector.
+
+Out of scope: big chains, B2B SaaS, pure e-commerce, agencies, real-estate dev,
+professional services with no physical room. Route those leads to Studios.
+
+WAVE 1 · SHIPPED (May 2, 2026)
+------------------------------
+Shared foundation:
+  + assets/page.css               — shared subpage stylesheet (paper variant, no sky)
+  + assets/page.js                — shared subpage JS (lang toggle, footer year, i18n swap)
+  + scripts/partials/header.html  — shared nav fragment
+  + scripts/partials/footer.html  — shared footer fragment
+  + scripts/wrap-page.mjs         — `node scripts/wrap-page.mjs <slug>` to generate any page
+                                     from scripts/bodies/<slug>.html
+
+Pages live:
+  + /privacy/                     — Ley 29733 compliant privacy policy, bilingual
+  + /terms/                       — commercial terms, Peru jurisdiction, bilingual
+  + /gracias/                     — form-submit thank-you, noindex
+  + /about/                       — founder story, Emiliano Rainey Laguna origin, Studios mention
+  + /journal/                     — index page + schema.org Blog
+  + /journal/lima-clima-marketing/ — first seed post, 8-min read, full BlogPosting schema
+
+Updated:
+  * sitemap.xml                   — now lists 15 URLs (home + EN mirror + 6 services + 4 work +
+                                     journal index + 1 post + privacy + terms + about)
+  * llms.txt                      — added Site Structure section + Parent brand (Studios) section
+
+WAVE 2 · SHIPPED (May 2, 2026)
+------------------------------
+  + 6 service pages live (websites, marca, care, vigia, garua, espejo)
+  + Homepage skip-link, service/work rows as anchors, RUC placeholder, OfferCatalog URLs
+  + Sector broadening across all meta/JSON-LD/copy (5 sectors, hospitality anchor)
+  + Garúa fitness-pilot footnote for 2026 Q3
+  + Live-brief scenarios on homepage now rotate across all 5 sectors
+    (café → yoga studio → independent school → dental clinic → bookshop)
+  + 4 work case study stubs live with "in progress / launching 2026" framing
+    /work/curcucho-cafe, /work/oh-jala, /work/olivia, /work/80-coffee-tea
+  + scripts/check-html.mjs — validates JSON-LD + inline JS parse-check
+  + progress.txt positioning section locked
+  + /en/index.html — full English homepage mirror (Option A build-script route)
+    * scripts/build-en.mjs regenerates /en/index.html from index.html
+      (swaps <html lang>, title, description, keywords, canonical, hreflang,
+       og:* + twitter:* meta, WebSite JSON-LD description)
+    * index.html detectLang() patched: pathname-based EN detection on /en/
+    * index.html setLang() patched: toggle on homepage navigates between / and /en/
+      so each language has a clean canonical URL
+    * scripts/check-en.mjs — 13 assertions validating EN head meta + JSON-LD + JS
+    * Workflow: edit index.html → run `node scripts/build-en.mjs` → commit both
+    * Future: add this to a single build command alongside wrap-page.mjs
+
+WAVE 3 · SHIPPED (May 2, 2026 · afternoon)
+------------------------------------------
+Services audit:
+  + All 6 services consistent across homepage, sitemap, JSON-LD, service pages,
+    OfferCatalog, and nav. Espejo OfferCatalog entry now has matching `url`
+    fields (was missing — fixed).
+  + Broadened 6 stale narrowings: FAQ answer, hero lede HTML fallback,
+    hero lede ES + EN i18n strings, and brief-form-name placeholder
+    ("Tu restaurante"/"Your restaurant" → "Tu negocio"/"Your business").
+
+Plausible analytics:
+  + Hostname-guarded snippet in homepage <head> + shared subpage <head> (via
+    wrap-page.mjs). Only fires on raineylaguna.com / www.raineylaguna.com so
+    localhost and preview deploys don't pollute stats.
+  + Custom event on Conversemos submit: "Conversemos Submit" with props
+    { district, stage, interests }.
+  + Privacy-friendly, no cookies, no banner required under Ley 29733.
+
+Formspree fallback (server-side lead capture):
+  + <meta name="formspree-endpoint" content=""> in homepage <head> — user just
+    pastes the Formspree URL to enable. Empty = disabled (WhatsApp-only path).
+  + Conversemos form submit now fires navigator.sendBeacon(endpoint, payload)
+    in parallel with the WhatsApp open, so the lead is captured even if the
+    user closes the tab before WhatsApp loads.
+  + Payload includes all form fields + language + page + referrer + UA.
+  + Silent failure — never blocks the WhatsApp open.
+
+WCAG 2.1 contrast audit across all 9 moods:
+  + scripts/check-contrast.mjs — computes WCAG relative-luminance ratios for
+    5 critical text pairs × 9 moods = 45 critical pairs.
+  + Initial run flagged 11 failures. Fixes applied:
+      - New --gold-ink #7a5618 CSS variable for readable gold text on paper
+        (5.2–6.0:1 across all moods, AA pass).
+      - Routed .service-price, .conv-fineprint .accent, .footer-bottom .accent,
+        .lagoon-eyebrow through --gold-ink (was --gold, failing 2:1 on paper).
+      - Sunset mood heroInk #f5e8d8 → #fff5ea (4.67:1 AA pass, was 4.17 fail).
+      - Sunset mood heroGold dark teal #0a3848 → pale cream #fff2c8
+        (4.50:1 AA large pass, was 2.50:1 fail).
+  + Final: 54/54 critical text pairs pass AA. Decorative gold (small section
+    numbers, hover states, pulse dots) exempt under WCAG SC 1.4.3 incidental.
+
+OG image renderer:
+  + scripts/render-og.mjs — Playwright-based renderer that captures
+    og-image.html as og-image.png at 1200×630 @2x (crisp on retina previews).
+  + One-time setup: `npm init -y && npm i -D playwright && npx playwright install chromium`
+  + Then: `node scripts/render-og.mjs`
+  + After first run, switch og:image + twitter:image meta tags from .svg to
+    .png across index.html and en/index.html (social scrapers prefer PNG).
+
+All validators passing:
+  scripts/check-html.mjs      — JSON-LD + inline JS parse (homepage)
+  scripts/check-en.mjs        — 13 EN head-meta assertions + JSON-LD + JS
+  scripts/check-contrast.mjs  — 54 WCAG pairs across 9 moods
+  scripts/wrap-page.mjs all   — 15 subpages regenerate cleanly
+  scripts/build-en.mjs        — EN homepage mirror regenerates cleanly
+
+WAVE 4 · PENDING (blocked on user action OR next session)
+---------------------------------------------------------
+User actions (5 minutes each):
+  [ ] Create Formspree form at formspree.io (free tier = 50 submissions/month).
+      Paste endpoint URL into the empty content="" of the meta tag at
+      index.html:78 — then re-run build-en.mjs so /en/ inherits it.
+  [ ] Generate favicon.ico from favicon.svg at realfavicongenerator.net.
+      Drop the resulting favicon.ico at the project root. (Modern browsers
+      already use favicon.svg; .ico is only for legacy crawlers and old iOS.)
+  [ ] Render og-image.png following the one-time setup in render-og.mjs, then
+      update og:image + twitter:image meta tags from .svg to .png in both
+      index.html and en/index.html.
+
+Next-session work:
+  [ ] Second journal post — boutique fitness in Miraflores. Anchors the
+      5-sector positioning in long-form content, not just in meta copy.
+  [ ] DNS + host choice. Candidates: Netlify, Cloudflare Pages, Vercel.
+      Static site → any of them work for free.
+  [ ] Post-deploy smoke test: Lighthouse on /, /en/, /servicios/garua/,
+      /journal/lima-clima-marketing/. Target 95+ on all four axes.
+
+PHASE 3 · raineylagunastudios.com — THE MAIN BRAND (not yet started)
+--------------------------------------------------------------------
+ARCHITECTURAL NOTE: raineylagunastudios.com is the PARENT / FLAGSHIP brand.
+raineylaguna.com is the web-development vertical underneath it. The main
+brand is what a journalist, peer studio, or discerning client should reach
+when they search "Rainey Laguna" alone — not the .com. The .com is the
+spoke; Studios is the hub.
+
+Scope of Studios (per founder, May 2, 2026):
+  - Graphic design
+  - Brand management
+  - 3D printing (FDM/SLA capability)
+  - Hydroprinting (water-transfer film, custom finishes on solid objects)
+  - "…and more" — additional creative and design services
+
+Status: ZERO code. Greenfield. No files, no domain provisioning.
+All .com footer references to "Parte de Rainey Laguna Studios" already
+route mentally to this brand but the URL is not yet live.
+
+Medium-priority:
+  [ ] Form fallback — wire Conversemos form to POST to Formspree OR to Vigía's /api/lead
+                      so that if WhatsApp link fails, the lead is captured server-side.
+                      Also redirect to /gracias/ on success.
+  [ ] Plausible analytics — add <script defer data-domain="raineylaguna.com"
+                            src="https://plausible.io/js/script.js"></script>
+                            to <head> of every page (homepage inline + shared subpage head).
+                            Privacy-friendly, no cookie banner needed.
+  [ ] Cookie banner stub — even though Plausible needs no banner, Ley 29733 is reassured by
+                           showing a one-time notice. Small, dismissable.
+  [ ] Favicon.ico — legacy fallback. Generate from favicon.svg using `sharp` or an online tool.
+  [ ] og-image.png — render og-image.html (or og-image.svg) to 1200×630 PNG using
+                     Playwright or Puppeteer. Several platforms don't render SVG OG.
+
+Lower-priority:
+  [ ] Testimonials section + client logos on homepage (needs real quotes from clients)
+  [ ] Newsletter signup (needs ESP choice: Buttondown / Resend / ConvertKit)
+  [ ] WCAG contrast audit on night-mood color variants — some gold/ink combinations
+      may fail 4.5:1 at night. Review with axe DevTools.
+  [ ] Social footer links (only add when Instagram/LinkedIn are live)
+  [ ] Deploy — see DEPLOYMENT section below
+
+WAVE 3 · RAINEY LAGUNA STUDIOS
+-------------------------------
+After Wave 2 ships and .com is stable, build raineylaguna.studio:
+  [ ] Domain: acquire raineylaguna.studio ($30-40/yr, any registrar)
+  [ ] Site architecture: 6 Phase-1 services
+        01 Identidad (graphic design & brand identity)
+        02 Impresos (print design + production)
+        03 Producto (product design + 3D printing)
+        04 Hidrográfica (hydroprinting)
+        05 Imagen (photography + motion)
+        06 Taller (custom / one-off commissions)
+  [ ] Shared design tokens with .com (same fonts, same palette, different accent color)
+  [ ] Cross-links: Studios footer → .com for hospitality; .com footer (already updated)
+      mentions Studios
+  [ ] Own /work archive — or shared across both sites
+  [ ] Phase 2 additions (after first case studies): Packaging deep-dive, Signage & wayfinding,
+      Merch, App/product UI design
+
+DEPLOYMENT
+----------
+Stack recommendation: Netlify or Cloudflare Pages (both free tiers sufficient for static).
+
+  1. DNS — point raineylaguna.com A/AAAA records to chosen host.
+           Add CNAME for www. Keep short TTL (300s) during switch.
+  2. MX records — set up hola@raineylaguna.com via Google Workspace (S/ 30/mo)
+                  OR cheaper: Zoho Mail (free tier: 5 users, 5 GB each).
+                  Add SPF, DKIM, DMARC to domain DNS.
+  3. Google Business Profile — claim "Rainey Laguna" at google.com/business.
+                               Category: "Graphic designer" + "Web designer".
+                               Service area: Lima Metropolitana.
+                               Add photos of studio/work, hours, phone, website.
+  4. Plausible — create account, add domain, put script tag in HTML.
+                 Share read-only dashboard with clients if desired.
+  5. Formspree — create form at formspree.io/forms/new, copy POST URL into
+                 conversemos-form action attribute. Add hidden _next=/gracias/
+                 for redirect on success.
+  6. Test checklist:
+        [ ] Lighthouse: 95+ on Perf, Accessibility, SEO, Best Practices
+        [ ] WebPageTest from Lima (Santiago closest server):  FCP < 1.5s, LCP < 2.5s
+        [ ] Search Console: verify ownership, submit sitemap.xml
+        [ ] Schema.org validator: confirm all JSON-LD parses clean
+        [ ] hreflang validator: confirm es-PE ↔ en pairs are reciprocal
+
+HOW TO EDIT CONTENT
+-------------------
+Any subpage is regenerated from scripts/bodies/<slug>.html:
+
+    node scripts/wrap-page.mjs privacy       # rebuild just privacy
+    node scripts/wrap-page.mjs all           # rebuild every body file found
+
+The head <title>, <meta description> and all body copy can be edited in the body file
+and regenerated in one command. Header and footer come from scripts/partials/* and are
+shared across every page.
+
+The homepage (index.html) is NOT generated — it stays hand-tuned because of its sky
+animation and one-off live-brief wiring.
+
+===
+
+Current dev server:  http-server (or similar) on http://localhost:5173
+Canonical domain:    raineylaguna.com
+WhatsApp:            +51 912 418 482

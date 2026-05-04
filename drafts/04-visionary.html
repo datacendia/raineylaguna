@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rainey Laguna — Direction D · Visionary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,200;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* Time-of-day-driven theme variables — overwritten at runtime by JS based on actual Lima hour */
+  :root {
+    /* Default: dusk (will be overwritten in script) */
+    --ink: #0F1A22;
+    --paper: #F5F1E8;
+    --lagoon-deep: #1A3A4A;
+    --lagoon-mist: #C4D4DC;
+    --gold: #C9A961;
+    --sky-1: #1A3A4A;
+    --sky-2: #2C4A5A;
+    --sky-3: #4A3530;
+    --hour-hue: 200;
+    --hour-saturation: 35%;
+    --rule: rgba(20, 36, 46, 0.18);
+    --muted: rgba(20, 36, 46, 0.55);
+    --type-weight: 300;
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background 4s ease, color 4s ease;
+  }
+  
+  .serif { font-family: 'Fraunces', Georgia, serif; }
+  
+  /* Sky gradient — time-of-day responsive */
+  .sky {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg, var(--sky-1) 0%, var(--sky-2) 50%, var(--sky-3) 100%);
+    z-index: 0;
+    opacity: 0.04;
+    pointer-events: none;
+    transition: opacity 4s ease, background 4s ease;
+  }
+  
+  /* Paper grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: color-mix(in srgb, var(--paper) 86%, transparent);
+    backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid var(--rule);
+    transition: background 4s ease;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    letter-spacing: 0.5px;
+    color: var(--lagoon-deep);
+    text-decoration: none;
+    font-weight: 400;
+  }
+  
+  .logo svg { width: 22px; height: 22px; transition: transform 0.6s; }
+  .logo:hover svg { transform: rotate(180deg); }
+  
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+  }
+  
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: opacity 0.3s;
+  }
+  
+  .nav-links a span.idx { color: var(--gold); margin-right: 6px; }
+  .nav-links a:hover { opacity: 0.5; }
+  
+  .nav-meta {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding-left: 20px;
+    border-left: 0.5px solid var(--rule);
+    text-align: right;
+    line-height: 1.5;
+  }
+  
+  .nav-meta .accent { color: var(--gold); }
+
+  /* Hero — types itself into existence */
+  .hero {
+    min-height: 100vh;
+    padding: 180px 40px 100px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: end;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--lagoon-deep);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 14px;
+  }
+  
+  .hero-eyebrow::before {
+    content: '';
+    width: 0;
+    height: 0.5px;
+    background: var(--lagoon-deep);
+    animation: rule-grow 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+  }
+  
+  @keyframes rule-grow { to { width: 28px; } }
+  
+  .hero-eyebrow .typed { white-space: nowrap; }
+  
+  .hero-h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(60px, 11vw, 156px);
+    line-height: 0.92;
+    color: var(--lagoon-deep);
+    letter-spacing: -3.5px;
+    font-weight: var(--type-weight);
+    transition: font-weight 4s ease;
+    min-height: 0.85em;
+  }
+  
+  .hero-h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: var(--type-weight);
+  }
+  
+  .hero-h1 .cursor-bar {
+    display: inline-block;
+    width: 0.45em;
+    height: 0.85em;
+    background: var(--gold);
+    margin-left: 4px;
+    animation: blink 1s step-end infinite;
+    vertical-align: -0.07em;
+  }
+  
+  .hero-h1 .cursor-bar.done { animation: blink 1s step-end infinite; opacity: 0; transition: opacity 1s; }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  .hero-meta {
+    align-self: end;
+    padding-bottom: 12px;
+  }
+  
+  .hero-lede {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink);
+    margin-bottom: 36px;
+    max-width: 460px;
+    font-weight: 300;
+    font-style: italic;
+    min-height: 4em;
+  }
+  
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  
+  .hero-actions.ready { opacity: 1; }
+  
+  .btn-primary {
+    background: var(--lagoon-deep);
+    color: var(--paper);
+    padding: 14px 26px;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateY(101%);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 0;
+  }
+  
+  .btn-primary span { position: relative; z-index: 1; transition: color 0.4s; }
+  .btn-primary:hover::before { transform: translateY(0); }
+  .btn-primary:hover span { color: var(--ink); }
+  
+  .btn-text {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    border-bottom: 0.5px solid var(--rule);
+    padding-bottom: 4px;
+    transition: all 0.3s;
+  }
+  
+  .btn-text:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* THE WATCHER — el Vigía. Persistent ambient companion in lower-right */
+  .watcher {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 90;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.2s ease 2s, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) 2s;
+  }
+  
+  .watcher.awake {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .watcher-bubble {
+    background: var(--lagoon-deep);
+    color: var(--paper);
+    padding: 14px 20px;
+    border-radius: 16px 16px 4px 16px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.4;
+    max-width: 280px;
+    pointer-events: auto;
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 12px 30px -12px rgba(0,0,0,0.25);
+    position: relative;
+  }
+  
+  .watcher-bubble.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  
+  .watcher-bubble .who {
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+  
+  .watcher-orb {
+    width: 56px;
+    height: 56px;
+    background: var(--lagoon-deep);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    pointer-events: auto;
+    cursor: pointer;
+    box-shadow: 0 12px 30px -12px rgba(0,0,0,0.4);
+  }
+  
+  .watcher-orb::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 0.5px solid var(--gold);
+    opacity: 0.4;
+    animation: pulse-ring 3s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-ring {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.15); opacity: 0; }
+  }
+  
+  .watcher-orb svg {
+    width: 28px;
+    height: 28px;
+    color: var(--gold);
+  }
+  
+  .watcher-orb .ripple {
+    position: absolute;
+    inset: 14px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    opacity: 0;
+    animation: orb-blink 8s ease-in-out infinite;
+  }
+  
+  @keyframes orb-blink {
+    0%, 90%, 100% { opacity: 0; transform: scale(0.8); }
+    93%, 95% { opacity: 0.8; transform: scale(1.4); }
+  }
+
+  /* Manifesto — generative section */
+  .manifest {
+    padding: 140px 40px;
+    border-top: 0.5px solid var(--rule);
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    gap: 60px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .section-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+  }
+  
+  .section-num span { color: var(--gold); }
+  
+  .manifest-text {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    line-height: 1.4;
+    color: var(--lagoon-deep);
+    font-weight: 300;
+    letter-spacing: -0.8px;
+    max-width: 760px;
+  }
+  
+  .manifest-text em { font-style: italic; }
+  .manifest-text .gold { color: var(--gold); font-style: italic; }
+
+  /* THE BRIEF — homepage IS the product */
+  .live-brief {
+    padding: 140px 40px;
+    border-top: 0.5px solid var(--rule);
+    background: var(--lagoon-deep);
+    color: var(--paper);
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+  }
+  
+  .live-brief-frame {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: start;
+  }
+  
+  .live-brief .section-num { color: rgba(245, 241, 232, 0.5); }
+  .live-brief .section-num span { color: var(--gold); }
+  
+  .live-brief-h {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(44px, 5.5vw, 72px);
+    line-height: 1;
+    letter-spacing: -2px;
+    font-weight: 300;
+    margin: 32px 0 28px;
+  }
+  
+  .live-brief-h em { font-style: italic; color: var(--gold); }
+  
+  .live-brief-desc {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--lagoon-mist);
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 32px;
+    max-width: 440px;
+  }
+  
+  .live-brief-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border: 0.5px solid var(--gold);
+    border-radius: 100px;
+  }
+  
+  .live-brief-status .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse-dot 1.4s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+  
+  /* The actual generative brief */
+  .brief-paper {
+    background: rgba(245, 241, 232, 0.04);
+    border: 0.5px solid rgba(201, 169, 97, 0.25);
+    border-radius: 4px;
+    padding: 36px 36px 28px;
+    font-family: 'JetBrains Mono', monospace;
+    backdrop-filter: blur(20px);
+    position: relative;
+  }
+  
+  .brief-paper::before {
+    content: 'VIGÍA · LIVE BRIEF';
+    position: absolute;
+    top: -10px;
+    left: 28px;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 4px 12px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  
+  .brief-meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .brief-target {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    min-height: 1.2em;
+  }
+  
+  .brief-target em { font-style: italic; color: var(--gold); }
+  
+  .brief-sub {
+    font-size: 11px;
+    color: var(--lagoon-mist);
+    opacity: 0.7;
+    margin-bottom: 28px;
+    letter-spacing: 1px;
+  }
+  
+  .brief-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .brief-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    padding: 14px 0;
+    border-top: 0.5px solid rgba(245, 241, 232, 0.1);
+    font-size: 11.5px;
+    align-items: baseline;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .brief-row.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .brief-row .label {
+    color: var(--paper);
+  }
+  
+  .brief-row .label-sub {
+    color: var(--lagoon-mist);
+    opacity: 0.6;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 2px;
+  }
+  
+  .brief-row .val {
+    color: var(--gold);
+    text-align: right;
+    font-weight: 500;
+  }
+  
+  .brief-recommend {
+    margin-top: 28px;
+    padding: 24px 0 4px;
+    border-top: 0.5px solid rgba(201, 169, 97, 0.4);
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--paper);
+    min-height: 80px;
+  }
+  
+  .brief-recommend .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+  
+  .brief-cursor {
+    display: inline-block;
+    width: 7px;
+    height: 1em;
+    background: var(--gold);
+    margin-left: 2px;
+    vertical-align: -0.13em;
+    animation: blink 1s step-end infinite;
+  }
+
+  /* Services */
+  .services {
+    padding: 120px 40px;
+    border-top: 0.5px solid var(--rule);
+    position: relative;
+    z-index: 2;
+  }
+  
+  .services-head {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 60px;
+    margin-bottom: 80px;
+  }
+  
+  .services-h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(56px, 8vw, 96px);
+    line-height: 0.95;
+    color: var(--lagoon-deep);
+    letter-spacing: -2px;
+    font-weight: 300;
+  }
+  
+  .services-h2 em { font-style: italic; color: var(--gold); }
+  
+  .service-row {
+    display: grid;
+    grid-template-columns: 200px 1.2fr 1fr 200px;
+    gap: 40px;
+    padding: 48px 0;
+    border-top: 0.5px solid var(--rule);
+    align-items: start;
+    transition: padding 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: pointer;
+  }
+  
+  .service-row:last-child { border-bottom: 0.5px solid var(--rule); }
+  .service-row:hover { padding-left: 16px; }
+  .service-row:hover .service-name { color: var(--gold); }
+  
+  .service-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+  }
+  
+  .service-name {
+    font-family: 'Fraunces', serif;
+    font-size: 38px;
+    line-height: 1;
+    color: var(--lagoon-deep);
+    font-weight: 400;
+    letter-spacing: -0.8px;
+    transition: color 0.4s;
+  }
+  
+  .service-name em { font-style: italic; }
+  
+  .service-desc {
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--ink);
+    max-width: 380px;
+  }
+  
+  .service-price {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--gold);
+    text-align: right;
+    font-style: italic;
+  }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 2;
+    padding: 160px 40px 32px;
+    border-top: 0.5px solid var(--rule);
+    background: var(--paper);
+  }
+  
+  .footer-h {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(72px, 12vw, 180px);
+    line-height: 0.9;
+    color: var(--lagoon-deep);
+    letter-spacing: -4px;
+    font-weight: 300;
+    margin-bottom: 80px;
+  }
+  
+  .footer-h em { font-style: italic; color: var(--gold); }
+  
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 32px;
+    padding-top: 60px;
+    border-top: 0.5px solid var(--rule);
+    margin-bottom: 60px;
+  }
+  
+  .footer-col h5 {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  
+  .footer-col p, .footer-col a {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink);
+    text-decoration: none;
+    display: block;
+  }
+  
+  .footer-col a:hover { color: var(--gold); }
+  
+  .footer-bottom {
+    padding-top: 32px;
+    border-top: 0.5px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .footer-bottom .accent { color: var(--gold); }
+  
+  /* Mobile */
+  @media (max-width: 800px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .nav-meta { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 120px 20px 60px; gap: 40px; }
+    .manifest, .services-head { grid-template-columns: 1fr; gap: 24px; padding: 80px 20px; }
+    .services { padding: 80px 20px; }
+    .service-row { grid-template-columns: 1fr; gap: 12px; padding: 32px 0; }
+    .service-price { text-align: left; }
+    .service-row:hover { padding-left: 0; }
+    .live-brief { padding: 80px 20px; }
+    .live-brief-frame { grid-template-columns: 1fr; gap: 40px; }
+    .brief-paper { padding: 28px 20px 20px; }
+    .brief-row { grid-template-columns: 1fr; gap: 4px; }
+    .brief-row .val { text-align: left; }
+    footer { padding: 100px 20px 24px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .watcher { bottom: 16px; right: 16px; }
+    .watcher-bubble { font-size: 12px; max-width: 220px; padding: 12px 16px; }
+    .watcher-orb { width: 48px; height: 48px; }
+    .watcher-orb svg { width: 24px; height: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sky" id="sky"></div>
+
+<nav>
+  <a href="#" class="logo">
+    <svg viewBox="0 0 200 200" fill="none">
+      <ellipse cx="100" cy="46" rx="2.2" ry="4" fill="currentColor" opacity="0.55"/>
+      <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="6"/>
+      <circle cx="100" cy="100" r="55" fill="none" stroke="currentColor" stroke-width="5" opacity="0.55"/>
+      <circle cx="100" cy="100" r="32" fill="none" stroke="currentColor" stroke-width="5" opacity="0.42"/>
+      <circle cx="100" cy="100" r="14" fill="none" stroke="currentColor" stroke-width="5" opacity="0.32"/>
+      <circle cx="100" cy="100" r="8" fill="currentColor"/>
+    </svg>
+    Rainey Laguna
+  </a>
+  <div class="nav-links">
+    <a href="#brief"><span class="idx">02</span>Brief</a>
+    <a href="#services"><span class="idx">03</span>Services</a>
+    <a href="#contact"><span class="idx">04</span>Hello</a>
+    <span class="nav-meta" id="navMeta">
+      <span class="accent" id="moodLabel">Loading mood</span><br>
+      <span id="navTime">Lima · 23:00</span>
+    </span>
+  </div>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow"><span class="typed" id="eyebrow"></span></div>
+    <h1 class="hero-h1" id="heroH1"></h1>
+  </div>
+  
+  <div class="hero-meta">
+    <p class="hero-lede" id="heroLede"></p>
+    <div class="hero-actions" id="heroActions">
+      <a href="#contact" class="btn-primary"><span>Start a conversation</span><span>→</span></a>
+      <a href="#brief" class="btn-text">Watch a brief generate</a>
+    </div>
+  </div>
+</section>
+
+<section class="manifest">
+  <div class="section-num"><span>01</span> — Manifesto</div>
+  <p class="manifest-text">A website should feel like the room your restaurant is named after — <em>considered, calm, alive at the edges.</em> But it should also <em>think.</em> The site you're reading rebuilt itself for you in the last few seconds, in a mood matching the actual hour in Lima. <span class="gold">This is what we make.</span></p>
+  <div></div>
+</section>
+
+<!-- The HOMEPAGE IS THE PRODUCT — live generating brief -->
+<section class="live-brief" id="brief">
+  <div class="live-brief-frame">
+    <div>
+      <div class="section-num"><span>02</span> — Vigía · the product</div>
+      <h2 class="live-brief-h">A brief, <em>generating now,</em> for a real Lima café.</h2>
+      <p class="live-brief-desc">Every Monday at 8 a.m., your inbox. This brief is regenerating live — same engine, real Lima neighborhoods, real competitor categories. Watch it think.</p>
+      <span class="live-brief-status"><span class="dot"></span><span id="briefStatus">Vigía · awake</span></span>
+    </div>
+    
+    <div class="brief-paper">
+      <div class="brief-meta-row">
+        <span id="briefDistrict">San Borja · Week 17</span>
+        <span id="briefId">brief #2026.4.k7c</span>
+      </div>
+      <div class="brief-target" id="briefTarget"></div>
+      <div class="brief-sub" id="briefSub">5 closest competitors · 200m radius</div>
+      <div class="brief-rows" id="briefRows"></div>
+      <div class="brief-recommend">
+        <span class="label">→ Recomendación</span>
+        <span id="briefRec"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="services-head">
+    <div class="section-num"><span>03</span> — Servicios</div>
+    <h2 class="services-h2">What we<br><em>actually</em> make.</h2>
+  </div>
+  
+  <div class="service-row">
+    <div class="service-num">→ 01 / Websites</div>
+    <h3 class="service-name">Websites <em>that earn their keep.</em></h3>
+    <p class="service-desc">Custom-designed sites in Spanish and English, built bespoke for each restaurant. Some of them, like this one, generate themselves.</p>
+    <div class="service-price">desde S/ 1,500</div>
+  </div>
+  
+  <div class="service-row">
+    <div class="service-num">→ 02 / Vigía</div>
+    <h3 class="service-name">Vigía — <em>the watcher.</em></h3>
+    <p class="service-desc">Every Monday at 8 a.m., a WhatsApp brief generated by the same engine you're watching above — what your competitors did last week and what to do about it.</p>
+    <div class="service-price">S/ 250 / mes</div>
+  </div>
+  
+  <div class="service-row">
+    <div class="service-num">→ 03 / Care</div>
+    <h3 class="service-name">Care <em>&amp; quietude.</em></h3>
+    <p class="service-desc">Hosting, security, monthly content updates, Google Business Profile. The boring half of being online, handled.</p>
+    <div class="service-price">desde S/ 300 / mes</div>
+  </div>
+</section>
+
+<footer id="contact">
+  <h2 class="footer-h">Tell us about<br>your <em>place.</em></h2>
+  
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h5>Email</h5>
+      <a href="mailto:hola@raineylaguna.com">hola@<br>raineylaguna.com</a>
+    </div>
+    <div class="footer-col">
+      <h5>WhatsApp</h5>
+      <a href="https://wa.me/51000000000">+51 ··· ····</a>
+    </div>
+    <div class="footer-col">
+      <h5>Studio</h5>
+      <p>Av. Conquistadores<br>San Isidro, Lima</p>
+    </div>
+    <div class="footer-col">
+      <h5>Origen</h5>
+      <p>Glasgow,<br>Scotland</p>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <span>© 2026 Stuart John Andrew Rainey · From Glasgow, in Lima</span>
+    <span><span class="accent" id="footMood">·</span> · <span id="footTime">Lima 23:00 · Glasgow 05:00</span></span>
+  </div>
+</footer>
+
+<!-- THE WATCHER — el Vigía -->
+<div class="watcher" id="watcher" aria-live="polite">
+  <div class="watcher-bubble" id="bubble">
+    <span class="who">El Vigía</span>
+    <span id="bubbleText"></span>
+  </div>
+  <div class="watcher-orb" id="orb" aria-label="El Vigía">
+    <svg viewBox="0 0 200 200" fill="none">
+      <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="6"/>
+      <circle cx="100" cy="100" r="55" fill="none" stroke="currentColor" stroke-width="5" opacity="0.55"/>
+      <circle cx="100" cy="100" r="32" fill="none" stroke="currentColor" stroke-width="5" opacity="0.42"/>
+      <circle cx="100" cy="100" r="14" fill="currentColor"/>
+    </svg>
+    <div class="ripple"></div>
+  </div>
+</div>
+
+<script>
+// =============================================================================
+// MOOD SYSTEM — site shifts with actual Lima time
+// =============================================================================
+const MOODS = {
+  dawn:    { label: 'amanecer en Lima', sky1: '#8B6F4A', sky2: '#C4A678', sky3: '#E5C8A0', ink: '#2C1F18', paper: '#FAF3E6', lagoonDeep: '#3D2818', lagoonMist: '#D4B894', gold: '#C9A961', weight: 300 },
+  morning: { label: 'mañana en Lima',   sky1: '#7AA0B0', sky2: '#A8C0CC', sky3: '#D6DDDC', ink: '#1F2E36', paper: '#F5F1E8', lagoonDeep: '#2A4A5C', lagoonMist: '#B8CDD5', gold: '#C9A961', weight: 300 },
+  noon:    { label: 'mediodía en Lima', sky1: '#4A7088', sky2: '#7A9AAB', sky3: '#C4D4DC', ink: '#0F1A22', paper: '#F5F1E8', lagoonDeep: '#1A3A4A', lagoonMist: '#C4D4DC', gold: '#C9A961', weight: 300 },
+  afternoon:{label: 'tarde en Lima',    sky1: '#B89060', sky2: '#D4A878', sky3: '#E5C49A', ink: '#1F1812', paper: '#F7EFDE', lagoonDeep: '#3A2818', lagoonMist: '#D8B896', gold: '#D4A042', weight: 300 },
+  dusk:    { label: 'atardecer en Lima',sky1: '#2A2440', sky2: '#7A4858', sky3: '#D48868', ink: '#181420', paper: '#F2EBDA', lagoonDeep: '#2A1F38', lagoonMist: '#A89AB8', gold: '#E59048', weight: 300 },
+  night:   { label: 'noche en Lima',    sky1: '#0A1428', sky2: '#1A2438', sky3: '#2A2C44', ink: '#0A0F18', paper: '#EDE5D2', lagoonDeep: '#0F2030', lagoonMist: '#8A98A8', gold: '#E5C57A', weight: 300 }
+};
+
+function getLimaHour() {
+  const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Lima', hour: 'numeric', hour12: false });
+  return parseInt(fmt.format(new Date()), 10);
+}
+
+function moodForHour(h) {
+  if (h >= 5 && h < 7)   return MOODS.dawn;
+  if (h >= 7 && h < 11)  return MOODS.morning;
+  if (h >= 11 && h < 15) return MOODS.noon;
+  if (h >= 15 && h < 18) return MOODS.afternoon;
+  if (h >= 18 && h < 21) return MOODS.dusk;
+  return MOODS.night;
+}
+
+function applyMood(m) {
+  const r = document.documentElement;
+  r.style.setProperty('--ink', m.ink);
+  r.style.setProperty('--paper', m.paper);
+  r.style.setProperty('--lagoon-deep', m.lagoonDeep);
+  r.style.setProperty('--lagoon-mist', m.lagoonMist);
+  r.style.setProperty('--gold', m.gold);
+  r.style.setProperty('--sky-1', m.sky1);
+  r.style.setProperty('--sky-2', m.sky2);
+  r.style.setProperty('--sky-3', m.sky3);
+  r.style.setProperty('--type-weight', m.weight);
+  
+  // mood label
+  const ml = document.getElementById('moodLabel');
+  const fm = document.getElementById('footMood');
+  if (ml) ml.textContent = m.label;
+  if (fm) fm.textContent = m.label;
+  
+  // sky opacity stronger at extremes
+  const sky = document.getElementById('sky');
+  const limaH = getLimaHour();
+  const intensity = (limaH < 6 || limaH > 19) ? 0.18 : 0.06;
+  if (sky) sky.style.opacity = intensity;
+}
+
+const currentMood = moodForHour(getLimaHour());
+applyMood(currentMood);
+
+// =============================================================================
+// CLOCK
+// =============================================================================
+function tickClock() {
+  const now = new Date();
+  const lima = now.toLocaleTimeString('en-GB', { timeZone: 'America/Lima', hour: '2-digit', minute: '2-digit' });
+  const glasgow = now.toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit' });
+  const nt = document.getElementById('navTime');
+  if (nt) nt.textContent = `Lima · ${lima}`;
+  const ft = document.getElementById('footTime');
+  if (ft) ft.textContent = `Lima ${lima} · Glasgow ${glasgow}`;
+}
+tickClock();
+setInterval(tickClock, 30000);
+
+// Re-evaluate mood every minute (in case a visitor stays on the page through dawn)
+setInterval(() => applyMood(moodForHour(getLimaHour())), 60000);
+
+// =============================================================================
+// HERO — types itself into existence
+// =============================================================================
+const heroH1 = document.getElementById('heroH1');
+const eyebrow = document.getElementById('eyebrow');
+const heroLede = document.getElementById('heroLede');
+const heroActions = document.getElementById('heroActions');
+
+const eyebrowText = `Estudio Web · Lima ⟷ Glasgow · Est. 2026`;
+const h1Text = ['Like rain', 'on the', '<em>laguna.</em>'];
+const ledeText = `Quiet, considered websites for Lima's restaurants and cafés — and every Monday morning, a brief that tells you exactly what your closest competitors just did.`;
+
+function typeInto(el, text, speed = 22, startDelay = 0) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      let i = 0;
+      el.textContent = '';
+      const step = () => {
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          i++;
+          setTimeout(step, speed + Math.random() * 10);
+        } else {
+          resolve();
+        }
+      };
+      step();
+    }, startDelay);
+  });
+}
+
+// Type the H1 line by line, with a cursor block
+async function typeH1() {
+  heroH1.innerHTML = '';
+  for (let i = 0; i < h1Text.length; i++) {
+    const lineSpan = document.createElement('span');
+    lineSpan.style.display = 'block';
+    heroH1.appendChild(lineSpan);
+    
+    const isLast = (i === h1Text.length - 1);
+    const text = h1Text[i];
+    
+    // Add a cursor at end of current line
+    const cur = document.createElement('span');
+    cur.className = 'cursor-bar';
+    lineSpan.appendChild(cur);
+    
+    const inner = document.createElement('span');
+    lineSpan.insertBefore(inner, cur);
+    
+    // Type — handle <em>
+    if (text.startsWith('<em>')) {
+      const em = document.createElement('em');
+      inner.appendChild(em);
+      const inside = text.replace('<em>', '').replace('</em>', '');
+      let j = 0;
+      await new Promise(res => {
+        const step = () => {
+          if (j < inside.length) {
+            em.textContent += inside.charAt(j);
+            j++;
+            setTimeout(step, 60);
+          } else { res(); }
+        };
+        step();
+      });
+    } else {
+      let j = 0;
+      await new Promise(res => {
+        const step = () => {
+          if (j < text.length) {
+            inner.textContent += text.charAt(j);
+            j++;
+            setTimeout(step, 55);
+          } else { res(); }
+        };
+        step();
+      });
+    }
+    
+    // remove cursor unless this is the last line
+    if (!isLast) cur.remove();
+    else {
+      // mark last cursor for fade after 2s
+      setTimeout(() => cur.classList.add('done'), 1500);
+    }
+    
+    await new Promise(r => setTimeout(r, 180));
+  }
+}
+
+// Orchestrate the hero generation
+(async () => {
+  await typeInto(eyebrow, eyebrowText, 18, 400);
+  await new Promise(r => setTimeout(r, 200));
+  await typeH1();
+  await typeInto(heroLede, ledeText, 11, 200);
+  heroActions.classList.add('ready');
+  
+  // Wake el Vigía
+  setTimeout(() => {
+    document.getElementById('watcher').classList.add('awake');
+    setTimeout(() => watcherSays(getOpeningLine()), 1400);
+  }, 600);
+})();
+
+// =============================================================================
+// EL VIGÍA — the watching companion
+// =============================================================================
+const orb = document.getElementById('orb');
+const bubble = document.getElementById('bubble');
+const bubbleText = document.getElementById('bubbleText');
+
+let bubbleTimer = null;
+let bubbleHideTimer = null;
+let lastSpoke = 0;
+
+function watcherSays(text, hold = 5500) {
+  if (Date.now() - lastSpoke < 2000) return;
+  lastSpoke = Date.now();
+  
+  clearTimeout(bubbleHideTimer);
+  bubbleText.textContent = text;
+  bubble.classList.add('visible');
+  
+  bubbleHideTimer = setTimeout(() => {
+    bubble.classList.remove('visible');
+  }, hold);
+}
+
+function getOpeningLine() {
+  const h = getLimaHour();
+  if (h < 7)  return 'Buen día. Es muy temprano en Lima — incluso para un café.';
+  if (h < 12) return 'Buenos días. Aquí, en Lima, los baristas ya están abriendo.';
+  if (h < 18) return 'Buenas tardes. Esta página se construyó para ti hace 4 segundos.';
+  if (h < 22) return 'Buenas noches. Estás llegando a una buena hora — la laguna está calma.';
+  return 'Tarde para escribir, temprano para responder. Bienvenido.';
+}
+
+const idleQuips = [
+  'Esta página está pensando en ti.',
+  '¿Notaste que el cielo cambió de color al cargar?',
+  'La paleta refleja la hora real en Lima.',
+  'Si vuelves al amanecer, el sitio se verá distinto.',
+  'El reporte de abajo se está generando en vivo.',
+];
+
+const scrollQuips = {
+  manifest: 'El manifiesto. Cada palabra escogida con cuidado.',
+  brief: 'Aquí. Esto es lo que hago cada lunes a las 8.',
+  services: 'Tres servicios. Uno suficiente. Tres ideales.',
+  footer: '¿Tu local merece una conversación? Aquí abajo está el correo.'
+};
+
+// React to scroll
+const sectionsToWatch = [
+  { id: 'brief', key: 'brief', spoken: false },
+  { id: 'services', key: 'services', spoken: false },
+  { id: 'contact', key: 'footer', spoken: false }
+];
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const sec = sectionsToWatch.find(s => s.id === e.target.id);
+      if (sec && !sec.spoken) {
+        sec.spoken = true;
+        watcherSays(scrollQuips[sec.key]);
+      }
+    }
+  });
+}, { threshold: 0.4 });
+
+sectionsToWatch.forEach(s => {
+  const el = document.getElementById(s.id);
+  if (el) obs.observe(el);
+});
+
+// React to long idle
+let idleTimeout = null;
+function resetIdle() {
+  clearTimeout(idleTimeout);
+  idleTimeout = setTimeout(() => {
+    if (Date.now() - lastSpoke > 12000) {
+      const q = idleQuips[Math.floor(Math.random() * idleQuips.length)];
+      watcherSays(q);
+    }
+    resetIdle();
+  }, 18000);
+}
+['mousemove', 'scroll', 'touchstart'].forEach(ev => {
+  document.addEventListener(ev, () => { 
+    // only reset on first activity
+  }, { once: true, passive: true });
+});
+resetIdle();
+
+// Click the orb for a comment
+orb.addEventListener('click', () => {
+  const lines = [
+    'Hola. Soy el Vigía.',
+    'Cada lunes te diré qué hizo tu competencia.',
+    '¿Tienes un restaurante en Lima?',
+    'Puedo demostrar lo que hago. Mira el brief.',
+    'Estoy mirando todo el barrio, todo el tiempo.'
+  ];
+  watcherSays(lines[Math.floor(Math.random() * lines.length)]);
+});
+
+// =============================================================================
+// LIVE BRIEF — the homepage IS the product
+// =============================================================================
+const briefScenarios = [
+  {
+    district: 'San Borja · Semana 17',
+    target: 'Curcucho <em>Café</em>',
+    sub: '5 competidores más cercanos · 200m',
+    rows: [
+      { label: 'Tostaduría Bisetti', sub: 'Av. Aviación · 180m', val: '+12% precio · oat latte' },
+      { label: 'La Nuez San Borja', sub: 'Av. San Borja Sur · 220m', val: '2 menús nuevos · brunch' },
+      { label: '80+ Coffee & Tea', sub: 'C. Eucaliptos · 90m', val: 'Reseñas · 4.5 → 4.7' },
+      { label: 'Café La Culture', sub: 'Av. Aviación · 310m', val: 'Promo 2x1 · martes' },
+      { label: 'William Flores Café', sub: 'C. Tomás Edison · 270m', val: 'Nueva sucursal · Surco' }
+    ],
+    rec: 'Considerar subir el flat white S/ 1.50 antes del 1 de mayo. Tu margen sigue 8% por debajo del barrio.'
+  },
+  {
+    district: 'San Isidro · Semana 17',
+    target: 'Cormiglio <em>Café</em>',
+    sub: '5 competidores · zona financiera',
+    rows: [
+      { label: 'Rutina Café SI', sub: 'C. Las Begonias · 140m', val: 'Subió capuchino S/ 2' },
+      { label: 'Oh-jalá', sub: 'Av. Conquistadores · 180m', val: 'Nuevo menú vegano · 8 ítems' },
+      { label: 'LA DOSIS DULCE', sub: 'Av. Pardo y Aliaga · 250m', val: 'IG · +1.2k seguidores' },
+      { label: 'Café Del Bosque', sub: 'Av. El Rosario · 320m', val: 'Cambió horario · cierra 21h' },
+      { label: 'Space Café', sub: 'C. Burgos · 290m', val: 'Reseñas · 4.6 → 4.5' }
+    ],
+    rec: 'La ola vegana en San Isidro está acelerando. Sugerimos 2 ítems plant-based para tu carta antes de mayo.'
+  },
+  {
+    district: 'Miraflores · Semana 17',
+    target: 'Grano Dorado / <em>Evolèt</em>',
+    sub: '5 competidores · zona malecón',
+    rows: [
+      { label: 'Rutina Café Miraflores', sub: 'C. Berlín · 110m', val: 'Subió flat white S/ 1' },
+      { label: 'Café de Lima', sub: 'C. La Paz · 80m', val: 'Eventos · jazz miércoles' },
+      { label: 'DULCE CIUDAD', sub: 'C. Bolognesi · 220m', val: 'Brunch · sábado/domingo' },
+      { label: 'Barra Botánica', sub: 'C. Independencia · 290m', val: 'Promo · pisco hour' },
+      { label: 'La Tiendecita Blanca', sub: 'Av. Larco · 340m', val: 'Reservas · +30% mes' }
+    ],
+    rec: 'Café de Lima está construyendo una marca cultural. Tu fortaleza es la calidad — sugerimos un evento mensual de cata.'
+  },
+  {
+    district: 'Surco · Semana 17',
+    target: 'HACIENDA <em>CAFE</em>',
+    sub: '5 competidores · Chacarilla',
+    rows: [
+      { label: 'La Folie Chacarilla', sub: 'Av. Caminos del Inca · 190m', val: 'Renovó interiores' },
+      { label: 'LYNCH Café', sub: 'C. Monte Rosa · 240m', val: '+15% precio · postres' },
+      { label: 'Don Mamino', sub: 'Av. La Encalada · 310m', val: 'Nuevo croissant · pistacho' },
+      { label: 'Olivia Restaurante', sub: 'Av. La Encalada · 380m', val: 'IG · 850 → 1.4k' },
+      { label: 'Amarás Café', sub: 'C. Capac Yupanqui · 290m', val: 'Lanzó delivery propio' }
+    ],
+    rec: 'Amarás está cobrando comisión 0% con delivery propio. Vale evaluar tu estructura con Rappi antes del Q3.'
+  }
+];
+
+let briefIdx = 0;
+
+const briefDistrict = document.getElementById('briefDistrict');
+const briefTarget = document.getElementById('briefTarget');
+const briefSub = document.getElementById('briefSub');
+const briefRows = document.getElementById('briefRows');
+const briefRec = document.getElementById('briefRec');
+const briefStatus = document.getElementById('briefStatus');
+
+async function typeText(el, text, speed = 14) {
+  return new Promise(resolve => {
+    el.innerHTML = '';
+    let i = 0;
+    // Strip and re-handle <em> for this small typing routine
+    const cursor = document.createElement('span');
+    cursor.className = 'brief-cursor';
+    el.appendChild(cursor);
+    
+    const buf = [];
+    let inEm = false;
+    let frag = '';
+    
+    function appendCharOrTag() {
+      if (i >= text.length) {
+        cursor.remove();
+        resolve();
+        return;
+      }
+      // Detect <em> and </em>
+      if (text.substring(i, i+4) === '<em>') {
+        inEm = true;
+        const emEl = document.createElement('em');
+        emEl.style.color = 'var(--gold)';
+        el.insertBefore(emEl, cursor);
+        i += 4;
+        return appendCharOrTag();
+      }
+      if (text.substring(i, i+5) === '</em>') {
+        inEm = false;
+        i += 5;
+        return appendCharOrTag();
+      }
+      const ch = text.charAt(i);
+      if (inEm) {
+        const lastEm = el.querySelector('em:last-of-type');
+        if (lastEm) lastEm.textContent += ch;
+      } else {
+        const tn = document.createTextNode(ch);
+        el.insertBefore(tn, cursor);
+      }
+      i++;
+      setTimeout(appendCharOrTag, speed + Math.random() * 12);
+    }
+    appendCharOrTag();
+  });
+}
+
+async function generateBrief() {
+  const sc = briefScenarios[briefIdx];
+  briefIdx = (briefIdx + 1) % briefScenarios.length;
+  
+  briefStatus.textContent = 'Vigía · generando…';
+  
+  // Header
+  briefDistrict.textContent = sc.district;
+  
+  // Type the target
+  await typeText(briefTarget, sc.target, 36);
+  briefSub.textContent = sc.sub;
+  
+  // Render rows with stagger
+  briefRows.innerHTML = '';
+  for (let i = 0; i < sc.rows.length; i++) {
+    const r = sc.rows[i];
+    const row = document.createElement('div');
+    row.className = 'brief-row';
+    row.innerHTML = `
+      <div class="label">${r.label}<span class="label-sub">${r.sub}</span></div>
+      <div class="val">${r.val}</div>
+    `;
+    briefRows.appendChild(row);
+    await new Promise(res => setTimeout(res, 90));
+    requestAnimationFrame(() => row.classList.add('in'));
+  }
+  
+  await new Promise(r => setTimeout(r, 400));
+  
+  // Type the recommendation
+  briefStatus.textContent = 'Vigía · pensando…';
+  await typeText(briefRec, sc.rec, 24);
+  briefStatus.textContent = 'Vigía · completo';
+  
+  await new Promise(r => setTimeout(r, 7000));
+  briefStatus.textContent = 'Vigía · siguiente brief en 3s…';
+  await new Promise(r => setTimeout(r, 3000));
+  
+  // Erase
+  briefStatus.textContent = 'Vigía · regenerando…';
+  briefRec.textContent = '';
+  briefTarget.textContent = '';
+  Array.from(briefRows.children).forEach(c => c.classList.remove('in'));
+  await new Promise(r => setTimeout(r, 500));
+  
+  generateBrief();
+}
+
+// Start the brief once it's in view
+const briefObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      generateBrief();
+      briefObs.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+
+briefObs.observe(document.getElementById('brief'));
+</script>
+
+</body>
+</html>

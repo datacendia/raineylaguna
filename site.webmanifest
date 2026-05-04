@@ -1,0 +1,32 @@
+{
+  "name": "Rainey Laguna",
+  "short_name": "Rainey Laguna",
+  "description": "Estudio web en Lima · Inteligencia competitiva con Vigía",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F5F1E8",
+  "theme_color": "#1A3A4A",
+  "lang": "es-PE",
+  "dir": "ltr",
+  "categories": ["business", "design", "productivity"],
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "WhatsApp",
+      "short_name": "WhatsApp",
+      "description": "Conversemos por WhatsApp",
+      "url": "https://wa.me/51912418482?text=Hola%20Stuart%20%E2%80%94%20vi%20raineylaguna.com%20y%20quiero%20conversar."
+    },
+    {
+      "name": "Ver brief",
+      "short_name": "Brief",
+      "description": "Ver un brief de Vigía generándose",
+      "url": "/?lang=es#brief"
+    }
+  ]
+}

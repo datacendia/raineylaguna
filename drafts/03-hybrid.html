@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rainey Laguna — Direction C · Hybrid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14242E;
+    --paper: #F5F1E8;
+    --paper-warm: #EFE8D8;
+    --lagoon-deep: #1A3A4A;
+    --lagoon-mist: #C4D4DC;
+    --gold: #C9A961;
+    --rule: rgba(20, 36, 46, 0.18);
+    --muted: rgba(20, 36, 46, 0.55);
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  
+  .serif { font-family: 'Fraunces', Georgia, serif; }
+  
+  /* Subtle paper grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+  
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(245, 241, 232, 0.86);
+    backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid var(--rule);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    letter-spacing: 0.5px;
+    color: var(--lagoon-deep);
+    text-decoration: none;
+    font-weight: 400;
+  }
+  
+  .logo svg { width: 22px; height: 22px; }
+  
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+  
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: opacity 0.3s;
+    position: relative;
+  }
+  
+  .nav-links a span.idx {
+    color: var(--gold);
+    margin-right: 6px;
+  }
+  
+  .nav-links a:hover { opacity: 0.5; }
+  
+  .clock {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding-left: 24px;
+    border-left: 0.5px solid var(--rule);
+  }
+  
+  /* Hero — calm */
+  .hero {
+    min-height: 100vh;
+    padding: 180px 40px 100px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: end;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--lagoon-deep);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .hero-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 0.5px;
+    background: var(--lagoon-deep);
+  }
+  
+  .hero-h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(60px, 11vw, 156px);
+    line-height: 0.92;
+    color: var(--lagoon-deep);
+    letter-spacing: -3.5px;
+    font-weight: 300;
+  }
+  
+  .hero-h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 300;
+  }
+  
+  .hero-h1-line {
+    display: block;
+    overflow: hidden;
+  }
+  
+  .hero-h1-line span {
+    display: inline-block;
+    transform: translateY(110%);
+    animation: rise-line 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  
+  .hero-h1-line:nth-child(1) span { animation-delay: 0.1s; }
+  .hero-h1-line:nth-child(2) span { animation-delay: 0.3s; }
+  .hero-h1-line:nth-child(3) span { animation-delay: 0.5s; }
+  
+  @keyframes rise-line { to { transform: translateY(0); } }
+  
+  .hero-meta {
+    align-self: end;
+    padding-bottom: 12px;
+    opacity: 0;
+    animation: fade-in 1.2s ease 0.8s forwards;
+  }
+  
+  @keyframes fade-in { to { opacity: 1; } }
+  
+  .hero-lede {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink);
+    margin-bottom: 36px;
+    max-width: 460px;
+    font-weight: 300;
+    font-style: italic;
+  }
+  
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .btn-primary {
+    background: var(--lagoon-deep);
+    color: var(--paper);
+    padding: 14px 26px;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateY(101%);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 0;
+  }
+  
+  .btn-primary span { position: relative; z-index: 1; transition: color 0.4s; }
+  
+  .btn-primary:hover::before { transform: translateY(0); }
+  .btn-primary:hover span { color: var(--ink); }
+  
+  .btn-text {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    border-bottom: 0.5px solid var(--rule);
+    padding-bottom: 4px;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  
+  .btn-text:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  
+  /* MAGIC MOMENT 1: Interactive lagoon section */
+  .lagoon {
+    position: relative;
+    z-index: 2;
+    background: var(--lagoon-deep);
+    color: var(--paper);
+    padding: 200px 40px;
+    overflow: hidden;
+    text-align: center;
+    cursor: crosshair;
+    border-top: 0.5px solid var(--rule);
+  }
+  
+  .lagoon canvas {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .lagoon-content {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  .lagoon-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+  
+  .lagoon-h {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 1.1;
+    letter-spacing: -2px;
+    font-weight: 300;
+    margin-bottom: 32px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .lagoon-h em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  
+  .lagoon-instruction {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--lagoon-mist);
+    opacity: 0.6;
+    margin-top: 60px;
+  }
+  
+  /* Manifesto */
+  .manifest {
+    padding: 140px 40px;
+    border-top: 0.5px solid var(--rule);
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    gap: 60px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .section-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+  }
+  
+  .section-num span { color: var(--gold); }
+  
+  .manifest-text {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    line-height: 1.4;
+    color: var(--lagoon-deep);
+    font-weight: 300;
+    letter-spacing: -0.8px;
+    max-width: 760px;
+  }
+  
+  .manifest-text em { font-style: italic; }
+  .manifest-text .gold { color: var(--gold); font-style: italic; }
+  
+  /* Services */
+  .services {
+    padding: 120px 40px;
+    border-top: 0.5px solid var(--rule);
+    position: relative;
+    z-index: 2;
+  }
+  
+  .services-head {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 60px;
+    margin-bottom: 80px;
+  }
+  
+  .services-h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(56px, 8vw, 96px);
+    line-height: 0.95;
+    color: var(--lagoon-deep);
+    letter-spacing: -2px;
+    font-weight: 300;
+  }
+  
+  .services-h2 em { font-style: italic; color: var(--gold); }
+  
+  .service-row {
+    display: grid;
+    grid-template-columns: 200px 1.2fr 1fr 200px;
+    gap: 40px;
+    padding: 48px 0;
+    border-top: 0.5px solid var(--rule);
+    align-items: start;
+    transition: padding 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: pointer;
+  }
+  
+  .service-row:last-child { border-bottom: 0.5px solid var(--rule); }
+  
+  .service-row:hover { padding-left: 16px; }
+  
+  .service-row:hover .service-name { color: var(--gold); }
+  
+  .service-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+  }
+  
+  .service-name {
+    font-family: 'Fraunces', serif;
+    font-size: 38px;
+    line-height: 1;
+    color: var(--lagoon-deep);
+    font-weight: 400;
+    letter-spacing: -0.8px;
+    transition: color 0.4s;
+  }
+  
+  .service-name em { font-style: italic; }
+  
+  .service-desc {
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--ink);
+    max-width: 380px;
+  }
+  
+  .service-price {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--gold);
+    text-align: right;
+    font-style: italic;
+  }
+  
+  /* MAGIC MOMENT 2: Live Vigía brief */
+  .vigia {
+    padding: 160px 40px;
+    border-top: 0.5px solid var(--rule);
+    background: var(--paper-warm);
+    position: relative;
+    z-index: 2;
+  }
+  
+  .vigia-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .vigia-left .section-num {
+    margin-bottom: 32px;
+    display: block;
+  }
+  
+  .vigia-h {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 1;
+    color: var(--lagoon-deep);
+    letter-spacing: -2px;
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+  
+  .vigia-h em { font-style: italic; color: var(--gold); }
+  
+  .vigia-desc {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 32px;
+    max-width: 460px;
+  }
+  
+  .vigia-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    border-bottom: 0.5px solid var(--rule);
+    padding-bottom: 6px;
+    transition: all 0.3s;
+  }
+  
+  .vigia-cta:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+    gap: 18px;
+  }
+  
+  /* Brief mockup */
+  .brief {
+    background: var(--lagoon-deep);
+    color: var(--paper);
+    padding: 36px;
+    border-radius: 4px;
+    position: relative;
+    box-shadow: 0 30px 60px -20px rgba(20, 36, 46, 0.3);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  .brief::before {
+    content: 'WHATSAPP · LUNES 08:02';
+    position: absolute;
+    top: -10px;
+    left: 28px;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 4px 12px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  
+  .brief-head {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  
+  .brief h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+  
+  .brief-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 0.5px solid rgba(245, 241, 232, 0.12);
+    font-size: 11px;
+    gap: 12px;
+  }
+  
+  .brief-row:first-of-type { border-top: none; }
+  .brief-row .label { opacity: 0.65; flex-shrink: 0; }
+  .brief-row .val { color: var(--gold); text-align: right; }
+  
+  .brief-action {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 0.5px solid rgba(201, 169, 97, 0.4);
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--paper);
+    min-height: 60px;
+  }
+  
+  .brief-action .typing {
+    border-right: 1.5px solid var(--gold);
+    animation: blink 1s step-end infinite;
+    padding-right: 2px;
+  }
+  
+  @keyframes blink {
+    0%, 50% { border-color: var(--gold); }
+    51%, 100% { border-color: transparent; }
+  }
+  
+  .brief-cycle {
+    margin-top: 16px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--lagoon-mist);
+    opacity: 0.5;
+    text-transform: uppercase;
+    text-align: right;
+  }
+  
+  /* Work */
+  .work {
+    padding: 120px 40px;
+    border-top: 0.5px solid var(--rule);
+    position: relative;
+    z-index: 2;
+  }
+  
+  .work-head {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 60px;
+    margin-bottom: 80px;
+  }
+  
+  .work-list {
+    border-top: 0.5px solid var(--rule);
+  }
+  
+  .work-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 200px 60px;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 0.5px solid var(--rule);
+    align-items: center;
+    transition: padding 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: pointer;
+  }
+  
+  .work-row:hover { padding-left: 16px; }
+  .work-row:hover .work-name { color: var(--gold); }
+  
+  .work-idx {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  
+  .work-name {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--lagoon-deep);
+    transition: color 0.4s;
+    letter-spacing: -1px;
+  }
+  
+  .work-name em { font-style: italic; }
+  
+  .work-cat {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  
+  .work-year {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+  }
+  
+  .work-arrow {
+    text-align: right;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    color: var(--gold);
+    font-size: 18px;
+  }
+  
+  .work-row:hover .work-arrow { opacity: 1; transform: translateX(0); }
+  
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 2;
+    padding: 160px 40px 32px;
+    border-top: 0.5px solid var(--rule);
+    background: var(--paper);
+  }
+  
+  .footer-h {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(72px, 12vw, 180px);
+    line-height: 0.9;
+    color: var(--lagoon-deep);
+    letter-spacing: -4px;
+    font-weight: 300;
+    margin-bottom: 80px;
+  }
+  
+  .footer-h em { font-style: italic; color: var(--gold); }
+  
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 32px;
+    padding-top: 60px;
+    border-top: 0.5px solid var(--rule);
+    margin-bottom: 60px;
+  }
+  
+  .footer-col h5 {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  
+  .footer-col p, .footer-col a {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink);
+    text-decoration: none;
+    display: block;
+  }
+  
+  .footer-col a:hover { color: var(--gold); }
+  
+  .footer-bottom {
+    padding-top: 32px;
+    border-top: 0.5px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  
+  /* Mobile */
+  @media (max-width: 800px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .clock { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 120px 20px 60px; gap: 40px; }
+    .lagoon { padding: 120px 20px; cursor: auto; }
+    .manifest, .services-head, .work-head { grid-template-columns: 1fr; gap: 24px; }
+    .manifest { padding: 80px 20px; }
+    .services { padding: 80px 20px; }
+    .service-row { grid-template-columns: 1fr; gap: 12px; padding: 32px 0; }
+    .service-price { text-align: left; }
+    .service-row:hover { padding-left: 0; }
+    .vigia { padding: 100px 20px; }
+    .vigia-grid { grid-template-columns: 1fr; gap: 60px; }
+    .work { padding: 80px 20px; }
+    .work-row { grid-template-columns: 40px 1fr 60px; gap: 16px; padding: 24px 0; }
+    .work-row .work-cat, .work-row .work-arrow { display: none; }
+    .work-name { font-size: 24px; }
+    .work-row:hover { padding-left: 0; }
+    footer { padding: 100px 20px 24px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">
+    <svg viewBox="0 0 200 200" fill="none">
+      <ellipse cx="100" cy="46" rx="2.2" ry="4" fill="currentColor" opacity="0.55"/>
+      <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="6"/>
+      <circle cx="100" cy="100" r="55" fill="none" stroke="currentColor" stroke-width="5" opacity="0.55"/>
+      <circle cx="100" cy="100" r="32" fill="none" stroke="currentColor" stroke-width="5" opacity="0.42"/>
+      <circle cx="100" cy="100" r="14" fill="none" stroke="currentColor" stroke-width="5" opacity="0.32"/>
+      <circle cx="100" cy="100" r="8" fill="currentColor"/>
+    </svg>
+    Rainey Laguna
+  </a>
+  <div class="nav-links">
+    <a href="#work"><span class="idx">04</span>Work</a>
+    <a href="#services"><span class="idx">02</span>Services</a>
+    <a href="#vigia"><span class="idx">03</span>Vigía</a>
+    <a href="#contact"><span class="idx">05</span>Hello</a>
+    <span class="clock" id="clock">Lima 23:00 · Glasgow 05:00</span>
+  </div>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Estudio Web · Lima ⟷ Glasgow · Est. 2026</div>
+    <h1 class="hero-h1">
+      <span class="hero-h1-line"><span>Like rain</span></span>
+      <span class="hero-h1-line"><span>on the</span></span>
+      <span class="hero-h1-line"><span><em>laguna.</em></span></span>
+    </h1>
+  </div>
+  
+  <div class="hero-meta">
+    <p class="hero-lede">Quiet, considered websites for Lima's restaurants and cafés — and every Monday morning, a brief that tells you exactly what your closest competitors just did.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary"><span>Start a conversation</span><span>→</span></a>
+      <a href="#vigia" class="btn-text">See Vigía</a>
+    </div>
+  </div>
+</section>
+
+<!-- MAGIC MOMENT 1: Interactive lagoon -->
+<section class="lagoon" id="lagoon-section">
+  <canvas id="lagoon-canvas"></canvas>
+  <div class="lagoon-content">
+    <div class="lagoon-eyebrow">— The brand, in motion</div>
+    <h2 class="lagoon-h">Every site we build is one ripple, set down <em>carefully,</em> on still water.</h2>
+    <div class="lagoon-instruction">↓ Move your cursor here</div>
+  </div>
+</section>
+
+<section class="manifest">
+  <div class="section-num"><span>01</span> — Manifesto</div>
+  <p class="manifest-text">A website should feel like the room your restaurant is named after — <em>considered, calm, alive at the edges.</em> We make sites that don't shout. We make Vigía briefs that don't either. <span class="gold">One ripple at a time.</span></p>
+  <div></div>
+</section>
+
+<section class="services" id="services">
+  <div class="services-head">
+    <div class="section-num"><span>02</span> — Servicios</div>
+    <h2 class="services-h2">What we<br><em>actually</em> make.</h2>
+  </div>
+  
+  <div class="service-row">
+    <div class="service-num">→ 01 / Websites</div>
+    <h3 class="service-name">Websites <em>that earn their keep.</em></h3>
+    <p class="service-desc">Custom-designed sites in Spanish and English. Menu, gallery, reservations, online ordering. Built to be fast, to take bookings, and to age well.</p>
+    <div class="service-price">desde S/ 1,500</div>
+  </div>
+  
+  <div class="service-row">
+    <div class="service-num">→ 02 / Vigía</div>
+    <h3 class="service-name">Vigía — <em>la inteligencia semanal.</em></h3>
+    <p class="service-desc">Every Monday at 8 a.m., a WhatsApp brief: what your five closest competitors did last week, what they charged, what their reviews said, and what we'd do about it.</p>
+    <div class="service-price">S/ 250 / mes</div>
+  </div>
+  
+  <div class="service-row">
+    <div class="service-num">→ 03 / Care</div>
+    <h3 class="service-name">Care <em>&amp; quietude.</em></h3>
+    <p class="service-desc">Hosting, security, monthly content updates, Google Business Profile, social handle management. The boring half of being online, handled.</p>
+    <div class="service-price">desde S/ 300 / mes</div>
+  </div>
+</section>
+
+<!-- MAGIC MOMENT 2: Live Vigía brief that "generates" recommendations -->
+<section class="vigia" id="vigia">
+  <div class="vigia-grid">
+    <div class="vigia-left">
+      <div class="section-num"><span>03</span> — Vigía</div>
+      <h2 class="vigia-h">A brief, every <em>Monday at 8.</em></h2>
+      <p class="vigia-desc">Before service starts. Before you've finished your coffee. Exactly what changed in your neighborhood last week, and what we'd do about it.</p>
+      <a href="#contact" class="vigia-cta">See a sample brief →</a>
+    </div>
+    
+    <div class="brief">
+      <div class="brief-head">VIGÍA · SAN BORJA · WEEK 17 / 2026</div>
+      <h4>Curcucho Café — 5 competidores</h4>
+      <div class="brief-row"><span class="label">Tostaduría Bisetti</span><span class="val">+12% precio · oat latte</span></div>
+      <div class="brief-row"><span class="label">La Nuez San Borja</span><span class="val">2 menús nuevos · brunch</span></div>
+      <div class="brief-row"><span class="label">80+ Coffee &amp; Tea</span><span class="val">Reseñas · 4.5 → 4.7</span></div>
+      <div class="brief-row"><span class="label">Café La Culture</span><span class="val">Promo 2x1 · martes</span></div>
+      <div class="brief-row"><span class="label">William Flores</span><span class="val">Nueva sucursal · Surco</span></div>
+      <div class="brief-action" id="briefAction"><span class="typing" id="typing"></span></div>
+      <div class="brief-cycle">[ Recomendación · semana actual ]</div>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="work-head">
+    <div class="section-num"><span>04</span> — Trabajo</div>
+    <h2 class="services-h2">Selected<br><em>work.</em></h2>
+  </div>
+  
+  <div class="work-list">
+    <div class="work-row">
+      <span class="work-idx">01</span>
+      <span class="work-name">Curcucho <em>Café</em></span>
+      <span class="work-cat">San Borja · Coffee</span>
+      <span class="work-year">2026</span>
+      <span class="work-arrow">→</span>
+    </div>
+    <div class="work-row">
+      <span class="work-idx">02</span>
+      <span class="work-name">Oh-jalá</span>
+      <span class="work-cat">San Isidro · Bakery</span>
+      <span class="work-year">2026</span>
+      <span class="work-arrow">→</span>
+    </div>
+    <div class="work-row">
+      <span class="work-idx">03</span>
+      <span class="work-name">Olivia <em>Restaurante</em></span>
+      <span class="work-cat">Surco · Restaurant</span>
+      <span class="work-year">2026</span>
+      <span class="work-arrow">→</span>
+    </div>
+    <div class="work-row">
+      <span class="work-idx">04</span>
+      <span class="work-name">80+ Coffee <em>&amp; Tea</em></span>
+      <span class="work-cat">San Borja · Coffee</span>
+      <span class="work-year">2026</span>
+      <span class="work-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <h2 class="footer-h">Tell us about<br>your <em>place.</em></h2>
+  
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h5>Email</h5>
+      <a href="mailto:hola@raineylaguna.com">hola@<br>raineylaguna.com</a>
+    </div>
+    <div class="footer-col">
+      <h5>WhatsApp</h5>
+      <a href="https://wa.me/51000000000">+51 ··· ····</a>
+    </div>
+    <div class="footer-col">
+      <h5>Studio</h5>
+      <p>Av. Conquistadores<br>San Isidro, Lima</p>
+    </div>
+    <div class="footer-col">
+      <h5>Origen</h5>
+      <p>Glasgow,<br>Scotland</p>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <span>© 2026 Stuart John Andrew Rainey</span>
+    <span>From Glasgow, with care</span>
+  </div>
+</footer>
+
+<script>
+// Live clock
+function updateClock() {
+  const now = new Date();
+  const lima = now.toLocaleTimeString('en-GB', { timeZone: 'America/Lima', hour: '2-digit', minute: '2-digit' });
+  const glasgow = now.toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit' });
+  const el = document.getElementById('clock');
+  if (el) el.textContent = `Lima ${lima} · Glasgow ${glasgow}`;
+}
+updateClock();
+setInterval(updateClock, 30000);
+
+// MAGIC 1: Interactive lagoon canvas (only on this section, not the whole page)
+const canvas = document.getElementById('lagoon-canvas');
+const section = document.getElementById('lagoon-section');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  const rect = section.getBoundingClientRect();
+  canvas.width = rect.width * window.devicePixelRatio;
+  canvas.height = rect.height * window.devicePixelRatio;
+  canvas.style.width = rect.width + 'px';
+  canvas.style.height = rect.height + 'px';
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+}
+resize();
+window.addEventListener('resize', resize);
+
+const ripples = [];
+
+function addRipple(x, y, big = false) {
+  ripples.push({
+    x, y,
+    radius: 0,
+    maxRadius: big ? 240 : 80 + Math.random() * 80,
+    opacity: big ? 0.45 : 0.15,
+    speed: big ? 1.8 : 0.8
+  });
+}
+
+// Auto rain inside the section only
+let lastDrop = 0;
+function autoRain(t) {
+  if (t - lastDrop > 350) {
+    const rect = section.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      addRipple(Math.random() * rect.width, Math.random() * rect.height);
+    }
+    lastDrop = t;
+  }
+  requestAnimationFrame(autoRain);
+}
+requestAnimationFrame(autoRain);
+
+// Cursor rain
+section.addEventListener('mousemove', (e) => {
+  const rect = section.getBoundingClientRect();
+  if (Math.random() < 0.35) {
+    addRipple(e.clientX - rect.left, e.clientY - rect.top, true);
+  }
+});
+
+function render() {
+  const rect = section.getBoundingClientRect();
+  ctx.clearRect(0, 0, rect.width, rect.height);
+  
+  for (let i = ripples.length - 1; i >= 0; i--) {
+    const r = ripples[i];
+    r.radius += r.speed;
+    const progress = r.radius / r.maxRadius;
+    const alpha = r.opacity * (1 - progress);
+    
+    if (r.radius >= r.maxRadius) {
+      ripples.splice(i, 1);
+      continue;
+    }
+    
+    ctx.strokeStyle = `rgba(196, 212, 220, ${alpha})`;
+    ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+    ctx.stroke();
+    
+    if (r.radius > 24) {
+      ctx.strokeStyle = `rgba(201, 169, 97, ${alpha * 0.5})`;
+      ctx.beginPath();
+      ctx.arc(r.x, r.y, r.radius * 0.6, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+  
+  requestAnimationFrame(render);
+}
+render();
+
+// MAGIC 2: Vigía brief — typing recommendations on rotation
+const recommendations = [
+  "→ Considerar subir el flat white S/ 1.50 antes del 1 de mayo. Tu margen sigue 8% por debajo del barrio.",
+  "→ Bisetti acaba de subir su oat latte. Margen para subir el tuyo S/ 1 sin perder volumen.",
+  "→ La Nuez está atrayendo brunch. Sugerimos lanzar tu menú de fin de semana esta quincena.",
+  "→ 80+ Coffee subió a 4.7 con un cambio en el grano. Vale revisar tu proveedor antes de fin de mes.",
+  "→ Café La Culture corre 2x1 los martes — tu martes está 32% más bajo. Considerar promo de loyalty.",
+];
+
+let recIdx = 0;
+const typingEl = document.getElementById('typing');
+
+function typeText(text, callback) {
+  let i = 0;
+  typingEl.textContent = '';
+  
+  function step() {
+    if (i < text.length) {
+      typingEl.textContent += text.charAt(i);
+      i++;
+      setTimeout(step, 18 + Math.random() * 28);
+    } else {
+      setTimeout(callback, 5500);
+    }
+  }
+  step();
+}
+
+function eraseText(callback) {
+  const text = typingEl.textContent;
+  let i = text.length;
+  
+  function step() {
+    if (i > 0) {
+      typingEl.textContent = text.substring(0, i - 1);
+      i--;
+      setTimeout(step, 8);
+    } else {
+      callback();
+    }
+  }
+  step();
+}
+
+function cycle() {
+  typeText(recommendations[recIdx], () => {
+    eraseText(() => {
+      recIdx = (recIdx + 1) % recommendations.length;
+      cycle();
+    });
+  });
+}
+
+// Start the cycle when the brief is in view
+const briefObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      cycle();
+      briefObserver.disconnect();
+    }
+  });
+}, { threshold: 0.5 });
+
+const briefEl = document.getElementById('briefAction');
+if (briefEl) briefObserver.observe(briefEl);
+</script>
+
+</body>
+</html>

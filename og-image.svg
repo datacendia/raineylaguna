@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1840"/>
+      <stop offset="20%" stop-color="#3a2858"/>
+      <stop offset="45%" stop-color="#7a3858"/>
+      <stop offset="70%" stop-color="#c4404a"/>
+      <stop offset="88%" stop-color="#e87038"/>
+      <stop offset="100%" stop-color="#f0a058"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(255,180,80,1)"/>
+      <stop offset="50%" stop-color="rgba(255,180,80,0.5)"/>
+      <stop offset="100%" stop-color="rgba(255,180,80,0)"/>
+    </radialGradient>
+    <style>
+      .word { font-family: 'Fraunces', Georgia, serif; fill: #f5e8d8; }
+      .word-em { font-style: italic; fill: #0a3848; }
+      .meta { font-family: 'JetBrains Mono', 'Courier New', monospace; fill: #f5e8d8; opacity: 0.78; letter-spacing: 3px; }
+      .meta-strong { font-family: 'JetBrains Mono', 'Courier New', monospace; fill: #f5e8d8; letter-spacing: 2.5px; }
+    </style>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1200" height="630" fill="url(#sky)"/>
+
+  <!-- Sun -->
+  <circle cx="240" cy="440" r="160" fill="url(#sun)"/>
+
+  <!-- Horizon line -->
+  <line x1="0" y1="490" x2="1200" y2="490" stroke="#f5e8d8" stroke-width="0.5" opacity="0.35"/>
+
+  <!-- Eyebrow -->
+  <text x="80" y="120" class="meta" font-size="14" text-transform="uppercase">ESTUDIO · LIMA ⟷ GLASGOW · EST. 2026</text>
+
+  <!-- Mark + wordmark -->
+  <g transform="translate(80, 195)">
+    <ellipse cx="0" cy="-26" rx="2" ry="3.5" fill="#C9A961" opacity="0.85"/>
+    <circle r="34" fill="none" stroke="#f5e8d8" stroke-width="4.4" opacity="0.95"/>
+    <circle r="23" fill="none" stroke="#f5e8d8" stroke-width="3.6" opacity="0.55"/>
+    <circle r="13" fill="none" stroke="#f5e8d8" stroke-width="3.6" opacity="0.42"/>
+    <circle r="3.4" fill="#C9A961"/>
+  </g>
+
+  <!-- Hero H1 -->
+  <text x="80" y="320" class="word" font-size="116" font-weight="300" letter-spacing="-3">Como lluvia</text>
+  <text x="80" y="430" class="word" font-size="116" font-weight="300" letter-spacing="-3">sobre la</text>
+  <text x="80" y="540" class="word word-em" font-size="116" font-weight="300" font-style="italic" letter-spacing="-3">laguna.</text>
+
+  <!-- URL -->
+  <text x="1120" y="580" class="meta-strong" font-size="14" text-anchor="end">RAINEYLAGUNA.COM</text>
+</svg>

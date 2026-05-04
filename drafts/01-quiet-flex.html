@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rainey Laguna — Direction A · Quiet Flex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=GT+America&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14242E;
+    --paper: #F5F1E8;
+    --lagoon-deep: #1A3A4A;
+    --lagoon-mist: #C4D4DC;
+    --gold: #C9A961;
+    --rule: rgba(20, 36, 46, 0.18);
+    --muted: rgba(20, 36, 46, 0.55);
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  
+  .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+  
+  /* Top rule */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(245, 241, 232, 0.88);
+    backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid var(--rule);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    letter-spacing: 1px;
+    color: var(--lagoon-deep);
+    text-decoration: none;
+  }
+  
+  .logo svg { width: 22px; height: 22px; }
+  
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+  
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: opacity 0.3s;
+  }
+  
+  .nav-links a:hover { opacity: 0.5; }
+  
+  .clock {
+    font-family: 'JetBrains Mono', 'Menlo', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding-left: 24px;
+    border-left: 0.5px solid var(--rule);
+  }
+  
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    padding: 200px 48px 120px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+    position: relative;
+  }
+  
+  .hero-mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70vmin;
+    height: 70vmin;
+    opacity: 0.04;
+    pointer-events: none;
+  }
+  
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--lagoon-deep);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 0.5px;
+    background: var(--lagoon-deep);
+  }
+  
+  .hero-h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(54px, 9vw, 120px);
+    line-height: 0.95;
+    color: var(--lagoon-deep);
+    letter-spacing: -2.5px;
+    font-weight: 300;
+    margin-bottom: 0;
+  }
+  
+  .hero-h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  
+  .hero-meta {
+    align-self: end;
+    padding-bottom: 8px;
+  }
+  
+  .hero-lede {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 36px;
+    max-width: 460px;
+    font-weight: 300;
+  }
+  
+  .hero-lede em { font-style: italic; }
+  
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  
+  .btn-primary {
+    background: var(--lagoon-deep);
+    color: var(--paper);
+    padding: 14px 28px;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .btn-primary:hover {
+    background: var(--ink);
+    gap: 18px;
+  }
+  
+  .btn-text {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    border-bottom: 0.5px solid var(--rule);
+    padding-bottom: 4px;
+    transition: border-color 0.3s;
+  }
+  
+  .btn-text:hover { border-color: var(--ink); }
+  
+  /* Manifest section */
+  .manifest {
+    padding: 140px 48px;
+    border-top: 0.5px solid var(--rule);
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    gap: 80px;
+  }
+  
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+  }
+  
+  .manifest-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    line-height: 1.35;
+    color: var(--lagoon-deep);
+    font-weight: 300;
+    letter-spacing: -0.8px;
+    max-width: 720px;
+  }
+  
+  .manifest-text em { font-style: italic; }
+  
+  .manifest-text .gold { color: var(--gold); font-style: italic; }
+  
+  /* Services */
+  .services {
+    padding: 120px 48px;
+    border-top: 0.5px solid var(--rule);
+  }
+  
+  .services-head {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 80px;
+    margin-bottom: 80px;
+  }
+  
+  .services-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--lagoon-deep);
+    letter-spacing: -1.5px;
+    font-weight: 300;
+  }
+  
+  .service-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr 200px;
+    gap: 40px;
+    padding: 48px 0;
+    border-top: 0.5px solid var(--rule);
+    align-items: start;
+  }
+  
+  .service-row:last-child { border-bottom: 0.5px solid var(--rule); }
+  
+  .service-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+  }
+  
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    line-height: 1;
+    color: var(--lagoon-deep);
+    font-weight: 400;
+    letter-spacing: -0.8px;
+  }
+  
+  .service-name em { font-style: italic; }
+  
+  .service-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink);
+    max-width: 380px;
+  }
+  
+  .service-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--gold);
+    text-align: right;
+    font-style: italic;
+  }
+  
+  /* Vigía pull-quote */
+  .vigia {
+    padding: 160px 48px;
+    border-top: 0.5px solid var(--rule);
+    background: var(--lagoon-deep);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .vigia-content {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    gap: 80px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .vigia .section-num { color: rgba(245, 241, 232, 0.5); }
+  
+  .vigia-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    line-height: 1.3;
+    font-weight: 300;
+    letter-spacing: -0.8px;
+  }
+  
+  .vigia-quote em { color: var(--gold); font-style: italic; }
+  
+  .vigia-attr {
+    margin-top: 40px;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(245, 241, 232, 0.7);
+  }
+  
+  .vigia-mark {
+    position: absolute;
+    bottom: -40%;
+    right: -10%;
+    width: 80vmin;
+    height: 80vmin;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+  
+  /* Selected work */
+  .work {
+    padding: 120px 48px;
+    border-top: 0.5px solid var(--rule);
+  }
+  
+  .work-head {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 80px;
+    margin-bottom: 80px;
+  }
+  
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  
+  .work-item {
+    cursor: pointer;
+  }
+  
+  .work-thumb {
+    aspect-ratio: 4/3;
+    background: var(--lagoon-mist);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .work-item:hover .work-thumb { transform: translateY(-6px); }
+  
+  .work-thumb-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    color: var(--lagoon-deep);
+    font-style: italic;
+    font-weight: 300;
+  }
+  
+  .work-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  
+  .work-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  
+  .work-cat {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  
+  /* Footer */
+  footer {
+    padding: 80px 48px 32px;
+    border-top: 0.5px solid var(--rule);
+    background: var(--paper);
+  }
+  
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 80px;
+  }
+  
+  .footer-h {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    line-height: 0.95;
+    color: var(--lagoon-deep);
+    letter-spacing: -1.5px;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  
+  .footer-h em { font-style: italic; }
+  
+  .footer-col h4 {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  
+  .footer-col p, .footer-col a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink);
+    text-decoration: none;
+    display: block;
+  }
+  
+  .footer-col a:hover { color: var(--gold); }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 32px;
+    border-top: 0.5px solid var(--rule);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  
+  /* Reveal animation */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .rise { animation: rise 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; opacity: 0; }
+  .d1 { animation-delay: 0.1s; }
+  .d2 { animation-delay: 0.3s; }
+  .d3 { animation-delay: 0.5s; }
+  .d4 { animation-delay: 0.7s; }
+  .d5 { animation-delay: 0.9s; }
+  
+  /* Mobile */
+  @media (max-width: 800px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .clock { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 140px 20px 80px; gap: 40px; }
+    .manifest, .services-head, .work-head { grid-template-columns: 1fr; gap: 24px; padding: 80px 20px; }
+    .service-row { grid-template-columns: 1fr; gap: 16px; }
+    .service-price { text-align: left; }
+    .vigia { padding: 100px 20px; }
+    .vigia-content { grid-template-columns: 1fr; gap: 24px; }
+    .vigia-quote { font-size: 28px; }
+    .work-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    footer { padding: 60px 20px 24px; }
+    .services { padding: 80px 20px; }
+    .work { padding: 80px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">
+    <svg viewBox="0 0 200 200" fill="none">
+      <ellipse cx="100" cy="46" rx="2.2" ry="4" fill="currentColor" opacity="0.55"/>
+      <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="6"/>
+      <circle cx="100" cy="100" r="55" fill="none" stroke="currentColor" stroke-width="5" opacity="0.55"/>
+      <circle cx="100" cy="100" r="32" fill="none" stroke="currentColor" stroke-width="5" opacity="0.42"/>
+      <circle cx="100" cy="100" r="14" fill="none" stroke="currentColor" stroke-width="5" opacity="0.32"/>
+      <circle cx="100" cy="100" r="8" fill="currentColor"/>
+    </svg>
+    Rainey Laguna
+  </a>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#vigia">Vigía</a>
+    <a href="#contact">Hello</a>
+    <span class="clock" id="clock">Lima 23:00 · Glasgow 05:00</span>
+  </div>
+</nav>
+
+<section class="hero">
+  <svg class="hero-mark" viewBox="0 0 200 200" fill="none">
+    <ellipse cx="100" cy="46" rx="2.2" ry="4" fill="var(--lagoon-deep)" opacity="0.55"/>
+    <circle cx="100" cy="100" r="80" fill="none" stroke="var(--lagoon-deep)" stroke-width="0.8"/>
+    <circle cx="100" cy="100" r="55" fill="none" stroke="var(--lagoon-deep)" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="32" fill="none" stroke="var(--lagoon-deep)" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="14" fill="none" stroke="var(--lagoon-deep)" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="2" fill="var(--lagoon-deep)"/>
+  </svg>
+  
+  <div>
+    <div class="hero-eyebrow rise d1">Estudio Web · Lima ⟷ Glasgow · Est. 2026</div>
+    <h1 class="hero-h1 rise d2">Like rain<br>on the <em>lagoon.</em></h1>
+  </div>
+  
+  <div class="hero-meta">
+    <p class="hero-lede rise d3">Quiet, considered websites for Lima's restaurants and cafés — and every Monday morning, a brief that tells you exactly what your closest <em>competitors</em> just did.</p>
+    <div class="hero-actions rise d4">
+      <a href="#contact" class="btn-primary">Start a conversation →</a>
+      <a href="#vigia" class="btn-text">See Vigía</a>
+    </div>
+  </div>
+</section>
+
+<section class="manifest">
+  <div class="section-num">01 — Manifesto</div>
+  <p class="manifest-text">A website should feel like the room your restaurant is named after — <em>considered, calm, alive at the edges.</em> We make sites that don't shout. We make briefs that don't either. <span class="gold">One ripple at a time.</span></p>
+  <div></div>
+</section>
+
+<section class="services" id="services">
+  <div class="services-head">
+    <div class="section-num">02 — Servicios</div>
+    <h2 class="services-h2">What we make.</h2>
+  </div>
+  
+  <div class="service-row">
+    <div class="service-num">→ 01</div>
+    <h3 class="service-name">Websites <em>that earn their keep.</em></h3>
+    <p class="service-desc">Custom-designed sites in Spanish and English. Menu, gallery, reservations, online ordering. Built to be fast, to take bookings, and to age well.</p>
+    <div class="service-price">desde S/ 1,500</div>
+  </div>
+  
+  <div class="service-row">
+    <div class="service-num">→ 02</div>
+    <h3 class="service-name">Vigía — <em>la inteligencia semanal.</em></h3>
+    <p class="service-desc">Every Monday at 8am, a WhatsApp brief: what your five closest competitors did last week, what they charged, what their reviews said, and what we'd do about it.</p>
+    <div class="service-price">S/ 250 / mes</div>
+  </div>
+  
+  <div class="service-row">
+    <div class="service-num">→ 03</div>
+    <h3 class="service-name">Care <em>&amp; quietude.</em></h3>
+    <p class="service-desc">Hosting, security, monthly content updates, Google Business Profile, social handle management. The boring half of being online, handled.</p>
+    <div class="service-price">desde S/ 300 / mes</div>
+  </div>
+</section>
+
+<section class="vigia" id="vigia">
+  <svg class="vigia-mark" viewBox="0 0 200 200" fill="none">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="var(--gold)" stroke-width="0.8"/>
+    <circle cx="100" cy="100" r="55" fill="none" stroke="var(--gold)" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="32" fill="none" stroke="var(--gold)" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="14" fill="none" stroke="var(--gold)" stroke-width="0.5"/>
+  </svg>
+  
+  <div class="vigia-content">
+    <div class="section-num">03 — Vigía</div>
+    <div>
+      <p class="vigia-quote">Cada lunes a las 8 a.m., sabrás <em>exactamente</em> qué hicieron tus cinco competidores más cercanos la semana pasada — sin abrir Instagram, sin leer reseñas, sin perder tiempo.</p>
+      <div class="vigia-attr">— El producto · explicado en una frase</div>
+    </div>
+    <div></div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="work-head">
+    <div class="section-num">04 — Trabajo</div>
+    <h2 class="services-h2">Selected work.</h2>
+  </div>
+  
+  <div class="work-grid">
+    <div class="work-item">
+      <div class="work-thumb"><div class="work-thumb-inner">Curcucho</div></div>
+      <div class="work-meta">
+        <div class="work-name">Curcucho Café</div>
+        <div class="work-cat">San Borja · 2026</div>
+      </div>
+    </div>
+    <div class="work-item">
+      <div class="work-thumb" style="background: #e8dcc4;"><div class="work-thumb-inner">Oh-jalá</div></div>
+      <div class="work-meta">
+        <div class="work-name">Oh-jalá</div>
+        <div class="work-cat">San Isidro · 2026</div>
+      </div>
+    </div>
+    <div class="work-item">
+      <div class="work-thumb" style="background: #d4dcc4;"><div class="work-thumb-inner">Olivia</div></div>
+      <div class="work-meta">
+        <div class="work-name">Olivia Restaurante</div>
+        <div class="work-cat">Surco · 2026</div>
+      </div>
+    </div>
+    <div class="work-item">
+      <div class="work-thumb" style="background: #dcc4c4;"><div class="work-thumb-inner">80+</div></div>
+      <div class="work-meta">
+        <div class="work-name">80+ Coffee &amp; Tea</div>
+        <div class="work-cat">San Borja · 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-grid">
+    <div style="grid-column: 1 / 3;">
+      <h2 class="footer-h">Tell us about<br>your <em>place.</em></h2>
+    </div>
+    
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:hola@raineylaguna.com">hola@raineylaguna.com</a>
+      <a href="https://wa.me/51000000000">+51 ··· ····</a>
+    </div>
+    
+    <div class="footer-col">
+      <h4>Lima ⟷ Glasgow</h4>
+      <p>Av. Conquistadores<br>San Isidro, Lima</p>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <span>© 2026 Stuart John Andrew Rainey</span>
+    <span>From Glasgow, with care</span>
+  </div>
+</footer>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    const lima = now.toLocaleTimeString('en-GB', { timeZone: 'America/Lima', hour: '2-digit', minute: '2-digit' });
+    const glasgow = now.toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit' });
+    const el = document.getElementById('clock');
+    if (el) el.textContent = `Lima ${lima} · Glasgow ${glasgow}`;
+  }
+  updateClock();
+  setInterval(updateClock, 30000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>OG Image — Rainey Laguna (1200×630)</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  /* HOW TO USE THIS PAGE
+     Open this file in your browser. It renders the Open Graph card at exactly
+     1200×630. Take a screenshot of the .og-card element (or use a headless tool):
+       npx playwright screenshot --viewport-size=1200,630 og-image.html og-image.png
+       npx puppeteer-screenshot og-image.html --width=1200 --height=630 -o og-image.png
+     Save the result as og-image.png in the project root. Then update the OG/Twitter
+     meta tags in 07-final-bilingual.html from .svg to .png. Done. */
+
+  body { margin: 0; background: #2a2a2a; display: grid; place-items: center; min-height: 100vh; padding: 40px; font-family: 'Fraunces', Georgia, serif; }
+  .og-card {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg,
+      #1a1840 0%,
+      #3a2858 20%,
+      #7a3858 45%,
+      #c4404a 70%,
+      #e87038 88%,
+      #f0a058 100%);
+    color: #f5e8d8;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+  }
+  .sun {
+    position: absolute;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    left: 80px; top: 280px;
+    background: radial-gradient(circle, rgba(255,180,80,1) 0%, rgba(255,180,80,0.5) 50%, transparent 70%);
+    filter: blur(3px);
+  }
+  .horizon {
+    position: absolute;
+    bottom: 140px; left: 0; right: 0;
+    height: 0.5px;
+    background: rgba(245, 232, 216, 0.35);
+  }
+  .frame {
+    position: relative;
+    z-index: 2;
+    padding: 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .eyebrow-row {
+    display: flex; align-items: center; gap: 20px;
+  }
+  .mark {
+    width: 70px; height: 70px;
+    color: #f5e8d8;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.78;
+  }
+  h1 {
+    font-size: 116px;
+    font-weight: 300;
+    line-height: 0.94;
+    letter-spacing: -3px;
+    margin: 0;
+  }
+  h1 em {
+    font-style: italic;
+    color: #0a3848;
+    font-weight: 300;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.3);
+  }
+  .url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-align: right;
+    opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="sun"></div>
+    <div class="horizon"></div>
+    <div class="frame">
+      <div class="eyebrow-row">
+        <svg class="mark" viewBox="0 0 200 200" fill="none">
+          <ellipse cx="100" cy="46" rx="2.2" ry="4" fill="#C9A961" opacity="0.85"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="6"/>
+          <circle cx="100" cy="100" r="55" fill="none" stroke="currentColor" stroke-width="5" opacity="0.55"/>
+          <circle cx="100" cy="100" r="32" fill="none" stroke="currentColor" stroke-width="5" opacity="0.42"/>
+          <circle cx="100" cy="100" r="8" fill="#C9A961"/>
+        </svg>
+        <span class="eyebrow">Estudio · Lima ⟷ Glasgow · Est. 2026</span>
+      </div>
+      <h1>Como lluvia<br>sobre la<br><em>laguna.</em></h1>
+      <div class="url">RAINEYLAGUNA.COM</div>
+    </div>
+  </div>
+</body>
+</html>

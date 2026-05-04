@@ -1,0 +1,23 @@
+/* TEAM */
+Founder & Designer: Stuart John Andrew Rainey
+Site: https://raineylaguna.com
+From: Glasgow, Scotland
+In: Lima, Peru
+
+/* THANKS */
+Emiliano Rainey Laguna — for the name.
+
+/* SITE */
+Last update: 2026/05/01
+Languages: Spanish (Peruvian), English
+Doctype: HTML5
+Standards: HTML5, CSS3, ES2022
+Components: Custom canvas (WebGL-free), SVG, Web Speech-free
+Software: Built by hand. No frameworks.
+
+/* COLOPHON */
+Typefaces: Fraunces, JetBrains Mono.
+Palette: Lagoon Deep #1A3A4A · Glasgow Gold #C9A961 · Paper #F5F1E8.
+Sky system: 9 mood bands, real-time interpolation, weather-aware via Open-Meteo.
+Moon: real lunar phase computed from synodic month reference.
+Brief engine: live demo backed by Vigía (Next.js) at vigia.raineylaguna.com.

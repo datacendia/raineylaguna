@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" role="img" aria-label="Rainey Laguna">
+  <defs>
+    <style>
+      .mark { fill: none; stroke: #1A3A4A; stroke-width: 5; }
+      .mark-soft { fill: none; stroke: #1A3A4A; stroke-width: 4; opacity: 0.55; }
+      .mark-faint { fill: none; stroke: #1A3A4A; stroke-width: 4; opacity: 0.42; }
+      .mark-fill { fill: #1A3A4A; }
+      .mark-drop { fill: #1A3A4A; opacity: 0.85; }
+      .word { font-family: 'Fraunces', Georgia, serif; font-weight: 300; fill: #1A3A4A; }
+      .word-em { font-style: italic; fill: #C9A961; }
+    </style>
+  </defs>
+  <!-- Mark -->
+  <g transform="translate(50, 50)">
+    <ellipse cx="0" cy="-32" rx="2" ry="3.5" class="mark-drop"/>
+    <circle r="40" class="mark"/>
+    <circle r="27.5" class="mark-soft"/>
+    <circle r="16" class="mark-faint"/>
+    <circle r="4" class="mark-fill"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="115" y="60" font-size="34" class="word">
+    Rainey<tspan class="word-em" font-style="italic"> Laguna</tspan>
+  </text>
+</svg>

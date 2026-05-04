@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5">
+<title data-title-es="Tu código es tuyo desde el día uno · Journal" data-title-en="Your code is yours from day one · Journal">Tu código es tuyo desde el día uno · Journal</title>
+<meta name="description" content="La mayoría de agencias y bastantes freelancers en Lima se quedan con el código del cliente. Notas sobre por qué nosotros lo entregamos en GitHub el día uno, lo que esto cambia para tu negocio, y las dos cosas que NO entregamos." data-desc-es="La mayoría de agencias y bastantes freelancers en Lima se quedan con el código del cliente. Notas sobre por qué nosotros lo entregamos en GitHub el día uno, lo que esto cambia para tu negocio, y las dos cosas que NO entregamos." data-desc-en="Most agencies and many freelancers in Lima keep their client’s code. Notes on why we hand it over on GitHub day one, what that changes for your business, and the two things we don’t hand over.">
+<meta name="theme-color" content="#F5F1E8">
+<meta name="author" content="Stuart John Andrew Rainey">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://raineylaguna.com/journal/tu-codigo-es-tuyo/">
+<link rel="alternate" hreflang="es-PE" href="https://raineylaguna.com/journal/tu-codigo-es-tuyo/">
+<link rel="alternate" hreflang="x-default" href="https://raineylaguna.com/journal/tu-codigo-es-tuyo/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="alternate icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_PE">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="Tu código es tuyo desde el día uno · Journal">
+<meta property="og:description" content="La mayoría de agencias en Lima se quedan con el código. Notas sobre por qué nosotros lo entregamos en GitHub el día uno.">
+<meta property="og:url" content="https://raineylaguna.com/journal/tu-codigo-es-tuyo/">
+<meta property="og:site_name" content="Rainey Laguna">
+<meta property="og:image" content="https://raineylaguna.com/og-image.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tu código es tuyo desde el día uno · Journal">
+<meta name="twitter:description" content="La mayoría de agencias en Lima se quedan con el código. Notas sobre por qué nosotros lo entregamos en GitHub el día uno.">
+<meta name="twitter:image" content="https://raineylaguna.com/og-image.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/page.css">
+
+<!-- Analytics · Plausible (only on production hostname). -->
+<script>
+(function(){if(location.hostname==='raineylaguna.com'||location.hostname==='www.raineylaguna.com'){var s=document.createElement('script');s.defer=true;s.setAttribute('data-domain','raineylaguna.com');s.src='https://plausible.io/js/script.outbound-links.js';document.head.appendChild(s);window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments);};}})();
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Tu código es tuyo desde el día uno","description":"La mayoría de agencias en Lima se quedan con el código. Notas sobre por qué nosotros lo entregamos en GitHub el día uno.","datePublished":"2026-03-21","dateModified":"2026-03-21","author":{"@type":"Person","name":"Stuart John Andrew Rainey","url":"https://raineylaguna.com/about/"},"publisher":{"@id":"https://raineylaguna.com/#org"},"mainEntityOfPage":"https://raineylaguna.com/journal/tu-codigo-es-tuyo/","inLanguage":"es-PE","image":"https://raineylaguna.com/og-image.svg"}</script>
+</head>
+<body>
+<a class="skip-link" href="#main" data-es="Ir al contenido" data-en="Skip to content">Ir al contenido</a>
+<header class="page-nav">
+  <a href="/" class="logo" aria-label="Rainey Laguna · Inicio">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="16" cy="20" rx="11" ry="3" fill="none" stroke="currentColor" stroke-width="0.6"/>
+      <ellipse cx="16" cy="20" rx="7" ry="2" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.7"/>
+      <circle cx="16" cy="13" r="0.9" fill="#C9A961"/>
+    </svg>
+    <span>Rainey Laguna</span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="/#servicios"><span class="idx">01</span><span data-es="Servicios" data-en="Services">Servicios</span></a>
+    <a href="/#trabajo"><span class="idx">02</span><span data-es="Trabajo" data-en="Work">Trabajo</span></a>
+    <a href="/about/"><span class="idx">03</span><span data-es="Estudio" data-en="Studio">Estudio</span></a>
+    <a href="/journal/"><span class="idx">04</span><span data-es="Journal" data-en="Journal">Journal</span></a>
+    <a href="/#conversemos"><span class="idx">05</span><span data-es="Conversemos" data-en="Let&rsquo;s talk">Conversemos</span></a>
+  </nav>
+  <div class="lang-toggle" role="group" aria-label="Idioma · Language">
+    <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
+    <span class="sep">/</span>
+    <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="crumbs">
+    <a href="/" data-es="Inicio" data-en="Home">Inicio</a><span class="sep">/</span>
+    <a href="/journal/" data-es="Journal" data-en="Journal">Journal</a><span class="sep">/</span>
+    <span data-es="Tu código es tuyo" data-en="Your code is yours">Tu código es tuyo</span>
+  </div>
+  <div class="eyebrow"><span data-es="Apunte" data-en="Note">Apunte</span> · 2026 · 03</div>
+  <h1 data-es="Tu código es <em>tuyo</em> desde el día uno." data-en="Your code is <em>yours</em> from day one." data-html="true">Tu código es <em>tuyo</em> desde el día uno.</h1>
+  <p class="lede" data-es="La mayoría de agencias y bastantes freelancers en Lima entregan un sitio web pero se quedan con el repositorio. El cliente recibe la URL pero no el código que la genera. Esto crea una dependencia silenciosa que rara vez se discute en la firma del contrato. Estas son notas sobre cómo lo hacemos al revés, qué cambia para tu negocio, y las dos únicas cosas que no entregamos." data-en="Most agencies and many freelancers in Lima deliver a website but keep the repository. The client gets the URL but not the code that produces it. This creates a quiet dependency that’s rarely discussed at signing. These are notes on how we do it the other way round, what changes for your business, and the only two things we don’t hand over.">La mayoría de agencias y bastantes freelancers en Lima entregan un sitio web pero se quedan con el repositorio. El cliente recibe la URL pero no el código que la genera. Esto crea una dependencia silenciosa que rara vez se discute en la firma del contrato. Estas son notas sobre cómo lo hacemos al revés, qué cambia para tu negocio, y las dos únicas cosas que no entregamos.</p>
+  <div class="meta-row">
+    <div><strong class="accent">Stuart Rainey</strong></div>
+    <div><span data-es="Lectura · 6 min" data-en="Read · 6 min">Lectura · 6 min</span></div>
+    <div><span data-es="Publicado · Marzo 2026" data-en="Published · March 2026">Publicado · Marzo 2026</span></div>
+  </div>
+</section>
+
+<section class="page-content">
+  <article class="prose">
+    <p class="lede-graf" data-es="Imagina que pides un local en alquiler. Firmas el contrato. Pagas tres meses por adelantado. Te entregan las llaves. Pero el plano del local — los planos eléctricos, las medidas exactas, los detalles de la instalación — los guarda el contratista. Si quieres mover una pared el año que viene, tienes que volver a contratar al mismo. Si el contratista cierra, tu local pasa a ser un misterio. Esto es exactamente lo que pasa con la mayoría de sitios web entregados en Lima, y casi nadie te lo dice antes de firmar." data-en="Imagine you rent a commercial space. You sign. You pay three months up front. You get the keys. But the plans of the place — the electrical schematics, the exact measurements, the install details — those stay with the contractor. If you want to move a wall next year, you have to hire the same contractor again. If they close, your space becomes a mystery. This is exactly what happens with most websites delivered in Lima, and almost nobody tells you before you sign.">Imagina que pides un local en alquiler. Firmas el contrato. Pagas tres meses por adelantado. Te entregan las llaves. Pero el plano del local — los planos eléctricos, las medidas exactas, los detalles de la instalación — los guarda el contratista. Si quieres mover una pared el año que viene, tienes que volver a contratar al mismo. Si el contratista cierra, tu local pasa a ser un misterio. Esto es exactamente lo que pasa con la mayoría de sitios web entregados en Lima, y casi nadie te lo dice antes de firmar.</p>
+
+    <h2 data-es="Qué pasa cuando una agencia «te entrega» un sitio" data-en="What happens when an agency ‘hands you’ a site">Qué pasa cuando una agencia «te entrega» un sitio</h2>
+    <p data-es="En la práctica, recibes una URL que funciona, una credencial de WordPress (si es WordPress), y a veces acceso al panel de hosting. Lo que casi nunca recibes es: el repositorio Git con la historia completa de cambios, los archivos del tema o los componentes a medida, los activos de diseño en formato editable, y el README explicando cómo se construyó. Sin estas cuatro cosas, técnicamente el sitio funciona pero estructuralmente no es tuyo. Es una caja negra cuyo dueño técnico es la agencia." data-en="In practice you receive a URL that works, a WordPress login (if it’s WordPress), and sometimes access to the hosting panel. What you almost never receive is: the Git repository with the full change history, the theme files or custom components, the editable design assets, and a README explaining how it was built. Without these four things, the site technically works but structurally isn’t yours. It’s a black box whose technical owner is the agency.">En la práctica, recibes una URL que funciona, una credencial de WordPress (si es WordPress), y a veces acceso al panel de hosting. Lo que casi nunca recibes es: el repositorio Git con la historia completa de cambios, los archivos del tema o los componentes a medida, los activos de diseño en formato editable, y el README explicando cómo se construyó. Sin estas cuatro cosas, técnicamente el sitio funciona pero estructuralmente no es tuyo. Es una caja negra cuyo dueño técnico es la agencia.</p>
+
+    <p data-es="Las consecuencias salen a relucir un año después. Quieres mover hosting porque el actual subió de precio: necesitas el código. Quieres contratar a otro estudio para una rediseño parcial: el nuevo estudio no puede leer el código sin reverse-engineering. La agencia original cerró: el sitio sigue corriendo pero nadie sabe cómo se actualiza. La factura mensual de mantenimiento se vuelve impagable: no puedes salir sin perder el sitio." data-en="The consequences show up a year later. You want to move hosting because the current bill went up: you need the code. You want to hire another studio for a partial redesign: the new studio can’t read the code without reverse-engineering. The original agency closed: the site keeps running but nobody knows how to update it. The monthly maintenance bill becomes unpayable: you can’t leave without losing the site.">Las consecuencias salen a relucir un año después. Quieres mover hosting porque el actual subió de precio: necesitas el código. Quieres contratar a otro estudio para una rediseño parcial: el nuevo estudio no puede leer el código sin reverse-engineering. La agencia original cerró: el sitio sigue corriendo pero nadie sabe cómo se actualiza. La factura mensual de mantenimiento se vuelve impagable: no puedes salir sin perder el sitio.</p>
+
+    <p data-es="Todos estos escenarios son comunes. Todos son evitables. Y casi ninguno se discute al momento de firmar." data-en="All of these scenarios are common. All are avoidable. And almost none of them gets discussed at signing.">Todos estos escenarios son comunes. Todos son evitables. Y casi ninguno se discute al momento de firmar.</p>
+
+    <h2 data-es="Cómo lo hacemos: GitHub el día uno" data-en="How we do it: GitHub day one">Cómo lo hacemos: GitHub el día uno</h2>
+    <p data-es="Cuando firmas un sitio con nosotros, el primer día — antes de escribir una línea de código — creamos un repositorio en GitHub <strong>bajo tu nombre o el de tu empresa.</strong> No bajo el nuestro. Tú eres el dueño del repo desde el commit cero. Nosotros somos colaboradores con permiso de escribir mientras dura el proyecto. Cuando entregamos, ese permiso se mantiene si quieres seguir trabajando con nosotros, o se retira si decides moverte a otro estudio." data-en="When you sign for a site with us, on day one — before a line of code is written — we create a GitHub repository <strong>under your name or your company’s.</strong> Not under ours. You own the repo from commit zero. We are collaborators with write access for the duration of the project. When we ship, that access continues if you want to keep working with us, or is revoked if you choose to move to another studio." data-html="true">Cuando firmas un sitio con nosotros, el primer día — antes de escribir una línea de código — creamos un repositorio en GitHub <strong>bajo tu nombre o el de tu empresa.</strong> No bajo el nuestro. Tú eres el dueño del repo desde el commit cero. Nosotros somos colaboradores con permiso de escribir mientras dura el proyecto. Cuando entregamos, ese permiso se mantiene si quieres seguir trabajando con nosotros, o se retira si decides moverte a otro estudio.</p>
+
+    <p data-es="El día de la entrega recibes:" data-en="On delivery day you receive:">El día de la entrega recibes:</p>
+    <ol>
+      <li data-es="<strong>El repositorio Git completo</strong> con todo el historial de commits, ramas, tags, y un README que explica cómo correr el sitio localmente y cómo se desplegó. No hay código nuestro escondido fuera del repo." data-en="<strong>The full Git repository</strong> with every commit, branch, tag, and a README explaining how to run the site locally and how it was deployed. No code of ours hidden outside the repo." data-html="true"><strong>El repositorio Git completo</strong> con todo el historial de commits, ramas, tags, y un README que explica cómo correr el sitio localmente y cómo se desplegó. No hay código nuestro escondido fuera del repo.</li>
+      <li data-es="<strong>Los activos de diseño</strong> — Figma, ilustraciones, fuentes con licencia transferible — en una carpeta /design del mismo repo." data-en="<strong>The design assets</strong> — Figma, illustrations, fonts with transferable licences — in a /design folder of the same repo." data-html="true"><strong>Los activos de diseño</strong> — Figma, ilustraciones, fuentes con licencia transferible — en una carpeta /design del mismo repo.</li>
+      <li data-es="<strong>Una guía de continuidad</strong> de dos páginas: dónde corre el sitio, qué scripts existen, cuáles son las decisiones técnicas claves, y a qué dolor te exponer si las cambias. Pensada para el próximo desarrollador, sea quien sea." data-en="<strong>A two-page continuity guide:</strong> where the site runs, what scripts exist, what the key technical decisions are, and what pain you expose yourself to if you change them. Written for the next developer, whoever that is." data-html="true"><strong>Una guía de continuidad</strong> de dos páginas: dónde corre el sitio, qué scripts existen, cuáles son las decisiones técnicas claves, y a qué dolor te exponer si las cambias. Pensada para el próximo desarrollador, sea quien sea.</li>
+    </ol>
+
+    <h2 data-es="Las dos cosas que NO entregamos" data-en="The two things we don’t hand over">Las dos cosas que NO entregamos</h2>
+    <p data-es="Para ser honestos: hay dos cosas que no transferimos automáticamente, y siempre las explicamos por adelantado:" data-en="To be honest: there are two things we don’t automatically transfer, and we always explain them up front:">Para ser honestos: hay dos cosas que no transferimos automáticamente, y siempre las explicamos por adelantado:</p>
+    <ol>
+      <li data-es="<strong>Las API keys de servicios pagos.</strong> Si tu sitio usa una API que cobramos a nuestra cuenta (Anthropic, Stripe en modo de prueba, ciertos servicios de mapas), las claves siguen siendo nuestras hasta que migres la facturación a tu cuenta. La razón es defensiva: si publicáramos las claves bajo tu nombre, cargas tú la responsabilidad de un mal uso. Cuando estás listo, hacemos la migración con tu CFO o equipo en una sesión de 30 minutos." data-en="<strong>API keys for paid services.</strong> If your site uses an API billed to our account (Anthropic, test-mode Stripe, certain map services), the keys remain ours until you migrate billing to your account. The reason is defensive: if we published the keys under your name, you would carry the responsibility for any misuse. When you’re ready, we run the migration with your CFO or team in a 30-minute session." data-html="true"><strong>Las API keys de servicios pagos.</strong> Si tu sitio usa una API que cobramos a nuestra cuenta (Anthropic, Stripe en modo de prueba, ciertos servicios de mapas), las claves siguen siendo nuestras hasta que migres la facturación a tu cuenta. La razón es defensiva: si publicáramos las claves bajo tu nombre, cargas tú la responsabilidad de un mal uso. Cuando estás listo, hacemos la migración con tu CFO o equipo en una sesión de 30 minutos.</li>
+      <li data-es="<strong>Las credenciales del registro DNS y el panel de hosting</strong> los transferimos solo cuando estás técnicamente listo para recibirlas. Damos acceso de invitado de inmediato; el rol de propietario se transfiere cuando puedes administrarlo sin perder el sitio por accidente. Es una protección, no una retención." data-en="<strong>The DNS registrar and hosting panel credentials</strong> we transfer only when you’re technically ready to take them. We give guest access immediately; the owner role transfers when you can administer it without accidentally losing the site. It’s protection, not retention." data-html="true"><strong>Las credenciales del registro DNS y el panel de hosting</strong> los transferimos solo cuando estás técnicamente listo para recibirlas. Damos acceso de invitado de inmediato; el rol de propietario se transfiere cuando puedes administrarlo sin perder el sitio por accidente. Es una protección, no una retención.</li>
+    </ol>
+
+    <blockquote data-es="La diferencia entre un proveedor que protege a su cliente y uno que retiene al cliente con dependencia técnica." data-en="The difference between a supplier who protects their client and one who retains the client through technical dependency.">La diferencia entre un proveedor que protege a su cliente y uno que retiene al cliente con dependencia técnica.</blockquote>
+
+    <h2 data-es="Qué cambia cuando el código es tuyo" data-en="What changes when the code is yours">Qué cambia cuando el código es tuyo</h2>
+    <p data-es="Tres cosas concretas. <strong>Una</strong>: puedes contratar al estudio que quieras para el siguiente cambio, sin pedirnos permiso. Si seguimos siendo la mejor opción, lo seremos por mérito. <strong>Dos</strong>: si nuestro estudio cerrara mañana, tu sitio sigue funcionando y un desarrollador con un día de inducción puede continuarlo. <strong>Tres</strong>: tu inversión en el sitio aparece en el activo de tu empresa. Es código que posees, no un servicio que arrendas." data-en="Three concrete things. <strong>One</strong>: you can hire whatever studio you want for the next change, without asking us. If we remain the best option, it’ll be on merit. <strong>Two</strong>: if our studio closed tomorrow, your site keeps running and a developer can continue it after a one-day induction. <strong>Three</strong>: your investment in the site shows up as an asset on your company books. It’s code you own, not a service you rent." data-html="true">Tres cosas concretas. <strong>Una</strong>: puedes contratar al estudio que quieras para el siguiente cambio, sin pedirnos permiso. Si seguimos siendo la mejor opción, lo seremos por mérito. <strong>Dos</strong>: si nuestro estudio cerrara mañana, tu sitio sigue funcionando y un desarrollador con un día de inducción puede continuarlo. <strong>Tres</strong>: tu inversión en el sitio aparece en el activo de tu empresa. Es código que posees, no un servicio que arrendas.</p>
+
+    <p data-es="Hay un ángulo financiero que rara vez se discute: si pagas S/ 6 800 por un sitio cuyo código es tuyo, ese gasto es una inversión en propiedad intelectual de la empresa. Si pagas la misma cifra por un sitio cuyo código pertenece a la agencia, has comprado el derecho a verlo en línea — un servicio, no un activo. Tu contador notará la diferencia incluso si tú no la notas." data-en="There’s a financial angle rarely discussed: if you pay S/ 6,800 for a site whose code is yours, that spend is an investment in your company’s intellectual property. If you pay the same figure for a site whose code belongs to the agency, you’ve bought the right to see it online — a service, not an asset. Your accountant will notice the difference even if you don’t.">Hay un ángulo financiero que rara vez se discute: si pagas S/ 6 800 por un sitio cuyo código es tuyo, ese gasto es una inversión en propiedad intelectual de la empresa. Si pagas la misma cifra por un sitio cuyo código pertenece a la agencia, has comprado el derecho a verlo en línea — un servicio, no un activo. Tu contador notará la diferencia incluso si tú no la notas.</p>
+
+    <h2 data-es="Qué preguntar antes de firmar" data-en="What to ask before signing">Qué preguntar antes de firmar</h2>
+    <p data-es="Si estás evaluando otro estudio, las cuatro preguntas que valen la pena hacer al firmar:" data-en="If you’re evaluating another studio, four questions worth asking at signing:">Si estás evaluando otro estudio, las cuatro preguntas que valen la pena hacer al firmar:</p>
+    <ol>
+      <li data-es="«¿En qué cuenta de GitHub vivirá el repositorio durante el proyecto?» <em>Si la respuesta es «la mía» y no «la tuya», sabes lo que viene.</em>" data-en="‘Whose GitHub account will the repository live in during the project?’ <em>If the answer is ‘mine’ and not ‘yours,’ you know what’s coming.</em>" data-html="true">«¿En qué cuenta de GitHub vivirá el repositorio durante el proyecto?» <em>Si la respuesta es «la mía» y no «la tuya», sabes lo que viene.</em></li>
+      <li data-es="«¿Qué exactamente recibo el día de la entrega? Lista, por favor.» <em>Si la lista no incluye el repositorio Git completo, hay un problema.</em>" data-en="‘What exactly do I receive on delivery day? A list, please.’ <em>If the list doesn’t include the full Git repository, there’s a problem.</em>" data-html="true">«¿Qué exactamente recibo el día de la entrega? Lista, por favor.» <em>Si la lista no incluye el repositorio Git completo, hay un problema.</em></li>
+      <li data-es="«¿Si decido no continuar contigo, qué cambia técnicamente para mí?» <em>Una respuesta honesta: nada. Una respuesta turbia: ya sabes.</em>" data-en="‘If I decide not to continue with you, what changes technically for me?’ <em>An honest answer: nothing. A murky answer: you know.</em>" data-html="true">«¿Si decido no continuar contigo, qué cambia técnicamente para mí?» <em>Una respuesta honesta: nada. Una respuesta turbia: ya sabes.</em></li>
+      <li data-es="«¿Tengo licencia transferible sobre las fuentes y los activos de diseño?» <em>Si el estudio compró las fuentes a su nombre y no las puede transferir, el rediseño futuro hereda ese problema.</em>" data-en="‘Do I have transferable licences on fonts and design assets?’ <em>If the studio bought the fonts under their name and can’t transfer them, the future redesign inherits that problem.</em>" data-html="true">«¿Tengo licencia transferible sobre las fuentes y los activos de diseño?» <em>Si el estudio compró las fuentes a su nombre y no las puede transferir, el rediseño futuro hereda ese problema.</em></li>
+    </ol>
+
+    <p data-es="Ninguna de estas preguntas es agresiva. Todas son razonables. Si un estudio se pone defensivo al responderlas, ya sabes lo que valen sus respuestas." data-en="None of these questions is aggressive. All of them are reasonable. If a studio gets defensive answering them, you already know what their answers are worth.">Ninguna de estas preguntas es agresiva. Todas son razonables. Si un estudio se pone defensivo al responderlas, ya sabes lo que valen sus respuestas.</p>
+
+    <hr>
+
+    <p style="font-size: 14px; color: var(--muted);" data-es="<em>Stuart Rainey · Lima · Marzo 2026.</em> Próximo apunte: <a href='/journal/cobramos-en-soles/'>por qué cobramos en soles</a> — y por qué la mayoría de estudios cotiza en dólares." data-en="<em>Stuart Rainey · Lima · March 2026.</em> Next note: <a href='/journal/cobramos-en-soles/'>why we charge in soles</a> — and why most studios quote in dollars." data-html="true"><em>Stuart Rainey · Lima · Marzo 2026.</em> Próximo apunte: <a href="/journal/cobramos-en-soles/">por qué cobramos en soles</a> — y por qué la mayoría de estudios cotiza en dólares.</p>
+  </article>
+</section>
+
+<section class="cta-bar">
+  <h3 data-es="¿Quieres un sitio cuyo código sea tuyo? <em>Conversemos.</em>" data-en="Want a site whose code is yours? <em>Let&rsquo;s talk.</em>" data-html="true">¿Quieres un sitio cuyo código sea tuyo? <em>Conversemos.</em></h3>
+  <div class="cta-actions">
+    <a href="/#audit" data-es="Auditar mi sitio" data-en="Audit my site">Auditar mi sitio</a>
+    <a class="ghost" href="/#conversemos" data-es="Conversemos" data-en="Let&rsquo;s talk">Conversemos</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="page-footer">
+  <div class="page-footer-inner">
+    <div class="page-footer-grid">
+      <div class="footer-col">
+        <div class="word">Rainey <em>Laguna</em></div>
+        <p class="tag" data-es="Estudio web · Inteligencia · Lima" data-en="Web studio · Intelligence · Lima">Estudio web · Inteligencia · Lima</p>
+        <p style="margin-top:24px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;" data-es="Parte de Rainey Laguna Studios" data-en="Part of Rainey Laguna Studios">Parte de Rainey Laguna Studios</p>
+      </div>
+      <div class="footer-col">
+        <h5 data-es="Estudio" data-en="Studio">Estudio</h5>
+        <a href="/about/" data-es="Sobre" data-en="About">Sobre</a>
+        <a href="/journal/" data-es="Journal" data-en="Journal">Journal</a>
+        <a href="/#trabajo" data-es="Trabajo" data-en="Work">Trabajo</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-es="Servicios" data-en="Services">Servicios</h5>
+        <a href="/servicios/websites/">Websites</a>
+        <a href="/servicios/marca/">Marca</a>
+        <a href="/servicios/care/">Care</a>
+        <a href="/servicios/vigia/">Vigía</a>
+        <a href="/servicios/garua/">Garúa</a>
+        <a href="/servicios/espejo/">Espejo</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-es="Contacto" data-en="Contact">Contacto</h5>
+        <a href="https://wa.me/51912418482" target="_blank" rel="noopener">WhatsApp · +51 912 418 482</a>
+        <a href="mailto:hola@raineylaguna.com">hola@raineylaguna.com</a>
+        <a href="/#conversemos" data-es="Conversemos →" data-en="Let&rsquo;s talk →">Conversemos →</a>
+      </div>
+    </div>
+    <div class="page-footer-bottom">
+      <span>© <span data-year>2026</span> Rainey Laguna · <span data-es="Hecho a mano en Lima" data-en="Handmade in Lima">Hecho a mano en Lima</span> <span class="accent">⚊</span> RUC <span data-rl-ruc>—</span></span>
+      <span><a href="/privacy/">Privacidad</a> · <a href="/terms/">Términos</a> · <a href="/llms.txt">llms.txt</a></span>
+    </div>
+  </div>
+</footer>
+<script src="/assets/page.js" defer></script>
+</body>
+</html>

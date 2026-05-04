@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rainey Laguna — Direction B · Award</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0F1A22;
+    --paper: #F5F1E8;
+    --lagoon-deep: #1A3A4A;
+    --lagoon-mist: #C4D4DC;
+    --gold: #C9A961;
+    --gold-bright: #E5C57A;
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    cursor: none;
+  }
+  
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
+    transform: translate(-50%, -50%);
+  }
+  
+  .cursor-ring {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 0.5px solid var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), width 0.4s, height 0.4s, opacity 0.4s;
+    transform: translate(-50%, -50%);
+    opacity: 0.6;
+  }
+  
+  a, button { cursor: none; }
+  
+  /* Canvas — rain on lagoon hero */
+  #lagoon-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: overlay;
+  }
+  
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 28px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    mix-blend-mode: difference;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    color: var(--paper);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+  }
+  
+  .logo svg { width: 26px; height: 26px; }
+  
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  .nav-links a {
+    color: var(--paper);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 4px;
+  }
+  
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .nav-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 40px 80px;
+    overflow: hidden;
+    z-index: 2;
+  }
+  
+  .hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 3;
+    max-width: 1400px;
+  }
+  
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 80px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--lagoon-mist);
+    opacity: 0.7;
+  }
+  
+  .hero-h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(72px, 14vw, 240px);
+    line-height: 0.85;
+    letter-spacing: -6px;
+    font-weight: 300;
+    color: var(--paper);
+    text-align: left;
+  }
+  
+  .hero-h1-line {
+    display: block;
+    overflow: hidden;
+  }
+  
+  .hero-h1-line span {
+    display: inline-block;
+    transform: translateY(110%);
+    animation: rise-line 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  
+  .hero-h1-line:nth-child(1) span { animation-delay: 0.2s; }
+  .hero-h1-line:nth-child(2) span { animation-delay: 0.5s; }
+  .hero-h1-line:nth-child(3) span { animation-delay: 0.8s; }
+  
+  .hero-h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gold);
+  }
+  
+  @keyframes rise-line {
+    to { transform: translateY(0); }
+  }
+  
+  .hero-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    margin-top: 80px;
+    text-align: left;
+    align-items: end;
+    opacity: 0;
+    animation: fade-in 1s ease 1.4s forwards;
+  }
+  
+  @keyframes fade-in { to { opacity: 1; } }
+  
+  .hero-tagline {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--paper);
+    font-style: italic;
+    font-weight: 300;
+  }
+  
+  .hero-cta {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .magnetic-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 36px;
+    border: 0.5px solid var(--gold);
+    color: var(--paper);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.4s;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  .magnetic-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateY(101%);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: -1;
+  }
+  
+  .magnetic-btn:hover { color: var(--ink); }
+  .magnetic-btn:hover::before { transform: translateY(0); }
+  
+  .arrow {
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .magnetic-btn:hover .arrow { transform: translateX(8px); }
+  
+  .hero-time {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--lagoon-mist);
+    opacity: 0.7;
+    line-height: 1.8;
+  }
+  
+  /* Statement section — kinetic */
+  .statement {
+    position: relative;
+    z-index: 2;
+    background: var(--ink);
+    padding: 200px 40px 200px;
+    overflow: hidden;
+  }
+  
+  .marquee {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(80px, 12vw, 180px);
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 1;
+    color: var(--paper);
+    letter-spacing: -4px;
+    font-weight: 300;
+  }
+  
+  .marquee-track {
+    display: inline-flex;
+    gap: 48px;
+    animation: marquee 35s linear infinite;
+  }
+  
+  .marquee-track em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  
+  .marquee-track span { display: inline-block; }
+  
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  
+  .statement-body {
+    max-width: 900px;
+    margin: 120px auto 0;
+    text-align: center;
+  }
+  
+  .statement-body p {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 3.4vw, 44px);
+    line-height: 1.4;
+    color: var(--paper);
+    font-weight: 300;
+    letter-spacing: -1px;
+  }
+  
+  .statement-body em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  
+  /* Services — overlapping cards */
+  .services {
+    position: relative;
+    z-index: 2;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 160px 40px;
+    overflow: hidden;
+  }
+  
+  .services-num {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--ink);
+    opacity: 0.5;
+  }
+  
+  .services h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(64px, 10vw, 160px);
+    line-height: 0.9;
+    color: var(--lagoon-deep);
+    letter-spacing: -4px;
+    font-weight: 300;
+    margin-bottom: 100px;
+  }
+  
+  .services h2 em { font-style: italic; color: var(--gold); }
+  
+  .service-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    max-width: 1400px;
+  }
+  
+  .service-card {
+    padding: 60px 40px;
+    border: 0.5px solid rgba(15, 26, 34, 0.2);
+    margin-left: -0.5px;
+    margin-top: -0.5px;
+    transition: background 0.5s;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .service-card:hover { background: var(--lagoon-deep); color: var(--paper); }
+  
+  .service-card .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 60px;
+  }
+  
+  .service-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    line-height: 1.1;
+    font-weight: 400;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+  }
+  
+  .service-card h3 em { font-style: italic; color: var(--gold); }
+  
+  .service-card p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    opacity: 0.8;
+  }
+  
+  .service-card .price {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--gold);
+  }
+  
+  /* Vigía — full bleed product moment */
+  .vigia {
+    position: relative;
+    z-index: 2;
+    background: var(--lagoon-deep);
+    padding: 200px 40px;
+    overflow: hidden;
+    border-top: 0.5px solid rgba(201, 169, 97, 0.3);
+  }
+  
+  .vigia-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: center;
+  }
+  
+  .vigia-left { color: var(--paper); }
+  
+  .vigia-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: var(--gold);
+    margin-bottom: 32px;
+    padding: 6px 14px;
+    border: 0.5px solid var(--gold);
+    border-radius: 100px;
+    text-transform: uppercase;
+  }
+  
+  .vigia-h {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(50px, 7vw, 96px);
+    line-height: 0.9;
+    letter-spacing: -3px;
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+  
+  .vigia-h em { font-style: italic; color: var(--gold); }
+  
+  .vigia-desc {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1.5;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--lagoon-mist);
+    max-width: 480px;
+  }
+  
+  /* Mock brief */
+  .brief {
+    background: rgba(245, 241, 232, 0.04);
+    border: 0.5px solid rgba(201, 169, 97, 0.3);
+    padding: 32px;
+    border-radius: 4px;
+    backdrop-filter: blur(10px);
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--paper);
+    position: relative;
+  }
+  
+  .brief::before {
+    content: 'WHATSAPP · 08:02';
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    background: var(--lagoon-deep);
+    padding: 0 12px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--gold);
+  }
+  
+  .brief-head {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  
+  .brief h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+  
+  .brief-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 0.5px solid rgba(245, 241, 232, 0.1);
+    font-size: 12px;
+  }
+  
+  .brief-row:first-of-type { border-top: none; }
+  
+  .brief-row .label { opacity: 0.6; }
+  .brief-row .val { color: var(--gold); }
+  
+  .brief-action {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 0.5px solid rgba(201, 169, 97, 0.3);
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--paper);
+  }
+  
+  /* Work — large, bold tiles */
+  .work {
+    position: relative;
+    z-index: 2;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 160px 40px;
+  }
+  
+  .work-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 80px;
+  }
+  
+  .work-h {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(64px, 8vw, 120px);
+    line-height: 0.9;
+    color: var(--lagoon-deep);
+    letter-spacing: -3px;
+    font-weight: 300;
+  }
+  
+  .work-h em { font-style: italic; color: var(--gold); }
+  
+  .work-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--ink);
+    opacity: 0.5;
+  }
+  
+  .work-list {
+    border-top: 0.5px solid rgba(15, 26, 34, 0.2);
+  }
+  
+  .work-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 200px 80px;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 0.5px solid rgba(15, 26, 34, 0.2);
+    align-items: center;
+    position: relative;
+    transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .work-row:hover { padding-left: 24px; }
+  
+  .work-row:hover .work-name { color: var(--gold); }
+  
+  .work-idx {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink);
+    opacity: 0.5;
+  }
+  
+  .work-name {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--lagoon-deep);
+    transition: color 0.4s;
+    letter-spacing: -1px;
+  }
+  
+  .work-name em { font-style: italic; }
+  
+  .work-cat-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.7;
+  }
+  
+  .work-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink);
+    opacity: 0.7;
+  }
+  
+  .work-arrow {
+    text-align: right;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    color: var(--gold);
+    font-size: 18px;
+  }
+  
+  .work-row:hover .work-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 2;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 200px 40px 32px;
+    overflow: hidden;
+  }
+  
+  .footer-h {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(80px, 14vw, 220px);
+    line-height: 0.85;
+    letter-spacing: -6px;
+    font-weight: 300;
+    margin-bottom: 80px;
+  }
+  
+  .footer-h em { font-style: italic; color: var(--gold); }
+  
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 32px;
+    padding-top: 60px;
+    border-top: 0.5px solid rgba(245, 241, 232, 0.15);
+    margin-bottom: 80px;
+  }
+  
+  .footer-col h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+  
+  .footer-col p, .footer-col a {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--paper);
+    text-decoration: none;
+    display: block;
+  }
+  
+  .footer-col a:hover { color: var(--gold); }
+  
+  .footer-bottom {
+    padding-top: 32px;
+    border-top: 0.5px solid rgba(245, 241, 232, 0.1);
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--lagoon-mist);
+    opacity: 0.7;
+  }
+  
+  /* Mobile */
+  @media (max-width: 800px) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+    a, button { cursor: auto; }
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-meta { flex-direction: column; gap: 8px; margin-bottom: 60px; text-align: left; }
+    .hero-bottom { grid-template-columns: 1fr; gap: 40px; margin-top: 60px; }
+    .hero-cta { justify-content: flex-start; }
+    .hero-time { text-align: left; }
+    .statement { padding: 100px 20px; }
+    .statement-body { margin-top: 80px; }
+    .services { padding: 100px 20px; }
+    .services-num { top: 32px; right: 20px; }
+    .services h2 { margin-bottom: 60px; }
+    .service-cards { grid-template-columns: 1fr; }
+    .service-card { padding: 40px 24px; }
+    .vigia { padding: 100px 20px; }
+    .vigia-grid { grid-template-columns: 1fr; gap: 60px; }
+    .work { padding: 100px 20px; }
+    .work-row { grid-template-columns: 40px 1fr 60px; gap: 16px; padding: 24px 0; }
+    .work-row .work-cat-mono, .work-row .work-arrow { display: none; }
+    .work-name { font-size: 24px; }
+    .work-row:hover { padding-left: 0; }
+    footer { padding: 100px 20px 24px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<canvas id="lagoon-canvas"></canvas>
+
+<nav>
+  <a href="#" class="logo">
+    <svg viewBox="0 0 200 200" fill="none">
+      <ellipse cx="100" cy="46" rx="2.2" ry="4" fill="currentColor" opacity="0.55"/>
+      <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="6"/>
+      <circle cx="100" cy="100" r="55" fill="none" stroke="currentColor" stroke-width="5" opacity="0.55"/>
+      <circle cx="100" cy="100" r="32" fill="none" stroke="currentColor" stroke-width="5" opacity="0.42"/>
+      <circle cx="100" cy="100" r="14" fill="none" stroke="currentColor" stroke-width="5" opacity="0.32"/>
+      <circle cx="100" cy="100" r="8" fill="currentColor"/>
+    </svg>
+    Rainey Laguna
+  </a>
+  <div class="nav-links">
+    <a href="#work">Work · 04</a>
+    <a href="#services">Services · 02</a>
+    <a href="#vigia">Vigía · 03</a>
+    <a href="#contact">Hello · 05</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-meta">
+      <span>EST. 2026 · LIMA ⟷ GLASGOW</span>
+      <span>WEB DESIGN &amp; COMPETITIVE INTELLIGENCE</span>
+    </div>
+    
+    <h1 class="hero-h1">
+      <span class="hero-h1-line"><span>Like rain</span></span>
+      <span class="hero-h1-line"><span>on the</span></span>
+      <span class="hero-h1-line"><span><em>laguna.</em></span></span>
+    </h1>
+    
+    <div class="hero-bottom">
+      <p class="hero-tagline">A studio of one. From Glasgow, in Lima, building quiet websites for restaurants that deserve them.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="magnetic-btn">
+          <span>Start a conversation</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+      <div class="hero-time" id="heroTime">
+        Lima · 23:00<br>
+        Glasgow · 05:00
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="statement">
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>QUIET WEBSITES</span><span>·</span><span><em>SHARP INTELLIGENCE</em></span><span>·</span><span>FROM GLASGOW</span><span>·</span><span><em>IN LIMA</em></span><span>·</span><span>QUIET WEBSITES</span><span>·</span><span><em>SHARP INTELLIGENCE</em></span><span>·</span><span>FROM GLASGOW</span><span>·</span><span><em>IN LIMA</em></span><span>·</span>
+    </div>
+  </div>
+  
+  <div class="statement-body">
+    <p>Most agencies sell you a website and disappear. We build the website, then send you a brief every Monday morning explaining <em>exactly</em> what your competition just did.</p>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <span class="services-num">02 / SERVICES</span>
+  <h2>What we<br>actually <em>make.</em></h2>
+  
+  <div class="service-cards">
+    <div class="service-card">
+      <div class="num">→ 01 · WEBSITES</div>
+      <h3>Considered <em>websites,</em> built to age well.</h3>
+      <p>Custom-designed sites in Spanish and English. Menu, gallery, reservations, online ordering. Built to be fast, to take bookings, and to outlast the trends they were made in.</p>
+      <div class="price">desde S/ 1,500</div>
+    </div>
+    
+    <div class="service-card">
+      <div class="num">→ 02 · VIGÍA</div>
+      <h3>The Monday <em>brief.</em></h3>
+      <p>Every Monday at 8 a.m., a WhatsApp report: what your five closest competitors did last week, what they charged, what their reviews said, and what we'd do about it.</p>
+      <div class="price">S/ 250 / mes</div>
+    </div>
+    
+    <div class="service-card">
+      <div class="num">→ 03 · CARE</div>
+      <h3>Care &amp; <em>quietude.</em></h3>
+      <p>Hosting, security, monthly content updates, Google Business Profile, social handle management. The boring half of being online, handled.</p>
+      <div class="price">desde S/ 300 / mes</div>
+    </div>
+  </div>
+</section>
+
+<section class="vigia" id="vigia">
+  <div class="vigia-grid">
+    <div class="vigia-left">
+      <span class="vigia-tag">★ Producto · Vigía</span>
+      <h2 class="vigia-h">A weekly brief, <em>delivered to WhatsApp.</em></h2>
+      <p class="vigia-desc">Every Monday at 8 a.m., before service starts — what your competitors did last week, and what we'd do about it.</p>
+    </div>
+    
+    <div class="brief">
+      <div class="brief-head">VIGÍA · SAN BORJA · WEEK 17</div>
+      <h4>Curcucho Café · 5 competitors monitored</h4>
+      <div class="brief-row">
+        <span class="label">Tostaduría Bisetti</span>
+        <span class="val">+12% precio · oat latte</span>
+      </div>
+      <div class="brief-row">
+        <span class="label">La Nuez San Borja</span>
+        <span class="val">2 menús nuevos · brunch</span>
+      </div>
+      <div class="brief-row">
+        <span class="label">80+ Coffee &amp; Tea</span>
+        <span class="val">Reseñas · 4.5 → 4.7</span>
+      </div>
+      <div class="brief-row">
+        <span class="label">Café La Culture</span>
+        <span class="val">Promo 2x1 · martes</span>
+      </div>
+      <div class="brief-action">
+        → Considerar subir precio del flat white S/ 1.50 antes del 1 de mayo. Tu margen sigue 8% por debajo del barrio.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="work-head">
+    <h2 class="work-h">Selected<br><em>work.</em></h2>
+    <span class="work-num">04 / WORK</span>
+  </div>
+  
+  <div class="work-list">
+    <div class="work-row">
+      <span class="work-idx">01</span>
+      <span class="work-name">Curcucho <em>Café</em></span>
+      <span class="work-cat-mono">SAN BORJA · COFFEE</span>
+      <span class="work-year">2026</span>
+      <span class="work-arrow">→</span>
+    </div>
+    <div class="work-row">
+      <span class="work-idx">02</span>
+      <span class="work-name">Oh-jalá</span>
+      <span class="work-cat-mono">SAN ISIDRO · BAKERY</span>
+      <span class="work-year">2026</span>
+      <span class="work-arrow">→</span>
+    </div>
+    <div class="work-row">
+      <span class="work-idx">03</span>
+      <span class="work-name">Olivia <em>Restaurante</em></span>
+      <span class="work-cat-mono">SURCO · RESTAURANT</span>
+      <span class="work-year">2026</span>
+      <span class="work-arrow">→</span>
+    </div>
+    <div class="work-row">
+      <span class="work-idx">04</span>
+      <span class="work-name">80+ Coffee <em>&amp; Tea</em></span>
+      <span class="work-cat-mono">SAN BORJA · COFFEE</span>
+      <span class="work-year">2026</span>
+      <span class="work-arrow">→</span>
+    </div>
+    <div class="work-row">
+      <span class="work-idx">05</span>
+      <span class="work-name">Cormiglio <em>Café</em></span>
+      <span class="work-cat-mono">SAN ISIDRO · COFFEE</span>
+      <span class="work-year">2026</span>
+      <span class="work-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <h2 class="footer-h">Tell us<br>about your <em>place.</em></h2>
+  
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h5>Email</h5>
+      <a href="mailto:hola@raineylaguna.com">hola@<br>raineylaguna.com</a>
+    </div>
+    <div class="footer-col">
+      <h5>WhatsApp</h5>
+      <a href="https://wa.me/51000000000">+51 ··· ····</a>
+    </div>
+    <div class="footer-col">
+      <h5>Studio</h5>
+      <p>Av. Conquistadores<br>San Isidro, Lima</p>
+    </div>
+    <div class="footer-col">
+      <h5>Origen</h5>
+      <p>Glasgow,<br>Scotland</p>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <span>© 2026 Stuart John Andrew Rainey</span>
+    <span id="footerTime">Lima 23:00 · Glasgow 05:00</span>
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', (e) => {
+  mx = e.clientX;
+  my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+
+function animateRing() {
+  rx += (mx - rx) * 0.18;
+  ry += (my - ry) * 0.18;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+// Cursor expands on hover targets
+document.querySelectorAll('a, button, .work-row, .service-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%, -50%) scale(0)';
+    ring.style.width = '70px';
+    ring.style.height = '70px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+    ring.style.width = '40px';
+    ring.style.height = '40px';
+  });
+});
+
+// Lagoon canvas — rain ripples on water
+const canvas = document.getElementById('lagoon-canvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth * window.devicePixelRatio;
+  canvas.height = window.innerHeight * window.devicePixelRatio;
+  canvas.style.width = window.innerWidth + 'px';
+  canvas.style.height = window.innerHeight + 'px';
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+}
+resize();
+window.addEventListener('resize', resize);
+
+const ripples = [];
+
+function spawnRipple(x, y, autoSpawn = false) {
+  ripples.push({
+    x, y,
+    radius: 0,
+    maxRadius: autoSpawn ? 60 + Math.random() * 100 : 220,
+    opacity: autoSpawn ? 0.18 : 0.5,
+    speed: autoSpawn ? 0.7 : 1.6,
+    born: performance.now()
+  });
+}
+
+// Auto rain
+setInterval(() => {
+  if (window.scrollY > window.innerHeight) return;
+  spawnRipple(
+    Math.random() * window.innerWidth,
+    Math.random() * window.innerHeight,
+    true
+  );
+}, 280);
+
+// Mouse rain
+document.addEventListener('mousemove', (e) => {
+  if (Math.random() < 0.35 && window.scrollY < window.innerHeight) {
+    spawnRipple(e.clientX, e.clientY);
+  }
+});
+
+function render() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // background lagoon gradient
+  const grd = ctx.createRadialGradient(
+    window.innerWidth * 0.5, window.innerHeight * 0.55, 0,
+    window.innerWidth * 0.5, window.innerHeight * 0.55, window.innerWidth * 0.7
+  );
+  grd.addColorStop(0, 'rgba(26, 58, 74, 0.5)');
+  grd.addColorStop(1, 'rgba(15, 26, 34, 0)');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+  
+  for (let i = ripples.length - 1; i >= 0; i--) {
+    const r = ripples[i];
+    r.radius += r.speed;
+    const progress = r.radius / r.maxRadius;
+    const alpha = r.opacity * (1 - progress);
+    
+    if (r.radius >= r.maxRadius) {
+      ripples.splice(i, 1);
+      continue;
+    }
+    
+    ctx.strokeStyle = `rgba(196, 212, 220, ${alpha})`;
+    ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+    ctx.stroke();
+    
+    // Inner ripple
+    if (r.radius > 20) {
+      ctx.strokeStyle = `rgba(201, 169, 97, ${alpha * 0.5})`;
+      ctx.beginPath();
+      ctx.arc(r.x, r.y, r.radius * 0.6, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+  
+  requestAnimationFrame(render);
+}
+render();
+
+// Live clocks
+function updateTimes() {
+  const now = new Date();
+  const lima = now.toLocaleTimeString('en-GB', { timeZone: 'America/Lima', hour: '2-digit', minute: '2-digit' });
+  const glasgow = now.toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit' });
+  
+  const ht = document.getElementById('heroTime');
+  if (ht) ht.innerHTML = `Lima · ${lima}<br>Glasgow · ${glasgow}`;
+  
+  const ft = document.getElementById('footerTime');
+  if (ft) ft.textContent = `Lima ${lima} · Glasgow ${glasgow}`;
+}
+updateTimes();
+setInterval(updateTimes, 30000);
+</script>
+
+</body>
+</html>
