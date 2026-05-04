@@ -60,8 +60,8 @@ for (const slug of slugs) {
 <link rel="alternate" hreflang="es-PE" href="${canonical}">
 <link rel="alternate" hreflang="x-default" href="${canonical}">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="alternate icon" href="/favicon.ico">
-<link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+<link rel="alternate icon" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 
 <meta property="og:type" content="${ogType}">
@@ -71,14 +71,18 @@ for (const slug of slugs) {
 <meta property="og:description" content="${esc(meta.descEs)}">
 <meta property="og:url" content="${canonical}">
 <meta property="og:site_name" content="Rainey Laguna">
-<meta property="og:image" content="${SITE}/og-image.svg">
+<meta property="og:image" content="${SITE}/og-image.png">
+<meta property="og:image:secure_url" content="${SITE}/og-image.png">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Rainey Laguna — estudio web en Lima, sobre fondo de cielo en transición">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(meta.ogTitle || meta.titleEs)}">
 <meta name="twitter:description" content="${esc(meta.descEs)}">
-<meta name="twitter:image" content="${SITE}/og-image.svg">
+<meta name="twitter:image" content="${SITE}/og-image.png">
+<meta name="twitter:image:alt" content="Rainey Laguna — estudio web en Lima">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,9 +91,7 @@ for (const slug of slugs) {
 <link rel="stylesheet" href="/assets/page.css">
 
 <!-- Analytics · Plausible (only on production hostname). -->
-<script>
-(function(){if(location.hostname==='raineylaguna.com'||location.hostname==='www.raineylaguna.com'){var s=document.createElement('script');s.defer=true;s.setAttribute('data-domain','raineylaguna.com');s.src='https://plausible.io/js/script.outbound-links.js';document.head.appendChild(s);window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments);};}})();
-</script>
+<script src="/assets/analytics.js" defer></script>
 ${extraJsonLd}
 </head>
 <body>

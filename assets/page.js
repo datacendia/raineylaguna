@@ -63,6 +63,19 @@
     });
   }
 
+  // -------- Active nav --------
+  function setActiveNav() {
+    var path = location.pathname.replace(/\/?$/, '/');
+    document.querySelectorAll('.page-nav .nav-links a').forEach(function(a) {
+      try {
+        var href = new URL(a.getAttribute('href'), location.origin).pathname.replace(/\/?$/, '/');
+        if (href === path) {
+          a.setAttribute('aria-current', 'page');
+        }
+      } catch (_) {}
+    });
+  }
+
   // -------- Footer year --------
   function setYear() {
     document.querySelectorAll('[data-year]').forEach((el) => {
@@ -74,6 +87,7 @@
   function boot() {
     applyLang(detectLang());
     initLangToggle();
+    setActiveNav();
     setYear();
   }
 

@@ -1,15 +1,20 @@
 {
   "name": "raineylaguna",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Rainey Laguna — estudio web en Lima",
+  "author": "Stuart John Andrew Rainey <hola@raineylaguna.com>",
+  "license": "ISC",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:en": "node scripts/build-en.mjs",
+    "check:en": "node scripts/check-en.mjs",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "check:jsonld": "node scripts/check-jsonld.mjs",
+    "check:html": "node scripts/check-html.mjs",
+    "check:all": "node scripts/check-en.mjs && node scripts/check-contrast.mjs && node scripts/check-jsonld.mjs && node scripts/check-html.mjs"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
     "playwright": "^1.59.1"
   }
