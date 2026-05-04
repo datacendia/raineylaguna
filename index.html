@@ -62,14 +62,16 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="alternate icon" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 
+<!-- TODO: Set to Vigía API base URL before going live, e.g. https://vigia.raineylaguna.com -->
 <!-- Vigía live brief endpoint (override per-environment in deployment).
      Local dev: <meta name="vigia-api" content="http://localhost:3000">
      Production: leave empty to auto-resolve to https://vigia.{hostname} -->
 <meta name="vigia-api" content="">
 
+<!-- TODO: Set to Cal.com booking URL once calendar is created, e.g. https://cal.com/stuart-rainey/audit-30 -->
 <!-- Cal.com booking URL for the "agendar 30 min" CTA in the live audit summary.
      Replace with the real Cal slug once the calendar is created
      (e.g. https://cal.com/stuart-rainey/audit-30). Until then the audit shows
@@ -83,20 +85,7 @@
      Example: <meta name="formspree-endpoint" content="https://formspree.io/f/xxxxxxxx"> -->
 <meta name="formspree-endpoint" content="">
 
-<!-- Analytics · Plausible (privacy-friendly, no cookies, no banner needed under Ley 29733).
-     Loaded only on the production hostname so localhost / preview deploys don't pollute stats. -->
-<script>
-  (function () {
-    if (location.hostname === 'raineylaguna.com' || location.hostname === 'www.raineylaguna.com') {
-      var s = document.createElement('script');
-      s.defer = true;
-      s.setAttribute('data-domain', 'raineylaguna.com');
-      s.src = 'https://plausible.io/js/script.outbound-links.js';
-      document.head.appendChild(s);
-      window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments); };
-    }
-  })();
-</script>
+<script src="/assets/analytics.js" defer></script>
 
 <!-- Performance: pre-resolve external origins -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2518,19 +2507,7 @@
   }
 </style>
 
-<!-- Analytics · Plausible (hostname-guarded, only fires on production) -->
-<script>
-  (function () {
-    if (location.hostname === 'raineylaguna.com' || location.hostname === 'www.raineylaguna.com') {
-      var s = document.createElement('script');
-      s.defer = true;
-      s.setAttribute('data-domain', 'raineylaguna.com');
-      s.src = 'https://plausible.io/js/script.outbound-links.tagged-events.js';
-      document.head.appendChild(s);
-      window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments); };
-    }
-  })();
-</script>
+<script src="/assets/analytics.js" defer></script>
 </head>
 <body>
 

@@ -50,6 +50,3 @@ Allow: /
 
 # Sitemap location
 Sitemap: https://raineylaguna.com/sitemap.xml
-
-# Host hint (helps some crawlers pick the canonical)
-Host: https://raineylaguna.com
