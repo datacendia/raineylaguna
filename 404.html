@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#F5F1E8">
 <title>404 — Rainey Laguna</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -85,9 +86,32 @@
     margin: 0 auto 36px;
     color: var(--lagoon-deep);
   }
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 8px 16px;
+    z-index: 100;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-decoration: none;
+  }
+  .skip-link:focus {
+    left: 8px;
+    top: 8px;
+    width: auto;
+    height: auto;
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Ir al contenido</a>
+<main id="main">
   <div class="frame">
     <svg class="mark" viewBox="0 0 200 200" fill="none" aria-hidden="true">
       <ellipse cx="100" cy="46" rx="2.2" ry="4" fill="currentColor" opacity="0.55"/>
@@ -104,5 +128,6 @@
       <a href="https://wa.me/51912418482" target="_blank" rel="noopener">WhatsApp</a>
     </div>
   </div>
+</main>
 </body>
 </html>
