@@ -16,7 +16,7 @@ Live Audit · v0 UI + mocked pipeline shipped on raineylaguna.com homepage:
   + nav-link 01 / Auditoría (previously unused idx)
 
 Vigía endpoint stub reserved:
-  + c:\Users\Stu\vigia\src\app\api\audit\route.ts (returns 501 for now)
+  + vigia/src/app/api/audit/route.ts (returns 501 for now)
 
 Still pending for Sprint 2 completion (2026 target ≤ May 19):
   [ ] Real /api/audit pipeline (Lighthouse + Places + SerpAPI + IG + Claude)

@@ -297,10 +297,17 @@
             t('Mi correo es: ','My email is: ') + email
           ].join('\n'));
           const mailto = `mailto:hola@raineylaguna.com?subject=${subject}&body=${body}`;
-          status.innerHTML = t(
-            'No pude enviar automáticamente. <a href="'+mailto+'">Abrir cliente de correo →</a>',
-            'Could not send automatically. <a href="'+mailto+'">Open mail client →</a>'
+          // Build the fallback anchor via DOM APIs rather than innerHTML so
+          // visitor-supplied url/city/sector text can never escape the
+          // attribute context, even if the URI-encoder ever changes.
+          status.textContent = t(
+            'No pude enviar automáticamente. ',
+            'Could not send automatically. '
           );
+          const a = document.createElement('a');
+          a.href = mailto;
+          a.textContent = t('Abrir cliente de correo →','Open mail client →');
+          status.appendChild(a);
           status.style.color = 'var(--gold)';
           btn.disabled = false;
           btn.textContent = t('Reintentar','Retry');

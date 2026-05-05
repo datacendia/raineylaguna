@@ -65,13 +65,11 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 
-<!-- TODO: Set to Vigía API base URL before going live, e.g. https://vigia.raineylaguna.com -->
 <!-- Vigía live brief endpoint (override per-environment in deployment).
      Local dev: <meta name="vigia-api" content="http://localhost:3000">
      Production: leave empty to auto-resolve to https://vigia.{hostname} -->
 <meta name="vigia-api" content="">
 
-<!-- TODO: Set to Cal.com booking URL once calendar is created, e.g. https://cal.com/stuart-rainey/audit-30 -->
 <!-- Cal.com booking URL for the "agendar 30 min" CTA in the live audit summary.
      Replace with the real Cal slug once the calendar is created
      (e.g. https://cal.com/stuart-rainey/audit-30). Until then the audit shows
@@ -2749,9 +2747,9 @@
         <span id="navTime">Lima · 23:00</span>
       </span>
       <span class="lang-toggle">
-        <button id="langEn" class="active">EN</button>
+        <button id="langEn">EN</button>
         <span class="divider">/</span>
-        <button id="langEs">ES</button>
+        <button id="langEs" class="active">ES</button>
       </span>
     </div>
   </nav>
