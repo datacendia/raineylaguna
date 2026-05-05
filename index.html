@@ -1749,6 +1749,17 @@
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.4; transform: scale(0.7); }
   }
+
+  /* Ambient dust particles above the hero — used by the garúa loop in
+     the scripted .particle spawner. Extracted from a runtime-injected
+     <style> block so the CSS ships with the first paint and the page
+     no longer needs to mutate <head> at module-eval time. */
+  @keyframes floatUp {
+    0%, 100% { opacity: 0; transform: translateY(0) translateX(0); }
+    20% { opacity: 0.6; }
+    80% { opacity: 0.6; }
+    50% { transform: translateY(-30px) translateX(15px); }
+  }
   
   .live-brief-cta {
     display: inline-flex;
@@ -4216,16 +4227,8 @@ for (let i = 0; i < 12; i++) {
   particlesContainer.appendChild(p);
 }
 
-const styleSheet = document.createElement('style');
-styleSheet.textContent = `
-  @keyframes floatUp {
-    0%, 100% { opacity: 0; transform: translateY(0) translateX(0); }
-    20% { opacity: 0.6; }
-    80% { opacity: 0.6; }
-    50% { transform: translateY(-30px) translateX(15px); }
-  }
-`;
-document.head.appendChild(styleSheet);
+// floatUp keyframes are declared in the static <style> block in <head>
+// (search for "Ambient dust particles"). No runtime injection needed.
 
 // ============================================================
 // NAV — turns paper-themed once you scroll past the hero
@@ -4945,9 +4948,23 @@ async function renderPersonalBrief(name, district) {
     const c = competitors[i];
     const row = document.createElement('div');
     row.className = 'brief-row';
-    row.innerHTML =
-      `<div class="label">${c.name}<span class="label-sub">${c.addr} · ${c.dist}</span></div>` +
-      `<div class="val">${c.val}</div>`;
+    // Safe DOM construction: c.name / c.addr / c.val may arrive from the
+    // live Vigía /api/brief endpoint, which is populated by Google Places
+    // "displayName" + "formattedAddress" — values that can legitimately
+    // contain HTML metacharacters. textContent eliminates the XSS surface
+    // entirely without changing the rendered result.
+    const label = document.createElement('div');
+    label.className = 'label';
+    label.textContent = String(c.name ?? '');
+    const sub = document.createElement('span');
+    sub.className = 'label-sub';
+    sub.textContent = `${c.addr ?? ''} · ${c.dist ?? ''}`;
+    label.appendChild(sub);
+    const val = document.createElement('div');
+    val.className = 'val';
+    val.textContent = String(c.val ?? '');
+    row.appendChild(label);
+    row.appendChild(val);
     briefRows.appendChild(row);
     await new Promise(r => setTimeout(r, 110));
     requestAnimationFrame(() => row.classList.add('in'));

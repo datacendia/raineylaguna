@@ -216,11 +216,12 @@
         : `Hi Stuart — I ran the audit on raineylaguna.com for ${inputs.url} (${inputs.city}, ${sn.en}). It found ${warns} openings. Can we talk?`
     );
 
-    // Cal.com booking URL — set window.RL_CAL_BOOKING_URL or <meta name="rl-cal-booking">
-    // Falls back to a generic /audit slug; replace before launch.
-    const calUrl = (typeof window !== 'undefined' && window.RL_CAL_BOOKING_URL)
-      || (document.querySelector('meta[name="rl-cal-booking"]') || {}).content
-      || 'https://cal.com/stuart-rainey/audit';
+    // Cal.com booking URL — opt-in via window.RL_CAL_BOOKING_URL or
+    // <meta name="rl-cal-booking" content="https://cal.com/...">. When
+    // neither is configured we hide the CTA entirely rather than link to
+    // a dead slug. WhatsApp remains the primary path either way.
+    const calMeta = (document.querySelector('meta[name="rl-cal-booking"]') || {}).content || '';
+    const calUrl = (typeof window !== 'undefined' && window.RL_CAL_BOOKING_URL) || calMeta.trim();
 
     const el = document.createElement('div');
     el.className = 'audit-summary';
@@ -240,9 +241,10 @@
         <a class="audit-cta-primary" href="https://wa.me/51912418482?text=${waMsg}" target="_blank" rel="noopener">
           ${t('Agendar llamada · S/ 250 créditable', 'Book a call · S/ 250 credited')} →
         </a>
+        ${calUrl ? `
         <a class="audit-cta-ghost" href="${calUrl}" target="_blank" rel="noopener" data-audit-cal>
           ${t('O reservar 30 min en el calendario', 'Or book 30 min on the calendar')} →
-        </a>
+        </a>` : ''}
         <a class="audit-cta-ghost" href="#brief" data-audit-to-brief>
           ${t('O sigue estas aperturas con Vigía', 'Or track these openings with Vigía')} →
         </a>
