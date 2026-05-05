@@ -133,7 +133,7 @@ Pricing rationale for the 3 May revisions:
 | **Total recurring** | | **S/ 4,150 / mo** |
 | **Espejo** (quarterly) | | S/ 900 / qtr |
 
-Anchor the stack against what an in-house marketing + social media + consultant combo would cost (~S/ 8,000 +/mo). We deliver more intelligence per Sol. Smaller clients can enter at **Audit (S/ 180 once)** → **Vigía (S/ 250/mo)** and ladder up from there.
+Anchor the stack against what an in-house marketing + social media + consultant combo would cost (~S/ 8,000 +/mo). We deliver more intelligence per Sol. Smaller clients can enter at **Audit (S/ 180 once)** → **Vigía (S/ 600/mo)** and ladder up from there.
 
 ---
 

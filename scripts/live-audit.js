@@ -239,7 +239,7 @@
       </div>
       <div class="audit-cta-row">
         <a class="audit-cta-primary" href="https://wa.me/51912418482?text=${waMsg}" target="_blank" rel="noopener">
-          ${t('Agendar llamada · S/ 250 créditable', 'Book a call · S/ 250 credited')} →
+          ${t('Agendar llamada · S/ 600 créditable', 'Book a call · S/ 600 credited')} →
         </a>
         ${calUrl ? `
         <a class="audit-cta-ghost" href="${calUrl}" target="_blank" rel="noopener" data-audit-cal>

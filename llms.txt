@@ -35,12 +35,12 @@ The studio offers eight services that map to a logical narrative arc — diagnos
 1. **Websites** — from S/ 1,500 (one-time). Custom-designed bilingual sites (Spanish + English) with menu, gallery, reservations, online ordering. Built to be fast, take bookings, and age well.
 2. **Marca** — S/ 2,500 (one-time). Brand identity for hospitality: logo, palette, type system, signage spec. Phase 0 before a website, or commissioned alone for an existing place.
 3. **Care & Quietude** — from S/ 300 / month. Hosting, security, monthly content updates, Google Business Profile management, social handle management.
-4. **Vigía** — S/ 250 / month. Weekly competitive intelligence delivered by WhatsApp every Monday at 8 a.m. Tracks competitor pricing changes, menu updates, review trends, promo launches and hiring signals across Google, Instagram, Yelp and more. Watches the competition.
+4. **Vigía** — S/ 600 / month. Weekly competitive intelligence delivered by WhatsApp every Monday at 8 a.m. Tracks competitor pricing changes, menu updates, review trends, promo launches and hiring signals across Google, Instagram, Yelp and more. Watches the competition.
 5. **Garúa** — S/ 350 / month. Weather-triggered marketing automation, unique to Peru. Lima has six months of grey sky (May–October). Garúa monitors tomorrow's forecast and fires pre-approved campaigns to website, Instagram and WhatsApp when conditions match — terrace promos on clear days, soup specials when garúa drizzle is forecast, pisco sour hours when sun is forecast. Acts on conditions.
 6. **Socio** — S/ 1,500 setup + S/ 800 / month. A persistent AI WhatsApp assistant trained on the client's menu, hours, reservation policy, delivery zones, customer history and tone. Replies 24/7, handles reservations, recognises returning customers, escalates cases that need the owner's judgement, and logs every conversation for a monthly summary. Deliberately conservative: never invents prices or hours, always discloses it is an assistant when asked. The inbound complement to Vigía's outbound watching — Vigía reads the market, Socio replies to the customer.
 7. **Espejo** — S/ 900 / quarter. Quarterly anonymous secret-shopper visit. Stuart eats at the client's restaurant as a stranger, photographs the experience, times the service, listens to the room. A four-page report follows: what worked, what jarred, what to fix. The inverse of Vigía — Vigía watches competitors, Espejo watches you. The one service on the stack that cannot be automated and becomes more valuable as everything else is.
 
-A typical full-service hospitality client commits to ~S/ 4,000 in one-time setup (Marca + Websites) plus ~S/ 1,700/month recurring (Care + Vigía + Garúa + Socio) plus ~S/ 900/quarter (Espejo). Lower-commitment clients often start with Audit (S/ 180) or Vigía alone (S/ 250/mo).
+A typical full-service hospitality client commits to ~S/ 4,000 in one-time setup (Marca + Websites) plus ~S/ 1,700/month recurring (Care + Vigía + Garúa + Socio) plus ~S/ 900/quarter (Espejo). Lower-commitment clients often start with Audit (S/ 180) or Vigía alone (S/ 600/mo).
 
 ## Areas served
 
@@ -76,7 +76,7 @@ A: We design and build websites for restaurants and cafés in Lima, and run Vig�
 A: From S/ 1,500. Final price depends on scope: digital menu, reservation system, online ordering, bilingual content. Each project is quoted individually.
 
 **Q: What is Vigía?**
-A: A weekly competitive intelligence service for restaurants. Every Monday at 8 a.m. we deliver a 90-second WhatsApp brief: what your closest competitors did this week (price changes, new menu items, review shifts, promotions) and what to do about it. S/ 250 per month.
+A: A weekly competitive intelligence service for restaurants. Every Monday at 8 a.m. we deliver a 90-second WhatsApp brief: what your closest competitors did this week (price changes, new menu items, review shifts, promotions) and what to do about it. S/ 600 per month.
 
 **Q: Where is the studio?**
 A: Av. Conquistadores, San Isidro, Lima. We work with clients across Lima Metropolitana.
