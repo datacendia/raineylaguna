@@ -92,6 +92,7 @@ for (const slug of slugs) {
 
 <!-- Analytics · Plausible (only on production hostname). -->
 <script src="/assets/analytics.js" defer></script>
+<script src="/assets/geo.js" defer></script>
 ${extraJsonLd}
 </head>
 <body>

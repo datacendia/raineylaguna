@@ -3370,6 +3370,7 @@ const I18N = {
     'hero-eyebrow': 'Studio · Lima ⟷ Glasgow · Est. 2026',
     'hero-h1': ['Like rain', 'on the', '<em>laguna.</em>'],
     'hero-lede': "Quiet, considered websites for Lima's independent local businesses — hospitality, boutique fitness, independent schools, wellness, boutique retail — and every Monday morning, a brief that tells you exactly what your closest competitors just did.",
+    'hero-lede-global': "Quiet, considered websites for independent local businesses — hospitality, boutique fitness, independent schools, wellness, boutique retail — and every Monday morning, a brief that tells you exactly what your closest competitors just did.",
     'hero-cta-primary': 'Audit my site · 90 s',
     'hero-cta-talk': 'Start a conversation',
     'hero-cta-secondary': 'Watch a brief generate',
@@ -3623,6 +3624,7 @@ const I18N = {
     'hero-eyebrow': 'Estudio · Lima ⟷ Glasgow · Est. 2026',
     'hero-h1': ['Como lluvia', 'sobre la', '<em>laguna.</em>'],
     'hero-lede': 'Páginas web tranquilas y pensadas para los negocios locales independientes de Lima — hospitalidad, fitness, educación, bienestar, retail boutique — y cada lunes por la mañana, un reporte que te dice exactamente qué hicieron tus competidores más cercanos.',
+    'hero-lede-global': 'Páginas web tranquilas y pensadas para negocios locales independientes — hospitalidad, fitness, educación, bienestar, retail boutique — y cada lunes por la mañana, un reporte que te dice exactamente qué hicieron tus competidores más cercanos.',
     'hero-cta-primary': 'Auditar mi sitio · 90 s',
     'hero-cta-talk': 'Conversemos',
     'hero-cta-secondary': 'Ver un brief generándose',
@@ -4453,6 +4455,20 @@ function retypeHero() {
 }
 
 runHero(true);
+
+// Geo: for non-Peru visitors, neutralize the Lima-specific hero copy + title.
+// Exposed for assets/geo.js to call once it knows the visitor's country.
+window.applyGeoText = function (isGlobal) {
+  if (!isGlobal) return;
+  if (I18N.es['hero-lede-global']) I18N.es['hero-lede'] = I18N.es['hero-lede-global'];
+  if (I18N.en['hero-lede-global']) I18N.en['hero-lede'] = I18N.en['hero-lede-global'];
+  try {
+    document.title = (LANG === 'en')
+      ? 'Rainey Laguna — Web studio · Competitive intelligence with Vigía'
+      : 'Rainey Laguna — Estudio web · Inteligencia competitiva con Vigía';
+  } catch (e) {}
+  if (typeof retypeHero === 'function') retypeHero();
+};
 
 // ============================================================
 // LAGOON CANVAS

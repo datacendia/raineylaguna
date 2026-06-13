@@ -30,6 +30,10 @@
   function apply(cc) {
     var isPeru = !cc || cc === 'PE';
     root.classList.toggle('geo-global', !isPeru);
+    // Let the homepage neutralize its Lima-specific hero copy + <title>.
+    if (typeof window.applyGeoText === 'function') {
+      try { window.applyGeoText(!isPeru); } catch (e) {}
+    }
   }
 
   // Manual override for review/QA: ?geo=global (or ?geo=pe) forces a view.
