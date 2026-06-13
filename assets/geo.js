@@ -32,6 +32,13 @@
     root.classList.toggle('geo-global', !isPeru);
   }
 
+  // Manual override for review/QA: ?geo=global (or ?geo=pe) forces a view.
+  try {
+    var q = new URLSearchParams(location.search).get('geo');
+    if (q === 'global' || q === 'intl') { apply('US'); return; }
+    if (q === 'pe' || q === 'lima' || q === 'local') { apply('PE'); return; }
+  } catch (e) {}
+
   // Cached for this session?
   var cached = null;
   try { cached = sessionStorage.getItem(KEY); } catch (e) {}
