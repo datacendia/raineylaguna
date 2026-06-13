@@ -83,6 +83,7 @@
 <meta name="formspree-endpoint" content="">
 
 <script src="/assets/analytics.js" defer></script>
+<script src="/assets/geo.js" defer></script>
 
 <!-- Performance: pre-resolve external origins -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -281,6 +282,54 @@
             "url": "https://raineylaguna.com/servicios/espejo/"
           },
           "url": "https://raineylaguna.com/servicios/espejo/"
+        },
+        {
+          "@type": "Offer",
+          "position": 7,
+          "name": "Imagen IA — Imágenes y marca con IA",
+          "description": "Fotografía de producto, imágenes de marca y direcciones de identidad generadas con IA y dirigidas a mano. Precio por proyecto, a cotizar.",
+          "availability": "https://schema.org/InStock",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Imagen con IA para negocios locales",
+            "serviceType": "AI image generation and art direction",
+            "provider": { "@id": "https://raineylaguna.com/#org" },
+            "areaServed": { "@type": "City", "name": "Lima" },
+            "url": "https://raineylaguna.com/servicios/imagen-ia/"
+          },
+          "url": "https://raineylaguna.com/servicios/imagen-ia/"
+        },
+        {
+          "@type": "Offer",
+          "position": 8,
+          "name": "Video IA — Video y motion con IA",
+          "description": "Clips cinemáticos, reels y motion para redes y lanzamientos, generados y dirigidos con IA. Precio por proyecto, a cotizar.",
+          "availability": "https://schema.org/InStock",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Video con IA para negocios locales",
+            "serviceType": "AI video generation",
+            "provider": { "@id": "https://raineylaguna.com/#org" },
+            "areaServed": { "@type": "City", "name": "Lima" },
+            "url": "https://raineylaguna.com/servicios/video-ia/"
+          },
+          "url": "https://raineylaguna.com/servicios/video-ia/"
+        },
+        {
+          "@type": "Offer",
+          "position": 9,
+          "name": "Datacendia — IA empresarial defendible",
+          "description": "Plataforma de IA defendible para organizaciones reguladas: deliberación multi-agente con decisiones firmadas y admisibles ante tribunales. La rama empresarial.",
+          "availability": "https://schema.org/InStock",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Datacendia — Enterprise AI governance",
+            "serviceType": "Enterprise AI governance",
+            "provider": { "@id": "https://raineylaguna.com/#org" },
+            "areaServed": { "@type": "Place", "name": "Worldwide" },
+            "url": "https://raineylaguna.com/servicios/datacendia/"
+          },
+          "url": "https://raineylaguna.com/servicios/datacendia/"
         }
       ]
     },
@@ -2803,11 +2852,12 @@
   <div class="services-head">
     <div class="section-num"><span>02</span> — <span data-i18n="services-label">Servicios</span></div>
     <h2 class="services-h2" data-i18n-html="services-h2">What we<br><em>actually</em> make.</h2>
+    <p class="geo-note" data-i18n="geo-note" style="display:none;margin-top:14px;font-size:14px;opacity:.7">Trabajamos en remoto con negocios independientes en todo el mundo — con base en Lima, Perú.</p>
   </div>
 
   <div class="services-arc">
     <div class="arc-eyebrow" data-i18n="arc-label">Un campo de visión, no una lista</div>
-    <p class="arc-text" data-i18n-html="arc-text">Ocho servicios en un solo instrumento. <strong>Vigía</strong> mira a tu competencia. <strong>Socio</strong> escucha a tus clientes. <strong>Espejo</strong> te mira a ti. La web y la marca son la superficie — el resto es cómo sigues viendo.</p>
+    <p class="arc-text" data-i18n-html="arc-text">Diez servicios en un solo instrumento. <strong>Vigía</strong> mira a tu competencia. <strong>Socio</strong> escucha a tus clientes. <strong>Espejo</strong> te mira a ti. La web y la marca son la superficie — el resto es cómo sigues viendo.</p>
   </div>
   
   <a class="service-row" href="/servicios/audit/">
@@ -2845,7 +2895,7 @@
     <div class="service-price">S/ 600 / mes</div>
   </a>
 
-  <a class="service-row" href="/servicios/garua/">
+  <a class="service-row" href="/servicios/garua/" data-geo-lima>
     <div class="service-num" data-i18n="srv-5-num">→ 05 / Garúa</div>
     <h3 class="service-name" data-i18n-html="srv-5-name">Garúa <em>convierte el clima en tráfico.</em></h3>
     <p class="service-desc" data-i18n="srv-5-desc">Lima tiene seis meses de cielo gris. Garúa observa el pronóstico de mañana y dispara campañas pre-aprobadas a tu web, Instagram y WhatsApp cuando las condiciones calzan — terraza en día limpio, sopa cuando garúa, pisco con sol. El marketing que tu competencia no hace.</p>
@@ -2859,11 +2909,37 @@
     <div class="service-price" data-i18n="srv-7-price">S/ 1,500 setup + S/ 800 / mes</div>
   </a>
 
-  <a class="service-row" href="/servicios/espejo/">
+  <a class="service-row" href="/servicios/espejo/" data-geo-lima>
     <div class="service-num" data-i18n="srv-6-num">→ 07 / Espejo</div>
     <h3 class="service-name" data-i18n-html="srv-6-name">Espejo — <em>el reflejo trimestral.</em></h3>
     <p class="service-desc" data-i18n="srv-6-desc">Una vez por trimestre, Stuart come en tu restaurante como un desconocido. Fotografía la experiencia, cronometra el servicio, escucha la sala. Llega un informe de cuatro páginas — qué funcionó, qué chirrió, qué arreglar. Vigía mira a tu competencia; Espejo te mira a ti.</p>
     <div class="service-price" data-i18n="srv-6-price">S/ 900 / trimestre</div>
+  </a>
+
+  <a class="service-row" href="/servicios/imagen-ia/">
+    <div class="service-num" data-i18n="srv-8-num">→ 08 / Imagen IA</div>
+    <h3 class="service-name" data-i18n-html="srv-8-name">Imagen IA — <em>fotos sin sesión.</em></h3>
+    <p class="service-desc" data-i18n="srv-8-desc">Fotografía de producto, imágenes de marca y direcciones de identidad — generadas con IA y dirigidas a mano. Tu plato, tu espacio, tu logo en cien variantes, sin contratar una sesión.</p>
+    <div class="service-price" data-i18n="srv-8-price">Consultar</div>
+  </a>
+
+  <a class="service-row" href="/servicios/video-ia/">
+    <div class="service-num" data-i18n="srv-9-num">→ 09 / Video IA</div>
+    <h3 class="service-name" data-i18n-html="srv-9-name">Video IA — <em>clips que se mueven.</em></h3>
+    <p class="service-desc" data-i18n="srv-9-desc">Clips cinemáticos, reels y motion para redes y lanzamientos — generados y dirigidos con IA. El video que tu competencia paga miles por producir, a la velocidad de una idea.</p>
+    <div class="service-price" data-i18n="srv-9-price">Consultar</div>
+  </a>
+</section>
+
+<section class="services" id="enterprise" aria-label="Enterprise">
+  <div class="services-head">
+    <div class="section-num"><span>—</span> — <span data-i18n="enterprise-label">Empresarial</span></div>
+  </div>
+  <a class="service-row" href="/servicios/datacendia/" data-enterprise>
+    <div class="service-num" data-i18n="srv-dc-num">→ Datacendia</div>
+    <h3 class="service-name" data-i18n-html="srv-dc-name">Datacendia — <em>IA defendible para organizaciones reguladas.</em></h3>
+    <p class="service-desc" data-i18n="srv-dc-desc">La rama empresarial del estudio: deliberación multi-agente con decisiones firmadas y admisibles ante tribunales — para servicios financieros, salud, legal y gobierno. Diferente público, diferente escala.</p>
+    <div class="service-price" data-i18n="srv-dc-price">Enterprise · datacendia.com →</div>
   </a>
 </section>
 
@@ -3294,6 +3370,7 @@ const I18N = {
     'hero-eyebrow': 'Studio · Lima ⟷ Glasgow · Est. 2026',
     'hero-h1': ['Like rain', 'on the', '<em>laguna.</em>'],
     'hero-lede': "Quiet, considered websites for Lima's independent local businesses — hospitality, boutique fitness, independent schools, wellness, boutique retail — and every Monday morning, a brief that tells you exactly what your closest competitors just did.",
+    'hero-lede-global': "Quiet, considered websites for independent local businesses — hospitality, boutique fitness, independent schools, wellness, boutique retail — and every Monday morning, a brief that tells you exactly what your closest competitors just did.",
     'hero-cta-primary': 'Audit my site · 90 s',
     'hero-cta-talk': 'Start a conversation',
     'hero-cta-secondary': 'Watch a brief generate',
@@ -3330,7 +3407,7 @@ const I18N = {
     'services-label': 'Services',
     'services-h2': 'What we<br><em>actually</em> make.',
     'arc-label': 'A field of view, not a service list',
-    'arc-text': 'Eight services arranged as one instrument. <strong>Vigía</strong> watches your competitors. <strong>Socio</strong> listens to your customers. <strong>Espejo</strong> watches you. The website and brand are the surface — the rest is how you keep seeing.',
+    'arc-text': 'Ten services arranged as one instrument. <strong>Vigía</strong> watches your competitors. <strong>Socio</strong> listens to your customers. <strong>Espejo</strong> watches you. The website and brand are the surface — the rest is how you keep seeing.',
     'beta-tag': 'beta · cohort 1',
     'srv-0-num': '→ 00 / Audit',
     'srv-0-name': 'Audit — <em>the 48-hour diagnostic.</em>',
@@ -3364,6 +3441,20 @@ const I18N = {
     'srv-6-name': 'Espejo — <em>the quarterly mirror.</em>',
     'srv-6-desc': "Once a quarter, Stuart eats at your restaurant as a stranger. Photographs the experience, times the service, listens to the room. A four-page report follows — what worked, what jarred, what to fix. Vigía watches your competitors; Espejo watches you.",
     'srv-6-price': 'S/ 900 / quarter',
+    'srv-8-num': '→ 08 / AI image',
+    'srv-8-name': 'AI image — <em>shots without a shoot.</em>',
+    'srv-8-desc': 'Product photography, brand imagery and identity directions — generated with AI and art-directed by hand. Your dish, your space, your logo in a hundred variants, without booking a shoot.',
+    'srv-8-price': 'Get a quote',
+    'srv-9-num': '→ 09 / AI video',
+    'srv-9-name': 'AI video — <em>clips that move.</em>',
+    'srv-9-desc': 'Cinematic clips, reels and motion for social and launches — generated and directed with AI. The video competitors pay thousands to produce, at the speed of an idea.',
+    'srv-9-price': 'Get a quote',
+    'srv-dc-num': '→ Datacendia',
+    'srv-dc-name': 'Datacendia — <em>defensible AI for regulated organisations.</em>',
+    'srv-dc-desc': "The studio's enterprise arm: multi-agent deliberation with signed, court-admissible decision records — for financial services, healthcare, legal and government. Different audience, different scale.",
+    'srv-dc-price': 'Enterprise · datacendia.com →',
+    'enterprise-label': 'Enterprise',
+    'geo-note': 'We work remotely with independent businesses worldwide — based in Lima, Peru.',
     
     // Brief
     'brief-label': 'Vigía · ongoing weekly tracking · S/ 600 / month',
@@ -3533,6 +3624,7 @@ const I18N = {
     'hero-eyebrow': 'Estudio · Lima ⟷ Glasgow · Est. 2026',
     'hero-h1': ['Como lluvia', 'sobre la', '<em>laguna.</em>'],
     'hero-lede': 'Páginas web tranquilas y pensadas para los negocios locales independientes de Lima — hospitalidad, fitness, educación, bienestar, retail boutique — y cada lunes por la mañana, un reporte que te dice exactamente qué hicieron tus competidores más cercanos.',
+    'hero-lede-global': 'Páginas web tranquilas y pensadas para negocios locales independientes — hospitalidad, fitness, educación, bienestar, retail boutique — y cada lunes por la mañana, un reporte que te dice exactamente qué hicieron tus competidores más cercanos.',
     'hero-cta-primary': 'Auditar mi sitio · 90 s',
     'hero-cta-talk': 'Conversemos',
     'hero-cta-secondary': 'Ver un brief generándose',
@@ -3569,7 +3661,7 @@ const I18N = {
     'services-label': 'Servicios',
     'services-h2': 'Lo que <em>realmente</em><br>hacemos.',
     'arc-label': 'Un campo de visión, no una lista',
-    'arc-text': 'Ocho servicios en un solo instrumento. <strong>Vigía</strong> mira a tu competencia. <strong>Socio</strong> escucha a tus clientes. <strong>Espejo</strong> te mira a ti. La web y la marca son la superficie — el resto es cómo sigues viendo.',
+    'arc-text': 'Diez servicios en un solo instrumento. <strong>Vigía</strong> mira a tu competencia. <strong>Socio</strong> escucha a tus clientes. <strong>Espejo</strong> te mira a ti. La web y la marca son la superficie — el resto es cómo sigues viendo.',
     'beta-tag': 'beta · cohorte 1',
     'srv-0-num': '→ 00 / Auditoría',
     'srv-0-name': 'Auditoría — <em>el diagnóstico de 48 horas.</em>',
@@ -3603,6 +3695,20 @@ const I18N = {
     'srv-6-name': 'Espejo — <em>el reflejo trimestral.</em>',
     'srv-6-desc': 'Una vez por trimestre, Stuart come en tu restaurante como un desconocido. Fotografía la experiencia, cronometra el servicio, escucha la sala. Llega un informe de cuatro páginas — qué funcionó, qué chirrió, qué arreglar. Vigía mira a tu competencia; Espejo te mira a ti.',
     'srv-6-price': 'S/ 900 / trimestre',
+    'srv-8-num': '→ 08 / Imagen IA',
+    'srv-8-name': 'Imagen IA — <em>fotos sin sesión.</em>',
+    'srv-8-desc': 'Fotografía de producto, imágenes de marca y direcciones de identidad — generadas con IA y dirigidas a mano. Tu plato, tu espacio, tu logo en cien variantes, sin contratar una sesión.',
+    'srv-8-price': 'Consultar',
+    'srv-9-num': '→ 09 / Video IA',
+    'srv-9-name': 'Video IA — <em>clips que se mueven.</em>',
+    'srv-9-desc': 'Clips cinemáticos, reels y motion para redes y lanzamientos — generados y dirigidos con IA. El video que tu competencia paga miles por producir, a la velocidad de una idea.',
+    'srv-9-price': 'Consultar',
+    'srv-dc-num': '→ Datacendia',
+    'srv-dc-name': 'Datacendia — <em>IA defendible para organizaciones reguladas.</em>',
+    'srv-dc-desc': 'La rama empresarial del estudio: deliberación multi-agente con decisiones firmadas y admisibles ante tribunales — para servicios financieros, salud, legal y gobierno. Diferente público, diferente escala.',
+    'srv-dc-price': 'Enterprise · datacendia.com →',
+    'enterprise-label': 'Empresarial',
+    'geo-note': 'Trabajamos en remoto con negocios independientes en todo el mundo — con base en Lima, Perú.',
     
     // Brief
     'brief-label': 'Vigía · seguimiento semanal · S/ 600 / mes',
@@ -4349,6 +4455,20 @@ function retypeHero() {
 }
 
 runHero(true);
+
+// Geo: for non-Peru visitors, neutralize the Lima-specific hero copy + title.
+// Exposed for assets/geo.js to call once it knows the visitor's country.
+window.applyGeoText = function (isGlobal) {
+  if (!isGlobal) return;
+  if (I18N.es['hero-lede-global']) I18N.es['hero-lede'] = I18N.es['hero-lede-global'];
+  if (I18N.en['hero-lede-global']) I18N.en['hero-lede'] = I18N.en['hero-lede-global'];
+  try {
+    document.title = (LANG === 'en')
+      ? 'Rainey Laguna — Web studio · Competitive intelligence with Vigía'
+      : 'Rainey Laguna — Estudio web · Inteligencia competitiva con Vigía';
+  } catch (e) {}
+  if (typeof retypeHero === 'function') retypeHero();
+};
 
 // ============================================================
 // LAGOON CANVAS

@@ -68,7 +68,12 @@
 <!-- Vigía live brief endpoint (override per-environment in deployment).
      Local dev: <meta name="vigia-api" content="http://localhost:3000">
      Production: leave empty to auto-resolve to https://vigia.{hostname} -->
-<meta name="vigia-api" content="">
+<meta name="vigia-api" content="https://vigia.raineylaguna.com">
+
+<!-- Cal.com booking URL for the audit summary CTA.
+     OPT-IN: Leave empty to hide the booking CTA entirely. WhatsApp remains the primary path.
+     Once configured, paste the Cal.com URL here (e.g. https://cal.com/stuart-rainey/audit-30). -->
+<meta name="rl-cal-booking" content="">
 
 <!-- Formspree endpoint for Conversemos form server-side capture.
      OPT-IN: Leave empty to disable server capture (form still opens WhatsApp as usual).
@@ -78,6 +83,7 @@
 <meta name="formspree-endpoint" content="">
 
 <script src="/assets/analytics.js" defer></script>
+<script src="/assets/geo.js" defer></script>
 
 <!-- Performance: pre-resolve external origins -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -276,6 +282,54 @@
             "url": "https://raineylaguna.com/servicios/espejo/"
           },
           "url": "https://raineylaguna.com/servicios/espejo/"
+        },
+        {
+          "@type": "Offer",
+          "position": 7,
+          "name": "Imagen IA — Imágenes y marca con IA",
+          "description": "Fotografía de producto, imágenes de marca y direcciones de identidad generadas con IA y dirigidas a mano. Precio por proyecto, a cotizar.",
+          "availability": "https://schema.org/InStock",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Imagen con IA para negocios locales",
+            "serviceType": "AI image generation and art direction",
+            "provider": { "@id": "https://raineylaguna.com/#org" },
+            "areaServed": { "@type": "City", "name": "Lima" },
+            "url": "https://raineylaguna.com/servicios/imagen-ia/"
+          },
+          "url": "https://raineylaguna.com/servicios/imagen-ia/"
+        },
+        {
+          "@type": "Offer",
+          "position": 8,
+          "name": "Video IA — Video y motion con IA",
+          "description": "Clips cinemáticos, reels y motion para redes y lanzamientos, generados y dirigidos con IA. Precio por proyecto, a cotizar.",
+          "availability": "https://schema.org/InStock",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Video con IA para negocios locales",
+            "serviceType": "AI video generation",
+            "provider": { "@id": "https://raineylaguna.com/#org" },
+            "areaServed": { "@type": "City", "name": "Lima" },
+            "url": "https://raineylaguna.com/servicios/video-ia/"
+          },
+          "url": "https://raineylaguna.com/servicios/video-ia/"
+        },
+        {
+          "@type": "Offer",
+          "position": 9,
+          "name": "Datacendia — IA empresarial defendible",
+          "description": "Plataforma de IA defendible para organizaciones reguladas: deliberación multi-agente con decisiones firmadas y admisibles ante tribunales. La rama empresarial.",
+          "availability": "https://schema.org/InStock",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Datacendia — Enterprise AI governance",
+            "serviceType": "Enterprise AI governance",
+            "provider": { "@id": "https://raineylaguna.com/#org" },
+            "areaServed": { "@type": "Place", "name": "Worldwide" },
+            "url": "https://raineylaguna.com/servicios/datacendia/"
+          },
+          "url": "https://raineylaguna.com/servicios/datacendia/"
         }
       ]
     },
@@ -1352,6 +1406,71 @@
   }
   .audit-cta-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
+  /* Email-the-report capture form, rendered inside .audit-summary */
+  .audit-email-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    margin-top: 18px;
+    padding: 16px;
+    border: 0.5px solid rgba(245, 241, 232, 0.18);
+    background: rgba(245, 241, 232, 0.04);
+  }
+  .audit-email-form label {
+    grid-column: 1 / -1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: rgba(245, 241, 232, 0.55);
+  }
+  .audit-email-form input[type="email"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(245, 241, 232, 0.35);
+    padding: 8px 2px;
+    font-family: 'Fraunces', serif;
+    font-variation-settings: 'wght' 380, 'opsz' 18;
+    font-size: 16px;
+    color: var(--paper);
+    outline: none;
+  }
+  .audit-email-form input[type="email"]:focus { border-bottom-color: var(--gold); }
+  .audit-email-form button {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    cursor: pointer;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 12px 18px;
+    transition: background 180ms ease;
+  }
+  .audit-email-form button:hover { background: var(--paper); }
+  .audit-email-form button[disabled] { opacity: 0.5; cursor: default; }
+  .audit-email-form .audit-email-note {
+    grid-column: 1 / -1;
+    font-family: 'Fraunces', serif;
+    font-variation-settings: 'wght' 350, 'opsz' 14;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(245, 241, 232, 0.7);
+    margin: 0;
+  }
+  .audit-email-form[data-state="ok"] {
+    border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.08);
+  }
+  @media (max-width: 600px) {
+    .audit-email-form { grid-template-columns: 1fr; }
+  }
+
   /* ===================================================================
      COMPARISON · how Rainey Laguna sits next to agencies and freelancers
      =================================================================== */
@@ -1679,8 +1798,10 @@
     50% { opacity: 0.4; transform: scale(0.7); }
   }
 
-  /* Ambient dust particles above the hero. Extracted from a runtime-
-     injected <style> block so the CSS ships with the first paint. */
+  /* Ambient dust particles above the hero — used by the garúa loop in
+     the scripted .particle spawner. Extracted from a runtime-injected
+     <style> block so the CSS ships with the first paint and the page
+     no longer needs to mutate <head> at module-eval time. */
   @keyframes floatUp {
     0%, 100% { opacity: 0; transform: translateY(0) translateX(0); }
     20% { opacity: 0.6; }
@@ -2685,9 +2806,9 @@
         <span id="navTime">Lima · 23:00</span>
       </span>
       <span class="lang-toggle">
-        <button id="langEn" class="active">EN</button>
+        <button id="langEn">EN</button>
         <span class="divider">/</span>
-        <button id="langEs">ES</button>
+        <button id="langEs" class="active">ES</button>
       </span>
     </div>
   </nav>
@@ -2731,25 +2852,26 @@
   <div class="services-head">
     <div class="section-num"><span>02</span> — <span data-i18n="services-label">Servicios</span></div>
     <h2 class="services-h2" data-i18n-html="services-h2">What we<br><em>actually</em> make.</h2>
+    <p class="geo-note" data-i18n="geo-note" style="display:none;margin-top:14px;font-size:14px;opacity:.7">Trabajamos en remoto con negocios independientes en todo el mundo — con base en Lima, Perú.</p>
   </div>
 
   <div class="services-arc">
-    <div class="arc-eyebrow" data-i18n="arc-label">A field of view, not a service list</div>
-    <p class="arc-text" data-i18n-html="arc-text">Eight services arranged as one instrument. <strong>Vigía</strong> watches your competitors. <strong>Socio</strong> listens to your customers. <strong>Espejo</strong> watches you. The website and brand are the surface — the rest is how you keep seeing.</p>
+    <div class="arc-eyebrow" data-i18n="arc-label">Un campo de visión, no una lista</div>
+    <p class="arc-text" data-i18n-html="arc-text">Diez servicios en un solo instrumento. <strong>Vigía</strong> mira a tu competencia. <strong>Socio</strong> escucha a tus clientes. <strong>Espejo</strong> te mira a ti. La web y la marca son la superficie — el resto es cómo sigues viendo.</p>
   </div>
   
   <a class="service-row" href="/servicios/audit/">
-    <div class="service-num" data-i18n="srv-0-num">→ 00 / Audit</div>
-    <h3 class="service-name" data-i18n-html="srv-0-name">Audit — <em>the 48-hour diagnostic.</em></h3>
-    <p class="service-desc" data-i18n="srv-0-desc">A written diagnostic of your digital presence — website, Google, social and one competitor — delivered in 48 hours, with a prioritised list of what to fix first. The most honest way into the studio.</p>
-    <div class="service-price" data-i18n="srv-0-price">S/ 180 · one-time</div>
+    <div class="service-num" data-i18n="srv-0-num">→ 00 / Auditoría</div>
+    <h3 class="service-name" data-i18n-html="srv-0-name">Auditoría — <em>el diagnóstico de 48 horas.</em></h3>
+    <p class="service-desc" data-i18n="srv-0-desc">Un diagnóstico escrito de tu presencia digital — web, Google, redes y un competidor — entregado en 48 horas, con una lista priorizada de qué arreglar primero. El punto de entrada más honesto al estudio.</p>
+    <div class="service-price" data-i18n="srv-0-price">S/ 180 · una vez</div>
   </a>
 
   <a class="service-row" href="/servicios/websites/">
     <div class="service-num" data-i18n="srv-1-num">→ 01 / Websites</div>
     <h3 class="service-name" data-i18n-html="srv-1-name">Websites <em>that earn their keep.</em></h3>
     <p class="service-desc" data-i18n="srv-1-desc">Custom-designed sites in Spanish and English. Menu, gallery, reservations, online ordering. Built to be fast, to take bookings, and to age well.</p>
-    <div class="service-price">from S/ 1,500</div>
+    <div class="service-price">desde S/ 1,500</div>
   </a>
 
   <a class="service-row" href="/servicios/marca/">
@@ -2761,19 +2883,19 @@
 
   <a class="service-row" href="/servicios/care/">
     <div class="service-num" data-i18n="srv-3-num">→ 03 / Care</div>
-    <h3 class="service-name" data-i18n-html="srv-3-name">Care — <em>someone is watching.</em></h3>
-    <p class="service-desc" data-i18n="srv-3-desc">Hosting, security, backups, monthly updates, Google Business Profile and social handles — the boring work, automated. At the end of every month, a short note: what we caught, what we fixed before you noticed, and what we saw on your Google worth knowing.</p>
+    <h3 class="service-name" data-i18n-html="srv-3-name">Care — <em>alguien está mirando.</em></h3>
+    <p class="service-desc" data-i18n="srv-3-desc">Hosting, seguridad, backups, actualizaciones mensuales, Google Business Profile y redes — todo lo aburrido, automatizado. Y al final de cada mes, una nota corta con lo que detectamos, lo que arreglamos antes de que te enteraras, y lo que vimos pasar en tu Google que vale la pena saber.</p>
     <div class="service-price">desde S/ 300 / mes</div>
   </a>
 
   <a class="service-row" href="/servicios/vigia/">
     <div class="service-num" data-i18n="srv-2-num">→ 04 / Vigía</div>
     <h3 class="service-name" data-i18n-html="srv-2-name">Vigía — <em>la inteligencia semanal.</em></h3>
-    <p class="service-desc" data-i18n="srv-2-desc">Every Monday at 8 a.m., a WhatsApp brief generated by the same engine you can watch below — what your competitors did last week and what to do about it.</p>
+    <p class="service-desc" data-i18n="srv-2-desc">Cada lunes a las 8 a. m., un reporte por WhatsApp generado por el mismo motor que ves abajo — qué hizo tu competencia la semana pasada y qué hacer al respecto.</p>
     <div class="service-price">S/ 600 / mes</div>
   </a>
 
-  <a class="service-row" href="/servicios/garua/">
+  <a class="service-row" href="/servicios/garua/" data-geo-lima>
     <div class="service-num" data-i18n="srv-5-num">→ 05 / Garúa</div>
     <h3 class="service-name" data-i18n-html="srv-5-name">Garúa <em>convierte el clima en tráfico.</em></h3>
     <p class="service-desc" data-i18n="srv-5-desc">Lima tiene seis meses de cielo gris. Garúa observa el pronóstico de mañana y dispara campañas pre-aprobadas a tu web, Instagram y WhatsApp cuando las condiciones calzan — terraza en día limpio, sopa cuando garúa, pisco con sol. El marketing que tu competencia no hace.</p>
@@ -2781,17 +2903,43 @@
   </a>
 
   <a class="service-row beta" href="/servicios/socio/">
-    <div class="service-num" data-i18n="srv-7-num">→ 06 / Socio <span class="beta-tag" data-i18n="beta-tag">beta · cohort 1</span></div>
-    <h3 class="service-name" data-i18n-html="srv-7-name">Socio — <em>the one who answers for you.</em></h3>
-    <p class="service-desc" data-i18n="srv-7-desc">A WhatsApp assistant trained on your menu, your hours, your tone. Replies at 11pm, handles reservations, only escalates what needs your judgement. It doesn't replace anyone — it replaces the exhaustion of answering your phone between covers.</p>
-    <div class="service-price" data-i18n="srv-7-price">S/ 1,500 setup + S/ 800 / month</div>
+    <div class="service-num" data-i18n="srv-7-num">→ 06 / Socio <span class="beta-tag" data-i18n="beta-tag">beta · cohorte 1</span></div>
+    <h3 class="service-name" data-i18n-html="srv-7-name">Socio — <em>el que contesta por ti.</em></h3>
+    <p class="service-desc" data-i18n="srv-7-desc">Un asistente de WhatsApp entrenado con tu carta, tus horarios, tu tono. Responde a las once de la noche, gestiona reservas, te pasa solo lo que necesita tu criterio. No reemplaza a nadie — reemplaza el agotamiento de contestar el celular entre servicios.</p>
+    <div class="service-price" data-i18n="srv-7-price">S/ 1,500 setup + S/ 800 / mes</div>
   </a>
 
-  <a class="service-row" href="/servicios/espejo/">
+  <a class="service-row" href="/servicios/espejo/" data-geo-lima>
     <div class="service-num" data-i18n="srv-6-num">→ 07 / Espejo</div>
-    <h3 class="service-name" data-i18n-html="srv-6-name">Espejo — <em>the quarterly mirror.</em></h3>
-    <p class="service-desc" data-i18n="srv-6-desc">Once a quarter, Stuart eats at your restaurant as a stranger. Photographs the experience, times the service, listens to the room. A four-page report follows — what worked, what jarred, what to fix. Vigía watches your competitors; Espejo watches you.</p>
-    <div class="service-price">S/ 900 / quarter</div>
+    <h3 class="service-name" data-i18n-html="srv-6-name">Espejo — <em>el reflejo trimestral.</em></h3>
+    <p class="service-desc" data-i18n="srv-6-desc">Una vez por trimestre, Stuart come en tu restaurante como un desconocido. Fotografía la experiencia, cronometra el servicio, escucha la sala. Llega un informe de cuatro páginas — qué funcionó, qué chirrió, qué arreglar. Vigía mira a tu competencia; Espejo te mira a ti.</p>
+    <div class="service-price" data-i18n="srv-6-price">S/ 900 / trimestre</div>
+  </a>
+
+  <a class="service-row" href="/servicios/imagen-ia/">
+    <div class="service-num" data-i18n="srv-8-num">→ 08 / Imagen IA</div>
+    <h3 class="service-name" data-i18n-html="srv-8-name">Imagen IA — <em>fotos sin sesión.</em></h3>
+    <p class="service-desc" data-i18n="srv-8-desc">Fotografía de producto, imágenes de marca y direcciones de identidad — generadas con IA y dirigidas a mano. Tu plato, tu espacio, tu logo en cien variantes, sin contratar una sesión.</p>
+    <div class="service-price" data-i18n="srv-8-price">Consultar</div>
+  </a>
+
+  <a class="service-row" href="/servicios/video-ia/">
+    <div class="service-num" data-i18n="srv-9-num">→ 09 / Video IA</div>
+    <h3 class="service-name" data-i18n-html="srv-9-name">Video IA — <em>clips que se mueven.</em></h3>
+    <p class="service-desc" data-i18n="srv-9-desc">Clips cinemáticos, reels y motion para redes y lanzamientos — generados y dirigidos con IA. El video que tu competencia paga miles por producir, a la velocidad de una idea.</p>
+    <div class="service-price" data-i18n="srv-9-price">Consultar</div>
+  </a>
+</section>
+
+<section class="services" id="enterprise" aria-label="Enterprise">
+  <div class="services-head">
+    <div class="section-num"><span>—</span> — <span data-i18n="enterprise-label">Empresarial</span></div>
+  </div>
+  <a class="service-row" href="/servicios/datacendia/" data-enterprise>
+    <div class="service-num" data-i18n="srv-dc-num">→ Datacendia</div>
+    <h3 class="service-name" data-i18n-html="srv-dc-name">Datacendia — <em>IA defendible para organizaciones reguladas.</em></h3>
+    <p class="service-desc" data-i18n="srv-dc-desc">La rama empresarial del estudio: deliberación multi-agente con decisiones firmadas y admisibles ante tribunales — para servicios financieros, salud, legal y gobierno. Diferente público, diferente escala.</p>
+    <div class="service-price" data-i18n="srv-dc-price">Enterprise · datacendia.com →</div>
   </a>
 </section>
 
@@ -2803,7 +2951,6 @@
 <section class="live-audit" id="audit">
   <div class="audit-frame">
     <div class="audit-intro">
-      <div class="section-num"><span>01</span> — <span data-i18n="audit-label">One-time diagnostic · on this page</span></div>
       <h2 class="audit-h" data-i18n-html="audit-h">Your site, <em>audited against</em> your nearest competitors — right now, in 90 seconds.</h2>
       <p class="audit-desc" data-i18n="audit-desc">Paste a URL. We run a one-shot competitive snapshot of your business right here — performance, reputation, price, social, SEO, accessibility — and hand you a six-week roadmap you can take to any agency. <strong>One-time. Free. No email.</strong> For ongoing weekly tracking, see Vigía below.</p>
       <p class="audit-note mono" data-i18n="audit-note">01 auditoría por IP cada 24 h · datos reales en v1 · demo mostrando el flujo en v0</p>
@@ -3223,6 +3370,7 @@ const I18N = {
     'hero-eyebrow': 'Studio · Lima ⟷ Glasgow · Est. 2026',
     'hero-h1': ['Like rain', 'on the', '<em>laguna.</em>'],
     'hero-lede': "Quiet, considered websites for Lima's independent local businesses — hospitality, boutique fitness, independent schools, wellness, boutique retail — and every Monday morning, a brief that tells you exactly what your closest competitors just did.",
+    'hero-lede-global': "Quiet, considered websites for independent local businesses — hospitality, boutique fitness, independent schools, wellness, boutique retail — and every Monday morning, a brief that tells you exactly what your closest competitors just did.",
     'hero-cta-primary': 'Audit my site · 90 s',
     'hero-cta-talk': 'Start a conversation',
     'hero-cta-secondary': 'Watch a brief generate',
@@ -3258,6 +3406,13 @@ const I18N = {
     // Services
     'services-label': 'Services',
     'services-h2': 'What we<br><em>actually</em> make.',
+    'arc-label': 'A field of view, not a service list',
+    'arc-text': 'Ten services arranged as one instrument. <strong>Vigía</strong> watches your competitors. <strong>Socio</strong> listens to your customers. <strong>Espejo</strong> watches you. The website and brand are the surface — the rest is how you keep seeing.',
+    'beta-tag': 'beta · cohort 1',
+    'srv-0-num': '→ 00 / Audit',
+    'srv-0-name': 'Audit — <em>the 48-hour diagnostic.</em>',
+    'srv-0-desc': 'A written diagnostic of your digital presence — website, Google, social and one competitor — delivered in 48 hours, with a prioritised list of what to fix first. The most honest way into the studio.',
+    'srv-0-price': 'S/ 180 · one-time',
     'srv-1-num': '→ 01 / Websites',
     'srv-1-name': 'Websites <em>that earn their keep.</em>',
     'srv-1-desc': 'Custom-designed sites in Spanish and English. Menu, gallery, reservations, online ordering. Built to be fast, to take bookings, and to age well.',
@@ -3273,18 +3428,11 @@ const I18N = {
     'srv-2-num': '→ 04 / Vigía',
     'srv-2-name': 'Vigía — <em>the weekly briefing.</em>',
     'srv-2-desc': "Every Monday at 8 a.m., a WhatsApp brief generated by the same engine you can watch below — what your competitors did last week and what to do about it.",
-    'srv-2-price': 'S/ 250 / month',
+    'srv-2-price': 'S/ 600 / month',
     'srv-5-num': '→ 05 / Garúa',
     'srv-5-name': 'Garúa <em>turns weather into traffic.</em>',
     'srv-5-desc': "Lima has six months of grey sky. Garúa watches tomorrow's forecast and fires pre-approved campaigns to your website, Instagram and WhatsApp when conditions match — terraces on clear days, soup when the drizzle comes, pisco hours with the sun. The marketing your competition doesn't do.",
     'srv-5-price': 'S/ 350 / month',
-    'arc-label': 'A field of view, not a service list',
-    'arc-text': 'Eight services arranged as one instrument. <strong>Vigía</strong> watches your competitors. <strong>Socio</strong> listens to your customers. <strong>Espejo</strong> watches you. The website and brand are the surface — the rest is how you keep seeing.',
-    'beta-tag': 'beta · cohort 1',
-    'srv-0-num': '→ 00 / Audit',
-    'srv-0-name': 'Audit — <em>the 48-hour diagnostic.</em>',
-    'srv-0-desc': 'A written diagnostic of your digital presence — website, Google, social and one competitor — delivered in 48 hours, with a prioritised list of what to fix first. The most honest way into the studio.',
-    'srv-0-price': 'S/ 180 · one-time',
     'srv-7-num': '→ 06 / Socio <span class="beta-tag">beta · cohort 1</span>',
     'srv-7-name': 'Socio — <em>the one who answers for you.</em>',
     'srv-7-desc': 'A WhatsApp assistant trained on your menu, your hours, your tone. Replies at 11pm, handles reservations, only escalates what needs your judgement. It doesn\'t replace anyone — it replaces the exhaustion of answering your phone between covers.',
@@ -3293,9 +3441,23 @@ const I18N = {
     'srv-6-name': 'Espejo — <em>the quarterly mirror.</em>',
     'srv-6-desc': "Once a quarter, Stuart eats at your restaurant as a stranger. Photographs the experience, times the service, listens to the room. A four-page report follows — what worked, what jarred, what to fix. Vigía watches your competitors; Espejo watches you.",
     'srv-6-price': 'S/ 900 / quarter',
+    'srv-8-num': '→ 08 / AI image',
+    'srv-8-name': 'AI image — <em>shots without a shoot.</em>',
+    'srv-8-desc': 'Product photography, brand imagery and identity directions — generated with AI and art-directed by hand. Your dish, your space, your logo in a hundred variants, without booking a shoot.',
+    'srv-8-price': 'Get a quote',
+    'srv-9-num': '→ 09 / AI video',
+    'srv-9-name': 'AI video — <em>clips that move.</em>',
+    'srv-9-desc': 'Cinematic clips, reels and motion for social and launches — generated and directed with AI. The video competitors pay thousands to produce, at the speed of an idea.',
+    'srv-9-price': 'Get a quote',
+    'srv-dc-num': '→ Datacendia',
+    'srv-dc-name': 'Datacendia — <em>defensible AI for regulated organisations.</em>',
+    'srv-dc-desc': "The studio's enterprise arm: multi-agent deliberation with signed, court-admissible decision records — for financial services, healthcare, legal and government. Different audience, different scale.",
+    'srv-dc-price': 'Enterprise · datacendia.com →',
+    'enterprise-label': 'Enterprise',
+    'geo-note': 'We work remotely with independent businesses worldwide — based in Lima, Peru.',
     
     // Brief
-    'brief-label': 'Vigía · ongoing weekly tracking · S/ 250 / month',
+    'brief-label': 'Vigía · ongoing weekly tracking · S/ 600 / month',
     'brief-h': 'A brief, <em>generating now,</em> for a real Lima café.',
     'brief-desc': 'The audit above is a one-shot snapshot. <strong>Vigía is the same competitive instrument, running every Monday at 8 a.m. forever.</strong> This brief is regenerating live — same engine, real Lima neighborhoods, real competitor categories.',
     'brief-cta': 'Start a conversation →',
@@ -3462,6 +3624,7 @@ const I18N = {
     'hero-eyebrow': 'Estudio · Lima ⟷ Glasgow · Est. 2026',
     'hero-h1': ['Como lluvia', 'sobre la', '<em>laguna.</em>'],
     'hero-lede': 'Páginas web tranquilas y pensadas para los negocios locales independientes de Lima — hospitalidad, fitness, educación, bienestar, retail boutique — y cada lunes por la mañana, un reporte que te dice exactamente qué hicieron tus competidores más cercanos.',
+    'hero-lede-global': 'Páginas web tranquilas y pensadas para negocios locales independientes — hospitalidad, fitness, educación, bienestar, retail boutique — y cada lunes por la mañana, un reporte que te dice exactamente qué hicieron tus competidores más cercanos.',
     'hero-cta-primary': 'Auditar mi sitio · 90 s',
     'hero-cta-talk': 'Conversemos',
     'hero-cta-secondary': 'Ver un brief generándose',
@@ -3497,6 +3660,13 @@ const I18N = {
     // Services
     'services-label': 'Servicios',
     'services-h2': 'Lo que <em>realmente</em><br>hacemos.',
+    'arc-label': 'Un campo de visión, no una lista',
+    'arc-text': 'Diez servicios en un solo instrumento. <strong>Vigía</strong> mira a tu competencia. <strong>Socio</strong> escucha a tus clientes. <strong>Espejo</strong> te mira a ti. La web y la marca son la superficie — el resto es cómo sigues viendo.',
+    'beta-tag': 'beta · cohorte 1',
+    'srv-0-num': '→ 00 / Auditoría',
+    'srv-0-name': 'Auditoría — <em>el diagnóstico de 48 horas.</em>',
+    'srv-0-desc': 'Un diagnóstico escrito de tu presencia digital — web, Google, redes y un competidor — entregado en 48 horas, con una lista priorizada de qué arreglar primero. El punto de entrada más honesto al estudio.',
+    'srv-0-price': 'S/ 180 · una vez',
     'srv-1-num': '→ 01 / Páginas web',
     'srv-1-name': 'Páginas <em>que valen su precio.</em>',
     'srv-1-desc': 'Sitios diseñados a medida, en español e inglés. Carta, galería, reservas, pedidos en línea. Construidos para ser rápidos, recibir reservas y envejecer bien.',
@@ -3512,18 +3682,11 @@ const I18N = {
     'srv-2-num': '→ 04 / Vigía',
     'srv-2-name': 'Vigía — <em>la inteligencia semanal.</em>',
     'srv-2-desc': 'Cada lunes a las 8 a. m., un reporte por WhatsApp generado por el mismo motor que ves abajo — qué hizo tu competencia la semana pasada y qué hacer al respecto.',
-    'srv-2-price': 'S/ 250 / mes',
+    'srv-2-price': 'S/ 600 / mes',
     'srv-5-num': '→ 05 / Garúa',
     'srv-5-name': 'Garúa <em>convierte el clima en tráfico.</em>',
     'srv-5-desc': 'Lima tiene seis meses de cielo gris. Garúa observa el pronóstico de mañana y dispara campañas pre-aprobadas a tu web, Instagram y WhatsApp cuando las condiciones calzan — terraza en día limpio, sopa cuando garúa, pisco con sol. El marketing que tu competencia no hace.',
     'srv-5-price': 'S/ 350 / mes',
-    'arc-label': 'Un campo de visión, no una lista',
-    'arc-text': 'Ocho servicios en un solo instrumento. <strong>Vigía</strong> mira a tu competencia. <strong>Socio</strong> escucha a tus clientes. <strong>Espejo</strong> te mira a ti. La web y la marca son la superficie — el resto es cómo sigues viendo.',
-    'beta-tag': 'beta · cohorte 1',
-    'srv-0-num': '→ 00 / Auditoría',
-    'srv-0-name': 'Auditoría — <em>el diagnóstico de 48 horas.</em>',
-    'srv-0-desc': 'Un diagnóstico escrito de tu presencia digital — web, Google, redes y un competidor — entregado en 48 horas, con una lista priorizada de qué arreglar primero. El punto de entrada más honesto al estudio.',
-    'srv-0-price': 'S/ 180 · una vez',
     'srv-7-num': '→ 06 / Socio <span class="beta-tag">beta · cohorte 1</span>',
     'srv-7-name': 'Socio — <em>el que contesta por ti.</em>',
     'srv-7-desc': 'Un asistente de WhatsApp entrenado con tu carta, tus horarios, tu tono. Responde a las once de la noche, gestiona reservas, te pasa solo lo que necesita tu criterio. No reemplaza a nadie — reemplaza el agotamiento de contestar el celular entre servicios.',
@@ -3532,9 +3695,23 @@ const I18N = {
     'srv-6-name': 'Espejo — <em>el reflejo trimestral.</em>',
     'srv-6-desc': 'Una vez por trimestre, Stuart come en tu restaurante como un desconocido. Fotografía la experiencia, cronometra el servicio, escucha la sala. Llega un informe de cuatro páginas — qué funcionó, qué chirrió, qué arreglar. Vigía mira a tu competencia; Espejo te mira a ti.',
     'srv-6-price': 'S/ 900 / trimestre',
+    'srv-8-num': '→ 08 / Imagen IA',
+    'srv-8-name': 'Imagen IA — <em>fotos sin sesión.</em>',
+    'srv-8-desc': 'Fotografía de producto, imágenes de marca y direcciones de identidad — generadas con IA y dirigidas a mano. Tu plato, tu espacio, tu logo en cien variantes, sin contratar una sesión.',
+    'srv-8-price': 'Consultar',
+    'srv-9-num': '→ 09 / Video IA',
+    'srv-9-name': 'Video IA — <em>clips que se mueven.</em>',
+    'srv-9-desc': 'Clips cinemáticos, reels y motion para redes y lanzamientos — generados y dirigidos con IA. El video que tu competencia paga miles por producir, a la velocidad de una idea.',
+    'srv-9-price': 'Consultar',
+    'srv-dc-num': '→ Datacendia',
+    'srv-dc-name': 'Datacendia — <em>IA defendible para organizaciones reguladas.</em>',
+    'srv-dc-desc': 'La rama empresarial del estudio: deliberación multi-agente con decisiones firmadas y admisibles ante tribunales — para servicios financieros, salud, legal y gobierno. Diferente público, diferente escala.',
+    'srv-dc-price': 'Enterprise · datacendia.com →',
+    'enterprise-label': 'Empresarial',
+    'geo-note': 'Trabajamos en remoto con negocios independientes en todo el mundo — con base en Lima, Perú.',
     
     // Brief
-    'brief-label': 'Vigía · seguimiento semanal · S/ 250 / mes',
+    'brief-label': 'Vigía · seguimiento semanal · S/ 600 / mes',
     'brief-h': 'Un brief, <em>generándose ahora,</em> para un café real de Lima.',
     'brief-desc': 'La auditoría arriba es una foto puntual. <strong>Vigía es el mismo instrumento competitivo, corriendo cada lunes a las 8 a.m., para siempre.</strong> Este brief se regenera en vivo — mismo motor, barrios reales de Lima, categorías reales de competidores.',
     'brief-cta': 'Conversemos →',
@@ -4279,6 +4456,20 @@ function retypeHero() {
 
 runHero(true);
 
+// Geo: for non-Peru visitors, neutralize the Lima-specific hero copy + title.
+// Exposed for assets/geo.js to call once it knows the visitor's country.
+window.applyGeoText = function (isGlobal) {
+  if (!isGlobal) return;
+  if (I18N.es['hero-lede-global']) I18N.es['hero-lede'] = I18N.es['hero-lede-global'];
+  if (I18N.en['hero-lede-global']) I18N.en['hero-lede'] = I18N.en['hero-lede-global'];
+  try {
+    document.title = (LANG === 'en')
+      ? 'Rainey Laguna — Web studio · Competitive intelligence with Vigía'
+      : 'Rainey Laguna — Estudio web · Inteligencia competitiva con Vigía';
+  } catch (e) {}
+  if (typeof retypeHero === 'function') retypeHero();
+};
+
 // ============================================================
 // LAGOON CANVAS
 // ============================================================
@@ -4875,8 +5066,11 @@ async function renderPersonalBrief(name, district) {
     const c = competitors[i];
     const row = document.createElement('div');
     row.className = 'brief-row';
-    // Safe DOM: live /api/brief values come from Google Places and can
-    // legitimately contain HTML metacharacters. textContent eliminates XSS.
+    // Safe DOM construction: c.name / c.addr / c.val may arrive from the
+    // live Vigía /api/brief endpoint, which is populated by Google Places
+    // "displayName" + "formattedAddress" — values that can legitimately
+    // contain HTML metacharacters. textContent eliminates the XSS surface
+    // entirely without changing the rendered result.
     const label = document.createElement('div');
     label.className = 'label';
     label.textContent = String(c.name ?? '');
