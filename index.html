@@ -281,6 +281,38 @@
             "url": "https://raineylaguna.com/servicios/espejo/"
           },
           "url": "https://raineylaguna.com/servicios/espejo/"
+        },
+        {
+          "@type": "Offer",
+          "position": 7,
+          "name": "Imagen IA — Imágenes y marca con IA",
+          "description": "Fotografía de producto, imágenes de marca y direcciones de identidad generadas con IA y dirigidas a mano. Precio por proyecto, a cotizar.",
+          "availability": "https://schema.org/InStock",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Imagen con IA para negocios locales",
+            "serviceType": "AI image generation and art direction",
+            "provider": { "@id": "https://raineylaguna.com/#org" },
+            "areaServed": { "@type": "City", "name": "Lima" },
+            "url": "https://raineylaguna.com/servicios/imagen-ia/"
+          },
+          "url": "https://raineylaguna.com/servicios/imagen-ia/"
+        },
+        {
+          "@type": "Offer",
+          "position": 8,
+          "name": "Video IA — Video y motion con IA",
+          "description": "Clips cinemáticos, reels y motion para redes y lanzamientos, generados y dirigidos con IA. Precio por proyecto, a cotizar.",
+          "availability": "https://schema.org/InStock",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Video con IA para negocios locales",
+            "serviceType": "AI video generation",
+            "provider": { "@id": "https://raineylaguna.com/#org" },
+            "areaServed": { "@type": "City", "name": "Lima" },
+            "url": "https://raineylaguna.com/servicios/video-ia/"
+          },
+          "url": "https://raineylaguna.com/servicios/video-ia/"
         }
       ]
     },
@@ -2807,7 +2839,7 @@
 
   <div class="services-arc">
     <div class="arc-eyebrow" data-i18n="arc-label">Un campo de visión, no una lista</div>
-    <p class="arc-text" data-i18n-html="arc-text">Ocho servicios en un solo instrumento. <strong>Vigía</strong> mira a tu competencia. <strong>Socio</strong> escucha a tus clientes. <strong>Espejo</strong> te mira a ti. La web y la marca son la superficie — el resto es cómo sigues viendo.</p>
+    <p class="arc-text" data-i18n-html="arc-text">Diez servicios en un solo instrumento. <strong>Vigía</strong> mira a tu competencia. <strong>Socio</strong> escucha a tus clientes. <strong>Espejo</strong> te mira a ti. La web y la marca son la superficie — el resto es cómo sigues viendo.</p>
   </div>
   
   <a class="service-row" href="/servicios/audit/">
@@ -2864,6 +2896,20 @@
     <h3 class="service-name" data-i18n-html="srv-6-name">Espejo — <em>el reflejo trimestral.</em></h3>
     <p class="service-desc" data-i18n="srv-6-desc">Una vez por trimestre, Stuart come en tu restaurante como un desconocido. Fotografía la experiencia, cronometra el servicio, escucha la sala. Llega un informe de cuatro páginas — qué funcionó, qué chirrió, qué arreglar. Vigía mira a tu competencia; Espejo te mira a ti.</p>
     <div class="service-price" data-i18n="srv-6-price">S/ 900 / trimestre</div>
+  </a>
+
+  <a class="service-row" href="/servicios/imagen-ia/">
+    <div class="service-num" data-i18n="srv-8-num">→ 08 / Imagen IA</div>
+    <h3 class="service-name" data-i18n-html="srv-8-name">Imagen IA — <em>fotos sin sesión.</em></h3>
+    <p class="service-desc" data-i18n="srv-8-desc">Fotografía de producto, imágenes de marca y direcciones de identidad — generadas con IA y dirigidas a mano. Tu plato, tu espacio, tu logo en cien variantes, sin contratar una sesión.</p>
+    <div class="service-price" data-i18n="srv-8-price">Consultar</div>
+  </a>
+
+  <a class="service-row" href="/servicios/video-ia/">
+    <div class="service-num" data-i18n="srv-9-num">→ 09 / Video IA</div>
+    <h3 class="service-name" data-i18n-html="srv-9-name">Video IA — <em>clips que se mueven.</em></h3>
+    <p class="service-desc" data-i18n="srv-9-desc">Clips cinemáticos, reels y motion para redes y lanzamientos — generados y dirigidos con IA. El video que tu competencia paga miles por producir, a la velocidad de una idea.</p>
+    <div class="service-price" data-i18n="srv-9-price">Consultar</div>
   </a>
 </section>
 
@@ -3330,7 +3376,7 @@ const I18N = {
     'services-label': 'Services',
     'services-h2': 'What we<br><em>actually</em> make.',
     'arc-label': 'A field of view, not a service list',
-    'arc-text': 'Eight services arranged as one instrument. <strong>Vigía</strong> watches your competitors. <strong>Socio</strong> listens to your customers. <strong>Espejo</strong> watches you. The website and brand are the surface — the rest is how you keep seeing.',
+    'arc-text': 'Ten services arranged as one instrument. <strong>Vigía</strong> watches your competitors. <strong>Socio</strong> listens to your customers. <strong>Espejo</strong> watches you. The website and brand are the surface — the rest is how you keep seeing.',
     'beta-tag': 'beta · cohort 1',
     'srv-0-num': '→ 00 / Audit',
     'srv-0-name': 'Audit — <em>the 48-hour diagnostic.</em>',
@@ -3364,6 +3410,14 @@ const I18N = {
     'srv-6-name': 'Espejo — <em>the quarterly mirror.</em>',
     'srv-6-desc': "Once a quarter, Stuart eats at your restaurant as a stranger. Photographs the experience, times the service, listens to the room. A four-page report follows — what worked, what jarred, what to fix. Vigía watches your competitors; Espejo watches you.",
     'srv-6-price': 'S/ 900 / quarter',
+    'srv-8-num': '→ 08 / AI image',
+    'srv-8-name': 'AI image — <em>shots without a shoot.</em>',
+    'srv-8-desc': 'Product photography, brand imagery and identity directions — generated with AI and art-directed by hand. Your dish, your space, your logo in a hundred variants, without booking a shoot.',
+    'srv-8-price': 'Get a quote',
+    'srv-9-num': '→ 09 / AI video',
+    'srv-9-name': 'AI video — <em>clips that move.</em>',
+    'srv-9-desc': 'Cinematic clips, reels and motion for social and launches — generated and directed with AI. The video competitors pay thousands to produce, at the speed of an idea.',
+    'srv-9-price': 'Get a quote',
     
     // Brief
     'brief-label': 'Vigía · ongoing weekly tracking · S/ 600 / month',
@@ -3569,7 +3623,7 @@ const I18N = {
     'services-label': 'Servicios',
     'services-h2': 'Lo que <em>realmente</em><br>hacemos.',
     'arc-label': 'Un campo de visión, no una lista',
-    'arc-text': 'Ocho servicios en un solo instrumento. <strong>Vigía</strong> mira a tu competencia. <strong>Socio</strong> escucha a tus clientes. <strong>Espejo</strong> te mira a ti. La web y la marca son la superficie — el resto es cómo sigues viendo.',
+    'arc-text': 'Diez servicios en un solo instrumento. <strong>Vigía</strong> mira a tu competencia. <strong>Socio</strong> escucha a tus clientes. <strong>Espejo</strong> te mira a ti. La web y la marca son la superficie — el resto es cómo sigues viendo.',
     'beta-tag': 'beta · cohorte 1',
     'srv-0-num': '→ 00 / Auditoría',
     'srv-0-name': 'Auditoría — <em>el diagnóstico de 48 horas.</em>',
@@ -3603,6 +3657,14 @@ const I18N = {
     'srv-6-name': 'Espejo — <em>el reflejo trimestral.</em>',
     'srv-6-desc': 'Una vez por trimestre, Stuart come en tu restaurante como un desconocido. Fotografía la experiencia, cronometra el servicio, escucha la sala. Llega un informe de cuatro páginas — qué funcionó, qué chirrió, qué arreglar. Vigía mira a tu competencia; Espejo te mira a ti.',
     'srv-6-price': 'S/ 900 / trimestre',
+    'srv-8-num': '→ 08 / Imagen IA',
+    'srv-8-name': 'Imagen IA — <em>fotos sin sesión.</em>',
+    'srv-8-desc': 'Fotografía de producto, imágenes de marca y direcciones de identidad — generadas con IA y dirigidas a mano. Tu plato, tu espacio, tu logo en cien variantes, sin contratar una sesión.',
+    'srv-8-price': 'Consultar',
+    'srv-9-num': '→ 09 / Video IA',
+    'srv-9-name': 'Video IA — <em>clips que se mueven.</em>',
+    'srv-9-desc': 'Clips cinemáticos, reels y motion para redes y lanzamientos — generados y dirigidos con IA. El video que tu competencia paga miles por producir, a la velocidad de una idea.',
+    'srv-9-price': 'Consultar',
     
     // Brief
     'brief-label': 'Vigía · seguimiento semanal · S/ 600 / mes',
